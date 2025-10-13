@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://damf4jskubnf2"]
+
+[ext_resource type="PackedScene" uid="uid://bpr5p80oqae3l" path="res://prefabs/character_body_2d.tscn" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://vyrtekuvt0x7" path="res://prefabs/level_ui.tscn" id="1_fj7yv"]
+[ext_resource type="Script" uid="uid://6bnfxtto1tr3" path="res://scripts/world.gd" id="1_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://xik0kqxbwkf5" path="res://prefabs/enemy.tscn" id="4_aqk2v"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_tlwt5")
+
+[node name="level_UI" parent="." instance=ExtResource("1_fj7yv")]
+
+[node name="player" parent="." instance=ExtResource("1_f3sb7")]
+position = Vector2(485, 364)
+
+[node name="enemy" parent="." instance=ExtResource("4_aqk2v")]
+position = Vector2(967, 205)
+
+[connection signal="enemy_hit_player" from="enemy" to="." method="_on_enemy_enemy_hit_player"]
