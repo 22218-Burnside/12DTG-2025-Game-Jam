@@ -1,19 +1,44 @@
-[gd_scene load_steps=5 format=3 uid="uid://damf4jskubnf2"]
+[gd_scene load_steps=6 format=3 uid="uid://damf4jskubnf2"]
 
-[ext_resource type="PackedScene" uid="uid://bpr5p80oqae3l" path="res://prefabs/character_body_2d.tscn" id="1_f3sb7"]
-[ext_resource type="PackedScene" uid="uid://vyrtekuvt0x7" path="res://prefabs/level_ui.tscn" id="1_fj7yv"]
-[ext_resource type="Script" uid="uid://6bnfxtto1tr3" path="res://scripts/world.gd" id="1_tlwt5"]
-[ext_resource type="PackedScene" uid="uid://xik0kqxbwkf5" path="res://prefabs/enemy.tscn" id="4_aqk2v"]
+[ext_resource type="Script" uid="uid://6bnfxtto1tr3" path="res://scripts/world.gd" id="1_4d63b"]
+[ext_resource type="PackedScene" uid="uid://vyrtekuvt0x7" path="res://prefabs/level_ui.tscn" id="2_4284n"]
+[ext_resource type="PackedScene" uid="uid://bpr5p80oqae3l" path="res://prefabs/player.tscn" id="3_07nuu"]
+[ext_resource type="PackedScene" uid="uid://xik0kqxbwkf5" path="res://prefabs/enemy.tscn" id="4_5f5nf"]
+[ext_resource type="Texture2D" uid="uid://c25cyoy0q1giy" path="res://assets/icon.svg" id="5_4284n"]
 
-[node name="World" type="Node2D"]
-script = ExtResource("1_tlwt5")
+[node name="world" type="Node2D"]
+script = ExtResource("1_4d63b")
 
-[node name="level_UI" parent="." instance=ExtResource("1_fj7yv")]
+[node name="level_ui" parent="." instance=ExtResource("2_4284n")]
+visible = false
 
-[node name="player" parent="." instance=ExtResource("1_f3sb7")]
-position = Vector2(485, 364)
+[node name="player" parent="." instance=ExtResource("3_07nuu")]
+position = Vector2(439, 407)
 
-[node name="enemy" parent="." instance=ExtResource("4_aqk2v")]
+[node name="enemy" parent="." instance=ExtResource("4_5f5nf")]
 position = Vector2(967, 205)
 
+[node name="menu" type="CanvasLayer" parent="."]
+
+[node name="Icon" type="Sprite2D" parent="menu"]
+position = Vector2(920, 524)
+scale = Vector2(16.316874, 8.54)
+texture = ExtResource("5_4284n")
+
+[node name="Label" type="Label" parent="menu"]
+visible = false
+offset_left = 883.0
+offset_top = 325.0
+offset_right = 959.0
+offset_bottom = 348.0
+text = "YOU DIED"
+
+[node name="play" type="Button" parent="menu"]
+offset_left = 891.0
+offset_top = 433.0
+offset_right = 947.0
+offset_bottom = 464.0
+text = "Play"
+
 [connection signal="enemy_hit_player" from="enemy" to="." method="_on_enemy_enemy_hit_player"]
+[connection signal="pressed" from="menu/play" to="." method="_on_play_pressed"]

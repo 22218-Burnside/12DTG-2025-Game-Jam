@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://vyrtekuvt0x7"]
 
-[node name="level_UI" type="CanvasLayer"]
+[node name="level_ui" type="CanvasLayer"]
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_right = 185.0
