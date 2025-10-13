@@ -26,3 +26,11 @@ shape = SubResource("RectangleShape2D_weayp")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0ump0")
 animation = &"idle"
+
+[node name="Marker" type="Marker2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="attack_timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="attack_timer" to="." method="fire_attack"]
