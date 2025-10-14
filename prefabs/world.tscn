@@ -50,6 +50,7 @@ text = "Play"
 [node name="level_ui" type="CanvasLayer" parent="."]
 
 [node name="immunity" type="Sprite2D" parent="level_ui"]
+visible = false
 position = Vector2(527.0001, 27.000004)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("5_4284n")
