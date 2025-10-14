@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpr5p80oqae3l"]
+[gd_scene load_steps=6 format=3 uid="uid://bpr5p80oqae3l"]
 
 [ext_resource type="Texture2D" uid="uid://c25cyoy0q1giy" path="res://assets/icon.svg" id="1_s082h"]
 [ext_resource type="Script" uid="uid://dsypkhf5mj0tv" path="res://scripts/player.gd" id="1_weayp"]
+[ext_resource type="PackedScene" uid="uid://drvot6vrm7j1i" path="res://hayden_stuff/readme/found assets/smith.tscn" id="3_r66lb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_weayp"]
 size = Vector2(128, 128)
@@ -34,6 +35,9 @@ animation = &"idle"
 [node name="attack_timer" type="Timer" parent="."]
 
 [node name="immunity_timer" type="Timer" parent="."]
+
+[node name="smith" parent="." instance=ExtResource("3_r66lb")]
+visible = false
 
 [connection signal="timeout" from="attack_timer" to="." method="fire_attack"]
 [connection signal="timeout" from="immunity_timer" to="." method="_on_immunity_timer_timeout"]
