@@ -3,6 +3,7 @@ extends Label
 var domain_sequence := "domainexpansion"
 var domain_progress := 0
 var domain_expanding := false
+var can_expand = true
 
 func _ready() -> void:
 	pass
@@ -12,7 +13,7 @@ func _input(event):
 		var key_char = char(event.unicode).to_lower()
 		if key_char == domain_sequence[domain_progress]:
 			domain_progress += 1
-			if domain_progress == domain_sequence.length():
+			if domain_progress == domain_sequence.length() and can_expand:
 				# Full sequence successful!
 				$"..".show()
 				$"../anukus".play()
@@ -23,6 +24,7 @@ func _input(event):
 				self.show()
 				domain_expanding = true
 				domain_progress = 0 # Reset for next time
+				can_expand = false
 		else:
 			# Reset on wrong key or partial input error
 			domain_progress = 0
@@ -39,8 +41,10 @@ func _on_timer_timeout() -> void:
 	$"../anukus".stop()
 	$"../GPUParticles2D".emitting = false
 	$"../GPUParticles2D2".emitting = false
+	await get_tree().create_timer(1).timeout
 	$"..".hide()
 	self.hide()
+	can_expand = true
 
 
 func _on_area_entered(area: Area2D) -> void:
