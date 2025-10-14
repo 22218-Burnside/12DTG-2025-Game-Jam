@@ -1,0 +1,95 @@
+[gd_scene load_steps=14 format=3 uid="uid://drvot6vrm7j1i"]
+
+[ext_resource type="Script" uid="uid://dgr0ekiih5f8j" path="res://hayden_stuff/readme/variable storing stuff/smith.gd" id="1_8ctu8"]
+[ext_resource type="AudioStream" uid="uid://by8nubbkl7o83" path="res://hayden_stuff/readme/found assets/record_audio_10-14-2025_7-47-44 PM-[AudioTrimmer.com].mp3" id="2_bjm18"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bjm18"]
+radius = 860.454
+
+[sub_resource type="Gradient" id="Gradient_c36aq"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cx7oa"]
+gradient = SubResource("Gradient_c36aq")
+fill = 2
+
+[sub_resource type="Curve" id="Curve_c36aq"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.49096382, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vtqqq"]
+curve = SubResource("Curve_c36aq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_svhk2"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(900, 900, 0)
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -720.0
+angle_max = 360.00003
+radial_velocity_min = 9.999977
+radial_velocity_max = 99.99998
+gravity = Vector3(0, 0, 0)
+color = Color(0.64705884, 0, 0.17254902, 1)
+alpha_curve = SubResource("CurveTexture_vtqqq")
+
+[sub_resource type="Gradient" id="Gradient_8ctu8"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bjm18"]
+gradient = SubResource("Gradient_8ctu8")
+width = 8
+height = 128
+
+[sub_resource type="Gradient" id="Gradient_cx7oa"]
+offsets = PackedFloat32Array(0, 0.52287585, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7n607"]
+gradient = SubResource("Gradient_cx7oa")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c36aq"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(2000, 1000, 0)
+angle_min = -720.0
+angle_max = 360.00003
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_7n607")
+
+[node name="smith" type="Node2D"]
+script = ExtResource("1_8ctu8")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_bjm18")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 40
+texture = SubResource("GradientTexture2D_cx7oa")
+process_material = SubResource("ParticleProcessMaterial_svhk2")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+amount = 50
+texture = SubResource("GradientTexture2D_bjm18")
+lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_c36aq")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="anukus" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_bjm18")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -950.0
+offset_top = -475.3
+offset_right = -298.0
+offset_bottom = -130.29999
+text = "If you find this, you can add your name to the Label. KEEP IT A SECRET
+
+Hayden - The creator"
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
