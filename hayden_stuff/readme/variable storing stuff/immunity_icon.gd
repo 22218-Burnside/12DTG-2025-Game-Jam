@@ -21,6 +21,7 @@ func _input(event):
 				$"../GPUParticles2D2".emitting = true
 				$"../Timer".start(15)
 				$"../Icon".hide()
+				$"../../Camera2D".shake(10.0,15.0)
 				self.show()
 				domain_expanding = true
 				domain_progress = 0 # Reset for next time
