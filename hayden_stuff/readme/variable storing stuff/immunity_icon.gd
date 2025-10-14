@@ -1,4 +1,4 @@
-extends Node2D
+extends Label
 
 var domain_sequence := "domainexpansion"
 var domain_progress := 0
@@ -14,11 +14,13 @@ func _input(event):
 			domain_progress += 1
 			if domain_progress == domain_sequence.length():
 				# Full sequence successful!
+				$"..".show()
+				$"../anukus".play()
+				$"../GPUParticles2D".emitting = true
+				$"../GPUParticles2D2".emitting = true
+				$"../Timer".start(15)
+				$"../Icon".hide()
 				self.show()
-				$anukus.play()
-				$GPUParticles2D.emitting = true
-				$GPUParticles2D2.emitting = true
-				$Timer.start(15)
 				domain_expanding = true
 				domain_progress = 0 # Reset for next time
 		else:
@@ -27,19 +29,20 @@ func _input(event):
 
 func _physics_process(_delta: float) -> void:
 	if domain_expanding:
-		var areas = $Area2D.get_overlapping_areas()
+		var areas = $"../Area2D".get_overlapping_areas()
 		for i in areas:
 			if i.is_in_group("enemy"):
 				i.die()
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.is_in_group("enemy") and domain_expanding:
-		area.die()
-
-
 func _on_timer_timeout() -> void:
 	domain_expanding = false
-	$anukus.stop()
-	$GPUParticles2D.emitting = false
-	$GPUParticles2D2.emitting = false
+	$"../anukus".stop()
+	$"../GPUParticles2D".emitting = false
+	$"../GPUParticles2D2".emitting = false
+	$"..".hide()
 	self.hide()
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemy") and domain_expanding:
+		area.die()
