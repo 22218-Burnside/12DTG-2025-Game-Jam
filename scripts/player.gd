@@ -2,11 +2,11 @@ extends CharacterBody2D
 
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
 var health = 100
 var score = 0
-var attack_time = 0.5
+var attack_time = 0.75
 var controlling = false
+var can_hit = true
 
 @onready var attack = preload("res://prefabs/attack.tscn")
 func setup():
@@ -16,11 +16,6 @@ func setup():
 	$".."/level_ui/Label.text = "Score: 0"
 	$"../level_ui/ProgressBar".value = health
 	fire_attack()
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		$Marker.position = get_global_mouse_position()
-
 
 func _physics_process(_delta: float) -> void:
 	if controlling:
@@ -40,10 +35,21 @@ func _physics_process(_delta: float) -> void:
 		velocity.y = move_toward(velocity.x, 0, SPEED)
 	move_and_slide()
 
+
+func update_stats():
+	$".."/level_ui/Label.text = "Score: " + str(score)
+	$"../level_ui/ProgressBar".value = health
+
+
 func fire_attack():
 	if controlling:
 		$attack_timer.start(attack_time)
 		var spawned_attack = attack.instantiate()
 		$"..".add_child(spawned_attack)
 		spawned_attack.position = self.position
-		spawned_attack.direction = ($Marker.position-self.position).normalized()
+		spawned_attack.direction = (get_global_mouse_position()-self.position).normalized()
+
+
+func _on_immunity_timer_timeout() -> void:
+	can_hit = true
+	$".."/level_ui/immunity.hide()

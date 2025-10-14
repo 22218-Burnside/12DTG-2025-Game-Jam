@@ -33,4 +33,7 @@ animation = &"idle"
 
 [node name="attack_timer" type="Timer" parent="."]
 
+[node name="immunity_timer" type="Timer" parent="."]
+
 [connection signal="timeout" from="attack_timer" to="." method="fire_attack"]
+[connection signal="timeout" from="immunity_timer" to="." method="_on_immunity_timer_timeout"]

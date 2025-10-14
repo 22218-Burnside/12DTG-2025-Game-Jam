@@ -24,9 +24,12 @@ script = ExtResource("1_4d63b")
 [node name="menu" type="CanvasLayer" parent="."]
 visible = false
 
+[node name="menu_camera" type="Camera2D" parent="menu"]
+position = Vector2(960, 540)
+
 [node name="Icon" type="Sprite2D" parent="menu"]
-position = Vector2(920, 524)
-scale = Vector2(16.316874, 8.54)
+position = Vector2(979.00006, 516.5)
+scale = Vector2(17.96875, 9.304687)
 texture = ExtResource("5_4284n")
 
 [node name="Label" type="Label" parent="menu"]
@@ -46,9 +49,15 @@ text = "Play"
 
 [node name="level_ui" type="CanvasLayer" parent="."]
 
+[node name="immunity" type="Sprite2D" parent="level_ui"]
+position = Vector2(527.0001, 27.000004)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_4284n")
+
 [node name="ProgressBar" type="ProgressBar" parent="level_ui"]
+offset_top = 3.49
 offset_right = 499.0
-offset_bottom = 48.0
+offset_bottom = 51.49
 value = 100.0
 
 [node name="Label" type="Label" parent="level_ui"]
