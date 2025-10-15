@@ -1,7 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://drvot6vrm7j1i"]
+[gd_scene load_steps=12 format=3 uid="uid://drvot6vrm7j1i"]
 
-[ext_resource type="AudioStream" uid="uid://by8nubbkl7o83" path="res://hayden_stuff/readme/found assets/record_audio_10-14-2025_7-47-44 PM-[AudioTrimmer.com].mp3" id="1_d4oq2"]
-[ext_resource type="Script" uid="uid://dgr0ekiih5f8j" path="res://hayden_stuff/readme/variable storing stuff/immunity_icon.gd" id="2_y0cty"]
+[ext_resource type="AudioStream" uid="uid://by8nubbkl7o83" path="res://placeholder_assets/readme/placeholder assets/record_audio_10-14-2025_7-47-44 PM-[AudioTrimmer.com].mp3" id="1_d4oq2"]
+[ext_resource type="Material" uid="uid://qialryg03ikl" path="res://placeholder_assets/readme/placeholder assets/red.tres" id="1_w4766"]
+[ext_resource type="Texture2D" uid="uid://bwh8wlf3xhrgt" path="res://placeholder_assets/readme/placeholder assets/line.tres" id="2_kqtvn"]
+[ext_resource type="Script" uid="uid://dgr0ekiih5f8j" path="res://placeholder_assets/readme/placeholder assets/screen_shake.gd" id="2_y0cty"]
 [ext_resource type="Texture2D" uid="uid://c25cyoy0q1giy" path="res://assets/icon.svg" id="3_e01a8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bjm18"]
@@ -13,34 +15,6 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_cx7oa"]
 gradient = SubResource("Gradient_c36aq")
 fill = 2
-
-[sub_resource type="Curve" id="Curve_c36aq"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.49096382, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_vtqqq"]
-curve = SubResource("Curve_c36aq")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_svhk2"]
-particle_flag_disable_z = true
-emission_shape_scale = Vector3(900, 900, 0)
-emission_shape = 1
-emission_sphere_radius = 1.0
-angle_min = -720.0
-angle_max = 360.00003
-radial_velocity_min = 9.999977
-radial_velocity_max = 99.99998
-gravity = Vector3(0, 0, 0)
-color = Color(0.64705884, 0, 0.17254902, 1)
-alpha_curve = SubResource("CurveTexture_vtqqq")
-
-[sub_resource type="Gradient" id="Gradient_8ctu8"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_bjm18"]
-gradient = SubResource("Gradient_8ctu8")
-width = 8
-height = 128
 
 [sub_resource type="Gradient" id="Gradient_cx7oa"]
 offsets = PackedFloat32Array(0, 0.52287585, 1)
@@ -70,12 +44,12 @@ shape = SubResource("CircleShape2D_bjm18")
 emitting = false
 amount = 40
 texture = SubResource("GradientTexture2D_cx7oa")
-process_material = SubResource("ParticleProcessMaterial_svhk2")
+process_material = ExtResource("1_w4766")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 50
-texture = SubResource("GradientTexture2D_bjm18")
+texture = ExtResource("2_kqtvn")
 lifetime = 0.2
 process_material = SubResource("ParticleProcessMaterial_c36aq")
 
