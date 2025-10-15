@@ -19,6 +19,7 @@ config/icon="res://assets/icon.svg"
 
 MusicManager="*res://scripts/musicManager.gd"
 AudioManager="*res://scripts/audioManager.gd"
+Globals="*res://scripts/Globals.gd"
 
 [display]
 
