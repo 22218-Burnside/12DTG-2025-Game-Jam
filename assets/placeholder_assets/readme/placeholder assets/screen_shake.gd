@@ -19,6 +19,7 @@ func _input(event):
 				$"../anukus".play()
 				$"../GPUParticles2D".emitting = true
 				$"../GPUParticles2D2".emitting = true
+				$"../GPUParticles2D3".emitting = true
 				$"../Timer".start(15)
 				$"../Icon".hide()
 				$"../../Camera2D".shake(10.0,15.0)
@@ -42,6 +43,7 @@ func _on_timer_timeout() -> void:
 	$"../anukus".stop()
 	$"../GPUParticles2D".emitting = false
 	$"../GPUParticles2D2".emitting = false
+	$"../GPUParticles2D3".emitting = false
 	await get_tree().create_timer(1).timeout
 	$"..".hide()
 	self.hide()

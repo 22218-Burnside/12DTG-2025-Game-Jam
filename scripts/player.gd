@@ -5,17 +5,29 @@ const SPEED = 300.0
 var health = 100
 var score = 0
 var attack_time = 0.75
+var fire_attack_time = 8
+var wind_attack_time = 0.8
 var controlling = false
 var can_hit = true
+var water_level = 1
+var fire_level = 0
+var earth_level = 0
+var wind_level = 0
+var wind_damage = 50
+var fire_damage = 50
+var water_damage = 50
+var earth_damage = 0
 
-@onready var attack = preload("res://prefabs/attack.tscn")
+@onready var water = preload("res://prefabs/attack.tscn")
+@onready var fire = preload("res://prefabs/fire_attack.tscn")
+@onready var wind = preload("res://prefabs/wind_attack.tscn")
 func setup():
 	controlling = true
 	health = 100
 	score = 0
 	$".."/level_ui/Label.text = "Score: 0"
 	$"../level_ui/ProgressBar".value = health
-	fire_attack()
+	water_attack()
 
 func _physics_process(_delta: float) -> void:
 	if controlling:
@@ -41,13 +53,24 @@ func update_stats():
 	$"../level_ui/ProgressBar".value = health
 
 
-func fire_attack():
+func water_attack():
 	if controlling:
 		$attack_timer.start(attack_time)
-		var spawned_attack = attack.instantiate()
-		$"..".add_child(spawned_attack)
-		spawned_attack.position = self.position
+		var spawned_attack = water.instantiate()
+		add_child(spawned_attack)
 		spawned_attack.direction = (get_global_mouse_position()-self.position).normalized()
+
+func fire_attack():
+	if controlling:
+		$fire_timer.start(fire_attack_time)
+		var spawned_attack = fire.instantiate()
+		add_child(spawned_attack)
+
+func wind_attack():
+	if controlling:
+		$wind_timer.start(wind_attack_time)
+		var spawned_attack = wind.instantiate()
+		add_child(spawned_attack)
 
 
 func _on_immunity_timer_timeout() -> void:
