@@ -81,6 +81,24 @@ theme_override_font_sizes/font_size = 60
 text = "SCORE:0"
 horizontal_alignment = 2
 
+[node name="Label2" type="Label" parent="level_ui"]
+offset_left = 1092.0
+offset_top = 81.0
+offset_right = 1919.0
+offset_bottom = 164.0
+theme_override_font_sizes/font_size = 60
+text = "adsfhpiasdhfa;dj"
+horizontal_alignment = 2
+
+[node name="Label3" type="Label" parent="level_ui"]
+offset_left = 1103.0
+offset_top = 270.0
+offset_right = 1930.0
+offset_bottom = 353.0
+theme_override_font_sizes/font_size = 60
+text = "SCORE:0"
+horizontal_alignment = 2
+
 [node name="player" parent="." instance=ExtResource("3_07nuu")]
 position = Vector2(439, 407)
 

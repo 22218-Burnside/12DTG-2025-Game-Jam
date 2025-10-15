@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bko4qppy1tvs1"]
+
+[ext_resource type="Script" uid="uid://nioxhtfrtvna" path="res://scripts/tank.gd" id="1_lin0t"]
+[ext_resource type="Texture2D" uid="uid://c25cyoy0q1giy" path="res://assets/icon.svg" id="2_as70b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ks3ws"]
+size = Vector2(128, 128)
+
+[node name="tank" type="Area2D" groups=["enemy"]]
+modulate = Color(0, 0, 0, 1)
+script = ExtResource("1_lin0t")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ks3ws")
+
+[node name="Icon" type="Sprite2D" parent="."]
+rotation = 3.1415927
+texture = ExtResource("2_as70b")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
