@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://by8nubbkl7o83"
+path="res://.godot/imported/record_audio_10-14-2025_7-47-44 PM-[AudioTrimmer.com].mp3-a2c0d241fb7cb8a4a50b492e5c6bca7a.mp3str"
+
+[deps]
+
+source_file="res://assets/placeholder_assets/readme/placeholder assets/record_audio_10-14-2025_7-47-44 PM-[AudioTrimmer.com].mp3"
+dest_files=["res://.godot/imported/record_audio_10-14-2025_7-47-44 PM-[AudioTrimmer.com].mp3-a2c0d241fb7cb8a4a50b492e5c6bca7a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

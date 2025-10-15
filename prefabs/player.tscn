@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c25cyoy0q1giy" path="res://assets/icon.svg" id="1_s082h"]
 [ext_resource type="Script" uid="uid://dsypkhf5mj0tv" path="res://scripts/player.gd" id="1_weayp"]
 [ext_resource type="Script" uid="uid://5abf8nsucu0e" path="res://scripts/camera_2d.gd" id="3_1txc5"]
-[ext_resource type="PackedScene" uid="uid://drvot6vrm7j1i" path="res://placeholder_assets/readme/placeholder assets/immunity_icon.tscn" id="3_r66lb"]
+[ext_resource type="PackedScene" uid="uid://drvot6vrm7j1i" path="res://assets/placeholder_assets/readme/placeholder assets/immunity_icon.tscn" id="3_r66lb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_weayp"]
 size = Vector2(128, 128)

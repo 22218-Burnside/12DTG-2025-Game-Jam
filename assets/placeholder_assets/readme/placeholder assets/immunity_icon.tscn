@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://drvot6vrm7j1i"]
 
-[ext_resource type="AudioStream" uid="uid://by8nubbkl7o83" path="res://placeholder_assets/readme/placeholder assets/record_audio_10-14-2025_7-47-44 PM-[AudioTrimmer.com].mp3" id="1_d4oq2"]
-[ext_resource type="Material" uid="uid://qialryg03ikl" path="res://placeholder_assets/readme/placeholder assets/red.tres" id="1_w4766"]
-[ext_resource type="Texture2D" uid="uid://bwh8wlf3xhrgt" path="res://placeholder_assets/readme/placeholder assets/line.tres" id="2_kqtvn"]
-[ext_resource type="Script" uid="uid://dgr0ekiih5f8j" path="res://placeholder_assets/readme/placeholder assets/screen_shake.gd" id="2_y0cty"]
+[ext_resource type="AudioStream" uid="uid://by8nubbkl7o83" path="res://assets/placeholder_assets/readme/placeholder assets/record_audio_10-14-2025_7-47-44 PM-[AudioTrimmer.com].mp3" id="1_d4oq2"]
+[ext_resource type="Material" uid="uid://qialryg03ikl" path="res://assets/placeholder_assets/readme/placeholder assets/red.tres" id="1_w4766"]
+[ext_resource type="Texture2D" uid="uid://bwh8wlf3xhrgt" path="res://assets/placeholder_assets/readme/placeholder assets/line.tres" id="2_kqtvn"]
+[ext_resource type="Script" uid="uid://dgr0ekiih5f8j" path="res://assets/placeholder_assets/readme/placeholder assets/screen_shake.gd" id="2_y0cty"]
 [ext_resource type="Texture2D" uid="uid://c25cyoy0q1giy" path="res://assets/icon.svg" id="3_e01a8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bjm18"]
