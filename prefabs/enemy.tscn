@@ -16,4 +16,6 @@ shape = SubResource("RectangleShape2D_ks3ws")
 [node name="Icon" type="Sprite2D" parent="."]
 texture = ExtResource("1_6n8dw")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="attack_timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]

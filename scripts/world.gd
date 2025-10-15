@@ -20,19 +20,28 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	$level_ui/Label2.text = str(capacity)
-	$level_ui/Label3.text = str(int(wave_points))
-	$level_ui/Label4.text = str(max_wave_capacity-9)
+	$level_ui/Label2.text = "Enemies left: " + str(capacity)
+	$level_ui/Label3.text = "Enemy points: " + str(int(wave_points))
+	$level_ui/Label4.text = "Wave: " + str(max_wave_capacity-9)
 	if capacity < max_wave_capacity and wave_points > 0:
 		spawn_enemy()
 	if capacity <= 0 and wave_points <= 0:
-		next_level()
+		pause_game()
 
+func pause_game():
+	get_tree().paused = true
+	$upgrade_selection.show()
+	
+	
 func next_level():
+	get_tree().paused = false
+	$upgrade_selection.hide()
 	max_wave *= randf_range(1.1,1.5)
 	wave_points = round(max_wave)
 	max_wave_capacity += 1
 	capacity = 0
+	
+	
 func spawn_enemy() -> void:
 	# Don't spawn if at capacity
 	if capacity >= max_wave_capacity:
@@ -108,7 +117,7 @@ func _on_play_pressed() -> void:
 	$level_ui.show()
 	$player.setup()
 	$player/Camera2D.make_current()
-	wave_points = 100  # Reset wave points
+	wave_points = 10  # Reset wave points
 	max_wave_capacity = 10
 	max_wave = 100
 	capacity = 0  # Reset capacity

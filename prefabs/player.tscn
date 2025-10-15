@@ -33,6 +33,10 @@ animation = &"idle"
 [node name="Marker" type="Marker2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_left = -1575
+limit_top = -1200
+limit_right = 3950
+limit_bottom = 2300
 script = ExtResource("3_1txc5")
 
 [node name="attack_timer" type="Timer" parent="."]
