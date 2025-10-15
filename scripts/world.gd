@@ -16,7 +16,7 @@ func _process(_delta: float) -> void:
 
 func player_hit(damage):
 	if $player.can_hit:
-		$player/Camera2D.shake(5.0,0.5)
+		$player/Camera2D.shake(7.0,0.5)
 		$player.health -= damage
 		$player.can_hit = false
 		$level_ui/immunity.show()
