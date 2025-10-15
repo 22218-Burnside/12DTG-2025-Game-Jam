@@ -30,8 +30,6 @@ z_index = 5
 sprite_frames = SubResource("SpriteFrames_0ump0")
 animation = &"idle"
 
-[node name="Marker" type="Marker2D" parent="."]
-
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = -1575
 limit_top = -1200
@@ -39,12 +37,18 @@ limit_right = 3950
 limit_bottom = 2300
 script = ExtResource("3_1txc5")
 
+[node name="immunity_icon" parent="." instance=ExtResource("3_r66lb")]
+visible = false
+
 [node name="attack_timer" type="Timer" parent="."]
 
 [node name="immunity_timer" type="Timer" parent="."]
 
-[node name="immunity_icon" parent="." instance=ExtResource("3_r66lb")]
-visible = false
+[node name="fire_timer" type="Timer" parent="."]
 
-[connection signal="timeout" from="attack_timer" to="." method="fire_attack"]
+[node name="wind_timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="attack_timer" to="." method="water_attack"]
 [connection signal="timeout" from="immunity_timer" to="." method="_on_immunity_timer_timeout"]
+[connection signal="timeout" from="fire_timer" to="." method="fire_attack"]
+[connection signal="timeout" from="wind_timer" to="." method="wind_attack"]

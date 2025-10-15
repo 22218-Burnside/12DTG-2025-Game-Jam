@@ -15,6 +15,7 @@ var enemies = {
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$level_ui.hide()
+	$upgrade_selection.hide()
 	$menu.show()
 	$menu/menu_camera.make_current()
 
@@ -31,11 +32,13 @@ func _process(_delta: float) -> void:
 func pause_game():
 	get_tree().paused = true
 	$upgrade_selection.show()
+	$level_ui.hide()
 	
 	
 func next_level():
 	get_tree().paused = false
 	$upgrade_selection.hide()
+	$level_ui.show()
 	max_wave *= randf_range(1.1,1.5)
 	wave_points = round(max_wave)
 	max_wave_capacity += 1
@@ -121,3 +124,52 @@ func _on_play_pressed() -> void:
 	max_wave_capacity = 10
 	max_wave = 100
 	capacity = 0  # Reset capacity
+
+
+func _on_fire_pressed() -> void:
+	$player.fire_level += 1
+	$upgrade_selection/Label.text = "Fire
+Level " + str($player.fire_level) + " >>> "  + str($player.fire_level + 1) + "
+Damage 5000 >>> 7000
+Duration 5.0 >>> 5.1
+Size 1 >>> 2
+Speed 1 >>> 2"
+
+	if $player.fire_level == 1:
+		$player.fire_attack()
+	next_level()
+
+func _on_earth_pressed() -> void:
+	$player.earth_level += 1
+	$upgrade_selection/Label2.text = "Earth
+Level " + str($player.earth_level) + " >>> "  + str($player.earth_level + 1) + "
+Damage 5000 >>> 7000
+Duration 5.0 >>> 5.1
+Size 1 >>> 2
+Speed 1 >>> 2"
+
+	next_level()
+
+func _on_water_pressed() -> void:
+	$player.water_level += 1
+	$upgrade_selection/Label3.text = "Water
+Level " + str($player.water_level) + " >>> "  + str($player.water_level + 1) + "
+Damage " + str(int(50*(0.8+$player.water_level/5.0))) + " >>> " + str(int(50*(0.8+($player.water_level+1)/5.0))) + "
+Duration 5.0 >>> 5.1
+Size 1 >>> 2
+Speed 1 >>> 2"
+
+	next_level()
+
+func _on_wind_pressed() -> void:
+	$player.wind_level += 1
+	$upgrade_selection/Label4.text = "Wind
+Level " + str($player.wind_level) + " >>> "  + str($player.wind_level + 1) + "
+Damage 5000 >>> 7000
+Duration 5.0 >>> 5.1
+Size 1 >>> 2
+Speed 1 >>> 2"
+
+	if $player.wind_level == 1:
+		$player.wind_attack()
+	next_level()

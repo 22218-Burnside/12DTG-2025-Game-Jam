@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://drvot6vrm7j1i"]
+[gd_scene load_steps=15 format=3 uid="uid://drvot6vrm7j1i"]
 
-[ext_resource type="AudioStream" uid="uid://by8nubbkl7o83" path="res://assets/placeholder_assets/readme/placeholder assets/record_audio_10-14-2025_7-47-44 PM-[AudioTrimmer.com].mp3" id="1_d4oq2"]
+[ext_resource type="AudioStream" uid="uid://by8nubbkl7o83" path="res://assets/placeholder_assets/readme/placeholder assets/ambience.mp3" id="1_d4oq2"]
 [ext_resource type="Material" uid="uid://qialryg03ikl" path="res://assets/placeholder_assets/readme/placeholder assets/red.tres" id="1_w4766"]
 [ext_resource type="Texture2D" uid="uid://bwh8wlf3xhrgt" path="res://assets/placeholder_assets/readme/placeholder assets/line.tres" id="2_kqtvn"]
 [ext_resource type="Script" uid="uid://dgr0ekiih5f8j" path="res://assets/placeholder_assets/readme/placeholder assets/screen_shake.gd" id="2_y0cty"]
@@ -32,6 +32,22 @@ angle_max = 360.00003
 gravity = Vector3(0, 0, 0)
 color_ramp = SubResource("GradientTexture1D_7n607")
 
+[sub_resource type="Gradient" id="Gradient_wyvja"]
+offsets = PackedFloat32Array(0, 0.52287585, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qc515"]
+gradient = SubResource("Gradient_wyvja")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qcw3o"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(2000, 1000, 0)
+angle_min = -720.0
+angle_max = 360.00003
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_qc515")
+
 [node name="immunity_icon" type="Node2D"]
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -50,13 +66,21 @@ process_material = ExtResource("1_w4766")
 emitting = false
 amount = 50
 texture = ExtResource("2_kqtvn")
-lifetime = 0.2
+lifetime = 0.05
 process_material = SubResource("ParticleProcessMaterial_c36aq")
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 50
+texture = ExtResource("2_kqtvn")
+lifetime = 0.05
+process_material = SubResource("ParticleProcessMaterial_qcw3o")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
 
 [node name="anukus" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
 stream = ExtResource("1_d4oq2")
 
 [node name="Label" type="Label" parent="."]

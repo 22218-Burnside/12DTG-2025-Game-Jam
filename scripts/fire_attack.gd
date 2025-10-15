@@ -1,15 +1,15 @@
-extends Area2D
+extends Node2D
 var damage = 0
 var speed = 600
 var direction = Vector2.ZERO
 
 func _ready() -> void:
-	$die_time.start(2)
-	damage = 50 * (0.8 + $"..".water_level/5.0)
+	$die_time.start(5)
+	damage = 50 * (0.8 + $"..".fire_level/5.0)
 	
 	
 func _physics_process(delta: float) -> void:
-	self.position += direction * speed * delta
+	self.rotation_degrees += delta * 50
 	
 	
 func _on_area_entered(area: Area2D) -> void:

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddqebhywyimhg"]
+
+[ext_resource type="Script" uid="uid://dikdpg5vhgmje" path="res://scripts/wind_attack.gd" id="1_mqtjm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mqtjm"]
+radius = 256.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_ot4cc"]
+radius = 0.6
+height = 0.8
+radial_segments = 4
+rings = 12
+
+[node name="wind_attack" type="Area2D"]
+script = ExtResource("1_mqtjm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mqtjm")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(1, 1, 1, 0.3647059)
+scale = Vector2(427.15048, 640)
+mesh = SubResource("SphereMesh_ot4cc")
+
+[node name="attack_timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
