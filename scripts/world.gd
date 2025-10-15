@@ -4,7 +4,7 @@ var tank = preload("res://prefabs/tank.tscn")
 var heart = preload("res://prefabs/heart.tscn")
 var max_wave = 100
 var max_wave_capacity = 10
-var wave_points = 50000000
+var wave_points = 50
 var capacity = 0
 var enemy_difficulty = 1.0
 var enemies = {
@@ -21,14 +21,15 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	$level_ui/Label2.text = str(capacity)
-	$level_ui/Label3.text = str(wave_points)
+	$level_ui/Label3.text = str(int(wave_points))
+	$level_ui/Label4.text = str(max_wave_capacity-9)
 	if capacity < max_wave_capacity and wave_points > 0:
 		spawn_enemy()
-	if capacity == 0 and wave_points == 0:
+	if capacity <= 0 and wave_points <= 0:
 		next_level()
 
 func next_level():
-	max_wave *= round(randf_range(1.01,1.2))
+	max_wave *= randf_range(1.1,1.5)
 	wave_points = round(max_wave)
 	max_wave_capacity += 1
 	capacity = 0
@@ -57,14 +58,14 @@ func spawn_enemy() -> void:
 		
 		# Spawn at least 350 pixels away from player
 		spawned_enemy.position = Vector2(
-			randi_range($player.position.x - 500, $player.position.x + 500), 
-			randi_range($player.position.y - 500, $player.position.y + 500)
+			randi_range($player.position.x - 1000, $player.position.x + 1000), 
+			randi_range($player.position.y - 1000, $player.position.y + 1000)
 		)
 		
-		while spawned_enemy.position.distance_to($player.position) < 350:
+		while spawned_enemy.position.distance_to($player.position) < 500:
 			spawned_enemy.position = Vector2(
-				randi_range($player.position.x - 500, $player.position.x + 500), 
-				randi_range($player.position.y - 500, $player.position.y + 500)
+				randi_range($player.position.x - 1000, $player.position.x + 1000), 
+				randi_range($player.position.y - 1000, $player.position.y + 1000)
 			)
 
 

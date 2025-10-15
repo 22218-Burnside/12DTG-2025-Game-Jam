@@ -7,7 +7,7 @@
 size = Vector2(128, 128)
 
 [node name="tank" type="Area2D" groups=["enemy"]]
-modulate = Color(0, 0, 0, 1)
+modulate = Color(0.28038633, 0.38093084, 0.18025348, 1)
 script = ExtResource("1_lin0t")
 metadata/_edit_group_ = true
 

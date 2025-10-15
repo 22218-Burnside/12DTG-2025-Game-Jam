@@ -91,10 +91,19 @@ text = "adsfhpiasdhfa;dj"
 horizontal_alignment = 2
 
 [node name="Label3" type="Label" parent="level_ui"]
-offset_left = 1103.0
-offset_top = 270.0
-offset_right = 1930.0
-offset_bottom = 353.0
+offset_left = 1085.0
+offset_top = 168.0
+offset_right = 1912.0
+offset_bottom = 251.0
+theme_override_font_sizes/font_size = 60
+text = "SCORE:0"
+horizontal_alignment = 2
+
+[node name="Label4" type="Label" parent="level_ui"]
+offset_left = 1082.0
+offset_top = 252.0
+offset_right = 1909.0
+offset_bottom = 335.0
 theme_override_font_sizes/font_size = 60
 text = "SCORE:0"
 horizontal_alignment = 2

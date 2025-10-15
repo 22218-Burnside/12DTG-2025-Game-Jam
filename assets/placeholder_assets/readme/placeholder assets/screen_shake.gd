@@ -11,7 +11,7 @@ func _ready() -> void:
 func _input(event):
 	if event is InputEventKey and not event.echo and event.unicode > 0:
 		var key_char = char(event.unicode).to_lower()
-		if key_char == domain_sequence[domain_progress]:
+		if key_char == domain_sequence[domain_progress] and can_expand:
 			domain_progress += 1
 			if domain_progress == domain_sequence.length() and can_expand:
 				# Full sequence successful!
