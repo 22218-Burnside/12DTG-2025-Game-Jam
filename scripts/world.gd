@@ -1,7 +1,11 @@
 extends Node2D
 
 var enemy = preload("res://prefabs/enemy.tscn")
-var heart = preload("res://prefabs/heart.tscn")
+var pickups = {
+	"heart": [preload("res://prefabs/pickups/heart.tscn"), 85],
+	"xp": [preload("res://prefabs/pickups/xp.tscn"), 0],
+	"coin": [preload("res://prefabs/pickups/coin.tscn"), 0]
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,13 +40,17 @@ func player_die():
 func _on_enemy_enemy_hit_player(damage) -> void:
 	player_hit(damage)
 
-func _on_enemy_killed(score, death_position):
+func _on_enemy_killed(score, xp, coins, death_position):
 	$player.score += score
-	var drop_chance = randi_range(1,100)
-	if drop_chance >= 85:
-		var spawned_heart = heart.instantiate()
-		call_deferred("add_child",spawned_heart)
-		spawned_heart.position = death_position
+	$player.xp += xp
+	$player.coins += coins
+		
+	for key in pickups.keys():
+		var drop_chance = randi_range(1,100)
+		if drop_chance >= pickups[key][1]:
+			var spawned_pickup = pickups[key][0].instantiate()
+			call_deferred("add_child",spawned_pickup)
+			spawned_pickup.position = death_position
 	$player.update_stats()
 	
 

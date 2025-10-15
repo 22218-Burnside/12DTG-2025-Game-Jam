@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://xthptpuqr5c1"]
+
+[ext_resource type="Script" uid="uid://d4cldo53uda08" path="res://scripts/pickup.gd" id="1_5hsgm"]
+[ext_resource type="Texture2D" uid="uid://c25cyoy0q1giy" path="res://assets/icon.svg" id="1_dvdga"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5hsgm"]
+size = Vector2(64, 64)
+
+[node name="coin" type="Area2D"]
+script = ExtResource("1_5hsgm")
+amount = 5
+type = "coin"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5hsgm")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_dvdga")
+
+[node name="despawn_timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

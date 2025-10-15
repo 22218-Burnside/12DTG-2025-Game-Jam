@@ -3,7 +3,9 @@ extends Area2D
 const SPEED : int = 150
 var health = 100
 var damage = 10
-var points = 10
+var score = 10
+var xp = 10
+var coins = 5
 var player : Node2D
 
 
@@ -34,5 +36,5 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func die():
-	death.emit(points,self.position)
+	death.emit(score, xp, coins, self.position)
 	self.queue_free()
