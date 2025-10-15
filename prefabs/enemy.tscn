@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ks3ws"]
 size = Vector2(128, 128)
 
-[node name="enemy" type="Area2D"]
+[node name="enemy" type="Area2D" groups=["enemy"]]
 script = ExtResource("1_yfjof")
 metadata/_edit_group_ = true
 
