@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c25cyoy0q1giy" path="res://assets/icon.svg" id="2_iw7t5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6j1uc"]
-size = Vector2(32, 32)
+size = Vector2(32, 200)
 
 [node name="attack" type="Area2D"]
 script = ExtResource("1_ehc6w")
@@ -13,7 +13,7 @@ script = ExtResource("1_ehc6w")
 shape = SubResource("RectangleShape2D_6j1uc")
 
 [node name="Icon" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.275, 1.595)
 texture = ExtResource("2_iw7t5")
 
 [node name="die_time" type="Timer" parent="."]

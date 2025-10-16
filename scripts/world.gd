@@ -1,29 +1,87 @@
 extends Node2D
+
+# Preloaded scenes
 var enemy = preload("res://prefabs/enemy.tscn")
 var tank = preload("res://prefabs/tank.tscn")
 var heart = preload("res://prefabs/heart.tscn")
-var max_wave = 100
-var max_wave_capacity = 10
-var wave_points = 50
+
+# Wave configuration constants
+const INITIAL_WAVE_POINTS = 10
+const INITIAL_MAX_WAVE = 100
+const INITIAL_MAX_WAVE_CAPACITY = 10
+const WAVE_MULTIPLIER_MIN = 1.1
+const WAVE_MULTIPLIER_MAX = 1.5
+const WAVE_DISPLAY_OFFSET = 9
+
+# Spawn configuration constants
+const MIN_SPAWN_DISTANCE = 500
+const SPAWN_RANGE = 1000
+
+# Drop configuration constants
+const HEART_DROP_CHANCE_MIN = 85
+const HEART_DROP_CHANCE_MAX = 100
+
+# Camera shake constants
+const CAMERA_SHAKE_STRENGTH = 7.0
+const CAMERA_SHAKE_DURATION = 0.5
+
+# Upgrade damage calculation constants
+const BASE_DAMAGE = 50
+const DAMAGE_BASE_MULTIPLIER = 0.8
+const DAMAGE_LEVEL_DIVISOR = 5.0
+
+# Enemy costs
+const ENEMY_COST = 1
+const TANK_COST = 10
+
+# Game state variables
+var max_wave = INITIAL_MAX_WAVE
+var max_wave_capacity = INITIAL_MAX_WAVE_CAPACITY
+var wave_points = INITIAL_WAVE_POINTS
 var capacity = 0
 var enemy_difficulty = 1.0
+
 var enemies = {
-	"enemy" : [preload("res://prefabs/enemy.tscn"),1],
-	"tank" : [preload("res://prefabs/tank.tscn"),10],
+	"enemy" : [preload("res://prefabs/enemy.tscn"), ENEMY_COST],
+	"tank" : [preload("res://prefabs/tank.tscn"), TANK_COST],
 }
+
+# Node references
+@onready var level_ui = $level_ui
+@onready var upgrade_selection = $upgrade_selection
+@onready var menu = $menu
+@onready var menu_camera = $menu/menu_camera
+@onready var player = $player
+@onready var player_camera = $player/Camera2D
+@onready var immunity_timer = $player/immunity_timer
+@onready var spawn_timer = $spawn_timer
+@onready var immunity_indicator = $level_ui/immunity
+
+# UI Label references
+@onready var enemies_left_label = $level_ui/Label2
+@onready var enemy_points_label = $level_ui/Label3
+@onready var wave_label = $level_ui/Label4
+@onready var menu_label = $menu/Label
+
+# Upgrade labels
+@onready var fire_upgrade_label = $upgrade_selection/Label
+@onready var earth_upgrade_label = $upgrade_selection/Label2
+@onready var water_upgrade_label = $upgrade_selection/Label3
+@onready var wind_upgrade_label = $upgrade_selection/Label4
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$level_ui.hide()
-	$upgrade_selection.hide()
-	$menu.show()
-	$menu/menu_camera.make_current()
+	level_ui.hide()
+	upgrade_selection.hide()
+	menu.show()
+	menu_camera.make_current()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	$level_ui/Label2.text = "Enemies left: " + str(capacity)
-	$level_ui/Label3.text = "Enemy points: " + str(int(wave_points))
-	$level_ui/Label4.text = "Wave: " + str(max_wave_capacity-9)
+	enemies_left_label.text = "Enemies left: " + str(capacity)
+	enemy_points_label.text = "Enemy points: " + str(int(wave_points))
+	wave_label.text = "Wave: " + str(max_wave_capacity - WAVE_DISPLAY_OFFSET)
+	
 	if capacity < max_wave_capacity and wave_points > 0:
 		spawn_enemy()
 	if capacity <= 0 and wave_points <= 0:
@@ -31,19 +89,20 @@ func _process(_delta: float) -> void:
 
 func pause_game():
 	get_tree().paused = true
-	$upgrade_selection.show()
-	$level_ui.hide()
-	
+	upgrade_selection.show()
+	level_ui.hide()
 	
 func next_level():
 	get_tree().paused = false
-	$upgrade_selection.hide()
-	$level_ui.show()
-	max_wave *= randf_range(1.1,1.5)
+	upgrade_selection.hide()
+	level_ui.show()
+	max_wave *= randf_range(WAVE_MULTIPLIER_MIN, WAVE_MULTIPLIER_MAX)
 	wave_points = round(max_wave)
 	max_wave_capacity += 1
 	capacity = 0
 	
+func calculate_damage(level: int) -> int:
+	return int(BASE_DAMAGE * (DAMAGE_BASE_MULTIPLIER + level / DAMAGE_LEVEL_DIVISOR))
 	
 func spawn_enemy() -> void:
 	# Don't spawn if at capacity
@@ -68,94 +127,90 @@ func spawn_enemy() -> void:
 		capacity += 1
 		add_child(spawned_enemy)
 		
-		# Spawn at least 350 pixels away from player
+		# Spawn at least MIN_SPAWN_DISTANCE pixels away from player
 		spawned_enemy.position = Vector2(
-			randi_range($player.position.x - 1000, $player.position.x + 1000), 
-			randi_range($player.position.y - 1000, $player.position.y + 1000)
+			randi_range(player.position.x - SPAWN_RANGE, player.position.x + SPAWN_RANGE), 
+			randi_range(player.position.y - SPAWN_RANGE, player.position.y + SPAWN_RANGE)
 		)
 		
-		while spawned_enemy.position.distance_to($player.position) < 500:
+		while spawned_enemy.position.distance_to(player.position) < MIN_SPAWN_DISTANCE:
 			spawned_enemy.position = Vector2(
-				randi_range($player.position.x - 1000, $player.position.x + 1000), 
-				randi_range($player.position.y - 1000, $player.position.y + 1000)
+				randi_range(player.position.x - SPAWN_RANGE, player.position.x + SPAWN_RANGE), 
+				randi_range(player.position.y - SPAWN_RANGE, player.position.y + SPAWN_RANGE)
 			)
 
-
 func player_hit(damage):
-	if $player.can_hit:
-		$player/Camera2D.shake(7.0, 0.5)
-		$player.health -= damage
-		$player.can_hit = false
-		$level_ui/immunity.show()
-		$player/immunity_timer.start()
-	$player.update_stats()
-	if $player.health <= 0:
+	if player.can_hit:
+		player_camera.shake(CAMERA_SHAKE_STRENGTH, CAMERA_SHAKE_DURATION)
+		player.health -= damage
+		player.can_hit = false
+		immunity_indicator.show()
+		immunity_timer.start()
+	player.update_stats()
+	if player.health <= 0:
 		player_die()
 
 func player_die():
-	$player.controlling = false
-	$menu/Label.show()
-	$menu.show()
-	$level_ui.hide()
-	$spawn_timer.stop()
-	$menu/menu_camera.make_current()
+	player.controlling = false
+	menu_label.show()
+	menu.show()
+	level_ui.hide()
+	spawn_timer.stop()
+	menu_camera.make_current()
 
 func _on_enemy_enemy_hit_player(damage) -> void:
 	player_hit(damage)
 
 func _on_enemy_killed(score, death_position):
 	capacity -= 1  # Decrease capacity when enemy dies
-	$player.score += score
-	var drop_chance = randi_range(1, 100)
-	if drop_chance >= 85:
+	player.score += score
+	var drop_chance = randi_range(1, HEART_DROP_CHANCE_MAX)
+	if drop_chance >= HEART_DROP_CHANCE_MIN:
 		var spawned_heart = heart.instantiate()
 		call_deferred("add_child", spawned_heart)
 		spawned_heart.position = death_position
-	$player.update_stats()
+	player.update_stats()
 
 func _on_play_pressed() -> void:
 	for i in get_tree().get_nodes_in_group("enemy"):
 		i.queue_free()
-	$menu.hide()
-	$level_ui.show()
-	$player.setup()
-	$player/Camera2D.make_current()
-	wave_points = 10  # Reset wave points
-	max_wave_capacity = 10
-	max_wave = 100
-	capacity = 0  # Reset capacity
-
+	menu.hide()
+	level_ui.show()
+	player.setup()
+	player_camera.make_current()
+	wave_points = INITIAL_WAVE_POINTS
+	max_wave_capacity = INITIAL_MAX_WAVE_CAPACITY
+	max_wave = INITIAL_MAX_WAVE
+	capacity = 0
 
 func _on_fire_pressed() -> void:
-	$player.fire_level += 1
-	$upgrade_selection/Label.text = "Fire
-Level " + str($player.fire_level) + " >>> "  + str($player.fire_level + 1) + "
-Damage " + str(int(50*(0.8+$player.fire_level/5.0))) + " >>> " + str(int(50*(0.8+($player.fire_level+1)/5.0)))
-	if $player.fire_level == 1:
-		$player.fire_attack()
+	player.fire_level += 1
+	var current_damage = calculate_damage(player.fire_level - 1)
+	var next_damage = calculate_damage(player.fire_level)
+	fire_upgrade_label.text = "Fire\nLevel " + str(player.fire_level) + " >>> " + str(player.fire_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
+	if player.fire_level == 1:
+		player.fire_attack()
 	next_level()
 
 func _on_earth_pressed() -> void:
-	$player.earth_level += 1
-	$upgrade_selection/Label2.text = "Earth
-Level " + str($player.earth_level) + " >>> "  + str($player.earth_level + 1) + "
-Damage " + str(int(50*(0.8+$player.earth_level/5.0))) + " >>> " + str(int(50*(0.8+($player.earth_level+1)/5.0)))
-
+	player.earth_level += 1
+	var current_damage = calculate_damage(player.earth_level - 1)
+	var next_damage = calculate_damage(player.earth_level)
+	earth_upgrade_label.text = "Earth\nLevel " + str(player.earth_level) + " >>> " + str(player.earth_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
 	next_level()
 
 func _on_water_pressed() -> void:
-	$player.water_level += 1
-	$upgrade_selection/Label3.text = "Water
-Level " + str($player.water_level) + " >>> "  + str($player.water_level + 1) + "
-Damage " + str(int(50*(0.8+$player.water_level/5.0))) + " >>> " + str(int(50*(0.8+($player.water_level+1)/5.0)))
+	player.water_level += 1
+	var current_damage = calculate_damage(player.water_level - 1)
+	var next_damage = calculate_damage(player.water_level)
+	water_upgrade_label.text = "Water\nLevel " + str(player.water_level) + " >>> " + str(player.water_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
 	next_level()
 
 func _on_wind_pressed() -> void:
-	$player.wind_level += 1
-	$upgrade_selection/Label4.text = "Wind
-Level " + str($player.wind_level) + " >>> "  + str($player.wind_level + 1) + "
-Damage " + str(int(50*(0.8+$player.wind_level/5.0))) + " >>> " + str(int(50*(0.8+($player.wind_level+1)/5.0)))
-
-	if $player.wind_level == 1:
-		$player.wind_attack()
+	player.wind_level += 1
+	var current_damage = calculate_damage(player.wind_level - 1)
+	var next_damage = calculate_damage(player.wind_level)
+	wind_upgrade_label.text = "Wind\nLevel " + str(player.wind_level) + " >>> " + str(player.wind_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
+	if player.wind_level == 1:
+		player.wind_attack()
 	next_level()

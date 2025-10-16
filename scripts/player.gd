@@ -4,7 +4,7 @@ extends CharacterBody2D
 const SPEED = 300.0
 var health = 100
 var score = 0
-var attack_time = 0.75
+var attack_time = 1.5
 var fire_attack_time = 8
 var wind_attack_time = 0.8
 var controlling = false
@@ -55,11 +55,26 @@ func update_stats():
 
 func water_attack():
 	if controlling:
-		$attack_timer.start(attack_time)
-		var spawned_attack = water.instantiate()
-		$"..".add_child(spawned_attack)
-		spawned_attack.position = self.position
-		spawned_attack.direction = (get_global_mouse_position()-self.position).normalized()
+		var closest_enemy_distance = INF
+		var closest_enemy_position = Vector2.ZERO
+		var enemy_found = false
+		
+		for i in get_tree().get_nodes_in_group("enemy"):
+			var distance = i.position.distance_to(self.position)
+			if distance < closest_enemy_distance:
+				closest_enemy_distance = distance
+				closest_enemy_position = i.position
+				enemy_found = true
+		
+		# Only fire if an enemy was actually found
+		if enemy_found:
+			$attack_timer.start(attack_time)
+			var spawned_attack = water.instantiate()
+			$"..".add_child(spawned_attack)
+			spawned_attack.position = self.position
+			# Calculate direction FROM player TO enemy
+			spawned_attack.look_at(closest_enemy_position)
+			spawned_attack.direction = (closest_enemy_position - self.position).normalized()
 
 func fire_attack():
 	if controlling:
