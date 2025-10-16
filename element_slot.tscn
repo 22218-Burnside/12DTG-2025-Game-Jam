@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmqqffip7hqwu"]
+
+[ext_resource type="Texture2D" uid="uid://c1o6210heiosi" path="res://assets/placeholder_assets/fire.png" id="1_g20t0"]
+
+[node name="Element Slot" type="VBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(90, 200)
+layout_mode = 2
+icon = ExtResource("1_g20t0")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Fire Lvl 2"
