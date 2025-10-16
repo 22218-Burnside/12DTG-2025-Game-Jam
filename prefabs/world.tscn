@@ -116,83 +116,71 @@ process_mode = 2
 
 [node name="fire" type="Button" parent="upgrade_selection"]
 offset_left = 25.0
-offset_top = 314.0
-offset_right = 407.0
-offset_bottom = 562.0
+offset_top = 300.0
+offset_right = 424.99994
+offset_bottom = 480.0
 text = "Fire"
 
 [node name="earth" type="Button" parent="upgrade_selection"]
 offset_left = 517.0
-offset_top = 313.0
-offset_right = 899.0
-offset_bottom = 536.0
+offset_top = 300.0
+offset_right = 916.99994
+offset_bottom = 480.0
 text = "Earth"
 
 [node name="water" type="Button" parent="upgrade_selection"]
 offset_left = 1010.0
-offset_top = 313.0
-offset_right = 1392.0
-offset_bottom = 515.0
+offset_top = 300.0
+offset_right = 1410.0
+offset_bottom = 480.0
 text = "Water"
 
 [node name="wind" type="Button" parent="upgrade_selection"]
 offset_left = 1489.0
-offset_top = 320.0
-offset_right = 1871.0
-offset_bottom = 493.0
+offset_top = 300.0
+offset_right = 1889.0
+offset_bottom = 480.0
 text = "Wind"
 
 [node name="Label" type="Label" parent="upgrade_selection"]
-offset_left = 94.0
-offset_top = 149.0
-offset_right = 346.0
-offset_bottom = 302.0
+offset_left = 45.0
+offset_top = 152.0
+offset_right = 395.0
+offset_bottom = 302.00043
 text = "Fire
 Level 0 >>> 1
-Damage 5000 >>> 7000
-Duration 5.0 >>> 5.1
-Size 1 >>> 2
-Speed 1 >>> 2"
+Damage 0 >>> 50"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="upgrade_selection"]
-offset_left = 572.0
-offset_top = 147.0
-offset_right = 824.0
-offset_bottom = 300.0
+offset_left = 542.0
+offset_top = 186.0
+offset_right = 892.0
+offset_bottom = 336.00043
 text = "Earth
 Level 0 >>> 1
-Damage 5000 >>> 7000
-Duration 5.0 >>> 5.1
-Size 1 >>> 2
-Speed 1 >>> 2"
+Damage 0 >>> 50"
 horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="upgrade_selection"]
-offset_left = 1084.0
-offset_top = 140.0
-offset_right = 1336.0
-offset_bottom = 293.0
+offset_left = 1029.0
+offset_top = 175.0
+offset_right = 1379.0
+offset_bottom = 325.00043
 text = "Water
 Level 1 >>> 2
-Damage 5000 >>> 7000
-Duration 5.0 >>> 5.1
-Size 1 >>> 2
-Speed 1 >>> 2"
+Damage 50 >> 60"
 horizontal_alignment = 1
 
 [node name="Label4" type="Label" parent="upgrade_selection"]
-offset_left = 1556.0
-offset_top = 157.0
-offset_right = 1808.0
-offset_bottom = 310.0
+offset_left = 1515.0
+offset_top = 181.0
+offset_right = 1865.0
+offset_bottom = 331.00043
 text = "Wind
 Level 0 >>> 1
-Damage 5000 >>> 7000
-Duration 5.0 >>> 5.1
-Size 1 >>> 2
-Speed 1 >>> 2"
+Damage 0 >>> 50"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="menu/play" to="." method="_on_play_pressed"]

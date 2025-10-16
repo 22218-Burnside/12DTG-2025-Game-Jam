@@ -57,7 +57,8 @@ func water_attack():
 	if controlling:
 		$attack_timer.start(attack_time)
 		var spawned_attack = water.instantiate()
-		add_child(spawned_attack)
+		$"..".add_child(spawned_attack)
+		spawned_attack.position = self.position
 		spawned_attack.direction = (get_global_mouse_position()-self.position).normalized()
 
 func fire_attack():

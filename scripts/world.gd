@@ -130,11 +130,7 @@ func _on_fire_pressed() -> void:
 	$player.fire_level += 1
 	$upgrade_selection/Label.text = "Fire
 Level " + str($player.fire_level) + " >>> "  + str($player.fire_level + 1) + "
-Damage 5000 >>> 7000
-Duration 5.0 >>> 5.1
-Size 1 >>> 2
-Speed 1 >>> 2"
-
+Damage " + str(int(50*(0.8+$player.fire_level/5.0))) + " >>> " + str(int(50*(0.8+($player.fire_level+1)/5.0)))
 	if $player.fire_level == 1:
 		$player.fire_attack()
 	next_level()
@@ -143,10 +139,7 @@ func _on_earth_pressed() -> void:
 	$player.earth_level += 1
 	$upgrade_selection/Label2.text = "Earth
 Level " + str($player.earth_level) + " >>> "  + str($player.earth_level + 1) + "
-Damage 5000 >>> 7000
-Duration 5.0 >>> 5.1
-Size 1 >>> 2
-Speed 1 >>> 2"
+Damage " + str(int(50*(0.8+$player.earth_level/5.0))) + " >>> " + str(int(50*(0.8+($player.earth_level+1)/5.0)))
 
 	next_level()
 
@@ -154,21 +147,14 @@ func _on_water_pressed() -> void:
 	$player.water_level += 1
 	$upgrade_selection/Label3.text = "Water
 Level " + str($player.water_level) + " >>> "  + str($player.water_level + 1) + "
-Damage " + str(int(50*(0.8+$player.water_level/5.0))) + " >>> " + str(int(50*(0.8+($player.water_level+1)/5.0))) + "
-Duration 5.0 >>> 5.1
-Size 1 >>> 2
-Speed 1 >>> 2"
-
+Damage " + str(int(50*(0.8+$player.water_level/5.0))) + " >>> " + str(int(50*(0.8+($player.water_level+1)/5.0)))
 	next_level()
 
 func _on_wind_pressed() -> void:
 	$player.wind_level += 1
 	$upgrade_selection/Label4.text = "Wind
 Level " + str($player.wind_level) + " >>> "  + str($player.wind_level + 1) + "
-Damage 5000 >>> 7000
-Duration 5.0 >>> 5.1
-Size 1 >>> 2
-Speed 1 >>> 2"
+Damage " + str(int(50*(0.8+$player.wind_level/5.0))) + " >>> " + str(int(50*(0.8+($player.wind_level+1)/5.0)))
 
 	if $player.wind_level == 1:
 		$player.wind_attack()

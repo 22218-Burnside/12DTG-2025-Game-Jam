@@ -5,7 +5,7 @@ var direction = Vector2.ZERO
 
 func _ready() -> void:
 	$die_time.start(2)
-	damage = 50 * (0.8 + $"..".water_level/5.0)
+	damage = 50 * (0.8 + $"../player".water_level/5.0)
 	
 	
 func _physics_process(delta: float) -> void:
