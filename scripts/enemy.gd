@@ -1,11 +1,11 @@
 extends Area2D
 
 const SPEED : int = 150
-var health = 100
-var damage = 10
-var score = 10
-var xp = 10
-var coins = 5
+@export var health = 100
+@export var damage = 10
+@export var score = 10
+@export var xp = 10
+@export var coins = 5
 var player : Node2D
 
 

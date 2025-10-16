@@ -45,9 +45,21 @@ func _physics_process(_delta: float) -> void:
 
 func update_stats():
 	$".."/level_ui/Label.text = "Score: " + str(score)
+	$"../level_ui/CoinDisplay".text = "Coins: " + str(coins)
 	$"../level_ui/ProgressBar".value = health
-	if xp >= LEVEL_BASE + LEVEL_INCREMENT * (level - 1):
-		print("level up", xp)
+	
+	# Exponentially increasing level
+	#var xp_requirement = LEVEL_BASE * pow(1.3, level - 1)
+	# Linear increasing level
+	var xp_requirement = LEVEL_BASE + LEVEL_INCREMENT * (level - 1)
+	
+	if xp >= xp_requirement:
+		level += 1
+		xp -= xp_requirement
+		xp_requirement = LEVEL_BASE + LEVEL_INCREMENT * (level - 1)
+		$"../level_ui/LevelDisplay/LevelLabel".text = str(level)
+	$"../level_ui/LevelDisplay/LevelBar".value = (float(xp) / xp_requirement) * 100
+
 	
 	
 func fire_attack():

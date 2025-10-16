@@ -20,6 +20,5 @@ func _on_body_entered(body: Node2D) -> void:
 		self.queue_free()
 			
 
-
 func _on_despawn_timer_timeout() -> void:
 	self.queue_free()

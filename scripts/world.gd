@@ -42,8 +42,6 @@ func _on_enemy_enemy_hit_player(damage) -> void:
 
 func _on_enemy_killed(score, xp, coins, death_position):
 	$player.score += score
-	$player.xp += xp
-	$player.coins += coins
 		
 	for key in pickups.keys():
 		var drop_chance = randi_range(1,100)
