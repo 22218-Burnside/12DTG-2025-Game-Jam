@@ -22,8 +22,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if vulnerable:
 		speed = 5
+		$Icon.flip_v = true
 	else:
 		speed = 50
+		$Icon.flip_v = false
 
 	if can_attack:
 		for i in get_overlapping_bodies():

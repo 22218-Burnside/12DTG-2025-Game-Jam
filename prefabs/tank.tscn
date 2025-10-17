@@ -16,7 +16,6 @@ metadata/_edit_group_ = true
 shape = SubResource("RectangleShape2D_ks3ws")
 
 [node name="Icon" type="Sprite2D" parent="."]
-rotation = 3.1415927
 texture = ExtResource("2_as70b")
 
 [node name="attack_timer" type="Timer" parent="."]
