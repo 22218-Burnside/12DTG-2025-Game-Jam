@@ -10,10 +10,7 @@ var wind_attack_time = 0.8
 var earth_attack_time = 3
 var controlling = false
 var can_hit = true
-var water_level = 1
-var fire_level = 0
-var earth_level = 0
-var wind_level = 0
+
 var wind_damage = 50
 var fire_damage = 50
 var water_damage = 50

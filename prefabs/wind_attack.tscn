@@ -32,7 +32,7 @@ mesh = SubResource("SphereMesh_ot4cc")
 
 [node name="attack_timer" type="Timer" parent="."]
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." groups=["attack"]]
 texture_filter = 1
 amount = 10
 texture = ExtResource("2_mqtjm")

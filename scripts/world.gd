@@ -91,6 +91,8 @@ func pause_game():
 	get_tree().paused = true
 	upgrade_selection.show()
 	level_ui.hide()
+	for i in get_tree().get_nodes_in_group("attack"):
+		i.queue_free()
 	
 func next_level():
 	get_tree().paused = false
@@ -184,35 +186,33 @@ func _on_play_pressed() -> void:
 	capacity = 0
 
 func _on_fire_pressed() -> void:
-	player.fire_level += 1
-	var current_damage = calculate_damage(player.fire_level - 1)
-	var next_damage = calculate_damage(player.fire_level)
-	fire_upgrade_label.text = "Fire\nLevel " + str(player.fire_level) + " >>> " + str(player.fire_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
-	if player.fire_level == 1:
-		player.fire_attack()
+	Globals.fire_level += 1
+	var current_damage = calculate_damage(Globals.fire_level - 1)
+	var next_damage = calculate_damage(Globals.fire_level)
+	fire_upgrade_label.text = "Fire\nLevel " + str(Globals.fire_level) + " >>> " + str(Globals.fire_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
+	player.fire_attack()
 	next_level()
 
 func _on_earth_pressed() -> void:
-	player.earth_level += 1
-	var current_damage = calculate_damage(player.earth_level - 1)
-	var next_damage = calculate_damage(player.earth_level)
-	earth_upgrade_label.text = "Earth\nLevel " + str(player.earth_level) + " >>> " + str(player.earth_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
+	Globals.earth_level += 1
+	var current_damage = calculate_damage(Globals.earth_level - 1)
+	var next_damage = calculate_damage(Globals.earth_level)
+	earth_upgrade_label.text = "Earth\nLevel " + str(Globals.earth_level) + " >>> " + str(Globals.earth_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
 	next_level()
-	if player.earth_level == 1:
-		player.earth_attack()
+	player.earth_attack()
 
 func _on_water_pressed() -> void:
-	player.water_level += 1
-	var current_damage = calculate_damage(player.water_level - 1)
-	var next_damage = calculate_damage(player.water_level)
-	water_upgrade_label.text = "Water\nLevel " + str(player.water_level) + " >>> " + str(player.water_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
+	Globals.water_level += 1
+	var current_damage = calculate_damage(Globals.water_level - 1)
+	var next_damage = calculate_damage(Globals.water_level)
+	water_upgrade_label.text = "Water\nLevel " + str(Globals.water_level) + " >>> " + str(Globals.water_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
+	player.water_attack()
 	next_level()
 
 func _on_wind_pressed() -> void:
-	player.wind_level += 1
-	var current_damage = calculate_damage(player.wind_level - 1)
-	var next_damage = calculate_damage(player.wind_level)
-	wind_upgrade_label.text = "Wind\nLevel " + str(player.wind_level) + " >>> " + str(player.wind_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
-	if player.wind_level == 1:
-		player.wind_attack()
+	Globals.wind_level += 1
+	var current_damage = calculate_damage(Globals.wind_level - 1)
+	var next_damage = calculate_damage(Globals.wind_level)
+	wind_upgrade_label.text = "Wind\nLevel " + str(Globals.wind_level) + " >>> " + str(Globals.wind_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
+	player.wind_attack()
 	next_level()

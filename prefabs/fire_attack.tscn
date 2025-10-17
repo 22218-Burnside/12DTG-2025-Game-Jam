@@ -9,7 +9,7 @@ radius = 64.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_rv45m"]
 radius = 64.0
 
-[node name="fire_attack" type="Node2D"]
+[node name="fire_attack" type="Node2D" groups=["attack"]]
 script = ExtResource("1_agrtj")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -18,6 +18,7 @@ scale = Vector2(1.64, 1.64)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -150)
 shape = SubResource("CircleShape2D_7gpr6")
+disabled = true
 
 [node name="Icon" type="Sprite2D" parent="Area2D/CollisionShape2D"]
 modulate = Color(0.868046, 0.39493915, 1.92523e-07, 1)
@@ -26,11 +27,13 @@ scale = Vector2(8, 8)
 texture = ExtResource("2_agrtj")
 
 [node name="Area2D2" type="Area2D" parent="."]
+visible = false
 scale = Vector2(1.64, 1.64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
 position = Vector2(0, 150)
 shape = SubResource("CircleShape2D_7gpr6")
+disabled = true
 
 [node name="Icon" type="Sprite2D" parent="Area2D2/CollisionShape2D"]
 modulate = Color(0.868046, 0.39493915, 1.92523e-07, 1)
@@ -40,11 +43,13 @@ scale = Vector2(8, 8)
 texture = ExtResource("2_agrtj")
 
 [node name="Area2D3" type="Area2D" parent="."]
+visible = false
 scale = Vector2(1.64, 1.64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
 position = Vector2(150, 0)
 shape = SubResource("CircleShape2D_7gpr6")
+disabled = true
 
 [node name="Icon" type="Sprite2D" parent="Area2D3/CollisionShape2D"]
 modulate = Color(0.868046, 0.39493915, 1.92523e-07, 1)
@@ -54,11 +59,13 @@ scale = Vector2(8, 8)
 texture = ExtResource("2_agrtj")
 
 [node name="Area2D4" type="Area2D" parent="."]
+visible = false
 scale = Vector2(1.64, 1.64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4"]
 position = Vector2(-150, 0)
 shape = SubResource("CircleShape2D_rv45m")
+disabled = true
 
 [node name="Icon" type="Sprite2D" parent="Area2D4/CollisionShape2D"]
 modulate = Color(0.868046, 0.39493915, 1.92523e-07, 1)
