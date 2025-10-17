@@ -9,7 +9,7 @@ func _ready() -> void:
 	
 	
 func _physics_process(delta: float) -> void:
-	self.rotation_degrees += delta * 50
+	self.rotation += delta*10
 	
 	
 func _on_area_entered(area: Area2D) -> void:

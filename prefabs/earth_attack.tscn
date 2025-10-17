@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0wk1e0jhquh3"]
+
+[ext_resource type="Texture2D" uid="uid://bk83y0mtiqttt" path="res://assets/placeholder_assets/earth.png" id="1_8g62b"]
+[ext_resource type="Script" uid="uid://bv6wqgunu7n8q" path="res://scripts/earth_attack.gd" id="1_jyjc0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyjc0"]
+size = Vector2(250, 300)
+
+[node name="earth_attack" type="Area2D"]
+script = ExtResource("1_jyjc0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jyjc0")
+
+[node name="Earth" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(20, 20)
+texture = ExtResource("1_8g62b")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

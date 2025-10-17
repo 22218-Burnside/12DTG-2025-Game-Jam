@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://52h848nfricr"]
 
 [ext_resource type="Script" uid="uid://du0mcwwmg6f2i" path="res://scripts/fire_attack.gd" id="1_agrtj"]
-[ext_resource type="Texture2D" uid="uid://c25cyoy0q1giy" path="res://assets/icon.svg" id="2_miq40"]
+[ext_resource type="Texture2D" uid="uid://c1o6210heiosi" path="res://assets/placeholder_assets/fire.png" id="2_agrtj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7gpr6"]
 radius = 64.0
@@ -21,7 +21,9 @@ shape = SubResource("CircleShape2D_7gpr6")
 
 [node name="Icon" type="Sprite2D" parent="Area2D/CollisionShape2D"]
 modulate = Color(0.868046, 0.39493915, 1.92523e-07, 1)
-texture = ExtResource("2_miq40")
+texture_filter = 1
+scale = Vector2(8, 8)
+texture = ExtResource("2_agrtj")
 
 [node name="Area2D2" type="Area2D" parent="."]
 scale = Vector2(1.64, 1.64)
@@ -32,7 +34,10 @@ shape = SubResource("CircleShape2D_7gpr6")
 
 [node name="Icon" type="Sprite2D" parent="Area2D2/CollisionShape2D"]
 modulate = Color(0.868046, 0.39493915, 1.92523e-07, 1)
-texture = ExtResource("2_miq40")
+texture_filter = 1
+rotation = 3.1415927
+scale = Vector2(8, 8)
+texture = ExtResource("2_agrtj")
 
 [node name="Area2D3" type="Area2D" parent="."]
 scale = Vector2(1.64, 1.64)
@@ -43,7 +48,10 @@ shape = SubResource("CircleShape2D_7gpr6")
 
 [node name="Icon" type="Sprite2D" parent="Area2D3/CollisionShape2D"]
 modulate = Color(0.868046, 0.39493915, 1.92523e-07, 1)
-texture = ExtResource("2_miq40")
+texture_filter = 1
+rotation = 1.5707964
+scale = Vector2(8, 8)
+texture = ExtResource("2_agrtj")
 
 [node name="Area2D4" type="Area2D" parent="."]
 scale = Vector2(1.64, 1.64)
@@ -54,7 +62,10 @@ shape = SubResource("CircleShape2D_rv45m")
 
 [node name="Icon" type="Sprite2D" parent="Area2D4/CollisionShape2D"]
 modulate = Color(0.868046, 0.39493915, 1.92523e-07, 1)
-texture = ExtResource("2_miq40")
+texture_filter = 1
+rotation = 4.712389
+scale = Vector2(8, 8)
+texture = ExtResource("2_agrtj")
 
 [node name="die_time" type="Timer" parent="."]
 
