@@ -1,13 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqpw738s2pxnx"]
+[gd_scene load_steps=4 format=3 uid="uid://bqpw738s2pxnx"]
 
 [ext_resource type="Theme" uid="uid://bwew6pw1vvt0v" path="res://theme.tres" id="1_l6vt0"]
 [ext_resource type="PackedScene" uid="uid://bmqqffip7hqwu" path="res://element_slot.tscn" id="2_0tjp8"]
-[ext_resource type="Script" uid="uid://cuykllnq4vn3r" path="res://element_slot.gd" id="3_8yape"]
-[ext_resource type="Script" uid="uid://knppiy8od0fv" path="res://scripts/element.gd" id="4_0tjp8"]
-
-[sub_resource type="Resource" id="Resource_8yape"]
-script = ExtResource("4_0tjp8")
-metadata/_custom_type_script = "uid://knppiy8od0fv"
+[ext_resource type="Resource" uid="uid://dirvbjxkn2pam" path="res://resources/fire_element.tres" id="3_l6vt0"]
 
 [node name="hotbar" type="CanvasLayer"]
 
@@ -28,21 +23,24 @@ anchor_bottom = 1.0
 offset_top = -307.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(0.75, 0.75)
 theme = ExtResource("1_l6vt0")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer"]
 layout_mode = 2
 
-[node name="Element Slot" parent="Control/MarginContainer/HBoxContainer" instance=ExtResource("2_0tjp8")]
+[node name="Element Slot1" parent="Control/MarginContainer/HBoxContainer" instance=ExtResource("2_0tjp8")]
 layout_mode = 2
-script = ExtResource("3_8yape")
-slot_id = 1
-element = SubResource("Resource_8yape")
-element_level = 2234
+element = ExtResource("3_l6vt0")
 
 [node name="Element Slot2" parent="Control/MarginContainer/HBoxContainer" instance=ExtResource("2_0tjp8")]
 layout_mode = 2
-script = ExtResource("3_8yape")
-slot_id = 1
-element = SubResource("Resource_8yape")
-element_level = 2234
+element = ExtResource("3_l6vt0")
+
+[node name="Element Slot3" parent="Control/MarginContainer/HBoxContainer" instance=ExtResource("2_0tjp8")]
+layout_mode = 2
+element = ExtResource("3_l6vt0")
+
+[node name="Element Slot4" parent="Control/MarginContainer/HBoxContainer" instance=ExtResource("2_0tjp8")]
+layout_mode = 2
+element = ExtResource("3_l6vt0")

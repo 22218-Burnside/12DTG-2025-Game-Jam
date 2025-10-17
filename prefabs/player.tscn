@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bpr5p80oqae3l"]
+[gd_scene load_steps=8 format=3 uid="uid://bpr5p80oqae3l"]
 
 [ext_resource type="Texture2D" uid="uid://c25cyoy0q1giy" path="res://assets/icon.svg" id="1_s082h"]
 [ext_resource type="Script" uid="uid://dsypkhf5mj0tv" path="res://scripts/player.gd" id="1_weayp"]
 [ext_resource type="Script" uid="uid://5abf8nsucu0e" path="res://scripts/camera_2d.gd" id="3_1txc5"]
 [ext_resource type="PackedScene" uid="uid://drvot6vrm7j1i" path="res://assets/placeholder_assets/readme/placeholder assets/immunity_icon.tscn" id="3_r66lb"]
+[ext_resource type="PackedScene" uid="uid://bqpw738s2pxnx" path="res://hotbar.tscn" id="5_ht1c8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_weayp"]
 size = Vector2(128, 128)
@@ -47,6 +48,8 @@ visible = false
 [node name="fire_timer" type="Timer" parent="."]
 
 [node name="wind_timer" type="Timer" parent="."]
+
+[node name="hotbar" parent="." instance=ExtResource("5_ht1c8")]
 
 [connection signal="timeout" from="attack_timer" to="." method="water_attack"]
 [connection signal="timeout" from="immunity_timer" to="." method="_on_immunity_timer_timeout"]

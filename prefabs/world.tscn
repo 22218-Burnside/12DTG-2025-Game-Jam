@@ -33,6 +33,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAA
 tile_set = SubResource("TileSet_4d63b")
 
 [node name="menu" type="CanvasLayer" parent="."]
+layer = 9
 visible = false
 
 [node name="menu_camera" type="Camera2D" parent="menu"]
