@@ -47,6 +47,8 @@ visible = false
 
 [node name="fire_timer" type="Timer" parent="."]
 
+[node name="earth_timer" type="Timer" parent="."]
+
 [node name="wind_timer" type="Timer" parent="."]
 
 [node name="hotbar" parent="." instance=ExtResource("5_ht1c8")]
@@ -54,4 +56,5 @@ visible = false
 [connection signal="timeout" from="attack_timer" to="." method="water_attack"]
 [connection signal="timeout" from="immunity_timer" to="." method="_on_immunity_timer_timeout"]
 [connection signal="timeout" from="fire_timer" to="." method="fire_attack"]
+[connection signal="timeout" from="earth_timer" to="." method="earth_attack"]
 [connection signal="timeout" from="wind_timer" to="." method="wind_attack"]

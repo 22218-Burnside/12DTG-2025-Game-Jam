@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddqebhywyimhg"]
+[gd_scene load_steps=6 format=3 uid="uid://ddqebhywyimhg"]
 
 [ext_resource type="Script" uid="uid://dikdpg5vhgmje" path="res://scripts/wind_attack.gd" id="1_mqtjm"]
+[ext_resource type="Texture2D" uid="uid://dxytgmarygufh" path="res://assets/placeholder_assets/wind.png" id="2_mqtjm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqtjm"]
 radius = 256.0
@@ -10,6 +11,13 @@ radius = 0.6
 height = 0.8
 radial_segments = 4
 rings = 12
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4vx8g"]
+particle_flag_disable_z = true
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = 417.17996
+gravity = Vector3(0, 0, 0)
+scale_max = 5.0
 
 [node name="wind_attack" type="Area2D"]
 script = ExtResource("1_mqtjm")
@@ -23,5 +31,11 @@ scale = Vector2(427.15048, 640)
 mesh = SubResource("SphereMesh_ot4cc")
 
 [node name="attack_timer" type="Timer" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+texture_filter = 1
+amount = 10
+texture = ExtResource("2_mqtjm")
+process_material = SubResource("ParticleProcessMaterial_4vx8g")
 
 [connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]

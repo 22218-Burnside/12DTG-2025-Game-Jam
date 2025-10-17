@@ -7,6 +7,7 @@ var score = 0
 var attack_time = 1.5
 var fire_attack_time = 8
 var wind_attack_time = 0.8
+var earth_attack_time = 3
 var controlling = false
 var can_hit = true
 var water_level = 1
@@ -21,6 +22,9 @@ var earth_damage = 0
 @onready var water = preload("res://prefabs/attack.tscn")
 @onready var fire = preload("res://prefabs/fire_attack.tscn")
 @onready var wind = preload("res://prefabs/wind_attack.tscn")
+@onready var earth = preload("res://prefabs/earth_attack.tscn")
+
+
 func setup():
 	controlling = true
 	health = 100
@@ -75,6 +79,8 @@ func water_attack():
 			# Calculate direction FROM player TO enemy
 			spawned_attack.look_at(closest_enemy_position)
 			spawned_attack.direction = (closest_enemy_position - self.position).normalized()
+			if closest_enemy_position.x < self.position.x:
+				spawned_attack.find_child("Icon").flip_v = true
 
 func fire_attack():
 	if controlling:
@@ -87,6 +93,14 @@ func wind_attack():
 		$wind_timer.start(wind_attack_time)
 		var spawned_attack = wind.instantiate()
 		add_child(spawned_attack)
+
+
+func earth_attack():
+	if controlling:
+		$earth_timer.start(earth_attack_time)
+		var spawned_attack = earth.instantiate()
+		$"..".add_child(spawned_attack)
+		spawned_attack.position = Vector2(randf_range(position.x-500.0,position.x + 500.0), randf_range(position.y-500.0,position.y + 500.0))
 
 
 func _on_immunity_timer_timeout() -> void:

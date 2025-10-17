@@ -10,7 +10,10 @@ func _ready() -> void:
 func _on_attack_timer_timeout() -> void:
 	for i in get_overlapping_areas():
 		if i.is_in_group("enemy"):
-			i.health -= damage
+			if i.vulnerable:
+				i.health -= damage * 2
+			else:
+				i.health -= damage
 			if i.health <= 0:
 				i.die()
 	self.queue_free()

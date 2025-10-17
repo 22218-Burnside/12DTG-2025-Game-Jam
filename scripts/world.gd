@@ -198,6 +198,8 @@ func _on_earth_pressed() -> void:
 	var next_damage = calculate_damage(player.earth_level)
 	earth_upgrade_label.text = "Earth\nLevel " + str(player.earth_level) + " >>> " + str(player.earth_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
 	next_level()
+	if player.earth_level == 1:
+		player.earth_attack()
 
 func _on_water_pressed() -> void:
 	player.water_level += 1

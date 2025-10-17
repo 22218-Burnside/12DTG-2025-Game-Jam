@@ -9,12 +9,15 @@ func _ready() -> void:
 	
 	
 func _physics_process(delta: float) -> void:
-	self.rotation_degrees += delta * 50
+	self.rotation += delta*10
 	
 	
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
-		area.health -= damage
+		if area.vulnerable:
+			area.health -= damage * 2
+		else:
+			area.health -= damage
 		if area.health <= 0:
 			area.die()
 
