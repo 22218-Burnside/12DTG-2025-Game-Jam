@@ -1,5 +1,10 @@
 extends CharacterBody2D
 
+const WATER_ELEMENT = preload("uid://bm0nfhtxr8et8")
+const FIRE_ELEMENT = preload("uid://dirvbjxkn2pam")
+const WIND_ELEMENT = preload("uid://duoekhjeg3c58")
+const EARTH_ELEMENT = preload("uid://cikihy5ag5kj7")
+
 
 const SPEED = 300.0
 var health = 100
@@ -10,10 +15,22 @@ var wind_attack_time = 0.8
 var earth_attack_time = 3
 var controlling = false
 var can_hit = true
-var water_level = 1
-var fire_level = 0
-var earth_level = 0
-var wind_level = 0
+var water_level = 1 :
+	set(value):
+		water_level = value
+		hotbar.element_slot_1.element_level += 1
+var fire_level = 0 : 
+	set(value):
+		fire_level = value
+		hotbar.element_slot_2.element_level += 1
+var earth_level = 0 :
+	set(value):
+		earth_level = value
+		hotbar.element_slot_4.element_level += 1
+var wind_level = 0 :
+	set(value):
+		wind_level = value
+		hotbar.element_slot_3 += 1
 var wind_damage = 50
 var fire_damage = 50
 var water_damage = 50
@@ -24,6 +41,8 @@ var earth_damage = 0
 @onready var wind = preload("res://prefabs/wind_attack.tscn")
 @onready var earth = preload("res://prefabs/earth_attack.tscn")
 
+@onready var hotbar = $hotbar
+
 
 func setup():
 	controlling = true
@@ -32,6 +51,11 @@ func setup():
 	$".."/level_ui/Label.text = "Score: 0"
 	$"../level_ui/ProgressBar".value = health
 	water_attack()
+	hotbar.element_slot_1.element = WATER_ELEMENT
+	hotbar.element_slot_2.element = FIRE_ELEMENT
+	hotbar.element_slot_3.element = WIND_ELEMENT
+	hotbar.element_slot_4.element = EARTH_ELEMENT
+	
 
 func _physics_process(_delta: float) -> void:
 	if controlling:
@@ -74,13 +98,15 @@ func water_attack():
 		if enemy_found:
 			$attack_timer.start(attack_time)
 			var spawned_attack = water.instantiate()
-			$"..".add_child(spawned_attack)
+			spawned_attack.damage = 50 * (0.8 + water_level/5.0)
+			
 			spawned_attack.position = self.position
 			# Calculate direction FROM player TO enemy
 			spawned_attack.look_at(closest_enemy_position)
 			spawned_attack.direction = (closest_enemy_position - self.position).normalized()
 			if closest_enemy_position.x < self.position.x:
 				spawned_attack.find_child("Icon").flip_v = true
+			get_parent().add_child(spawned_attack)
 
 func fire_attack():
 	if controlling:

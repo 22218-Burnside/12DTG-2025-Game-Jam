@@ -7,6 +7,7 @@ custom_minimum_size = Vector2(200, 200)
 script = ExtResource("1_olark")
 
 [node name="Button" type="Button" parent="."]
+texture_filter = 1
 custom_minimum_size = Vector2(90, 200)
 layout_mode = 2
 icon_alignment = 1

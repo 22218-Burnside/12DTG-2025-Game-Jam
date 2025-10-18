@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Element" load_steps=3 format=3 uid="uid://duoekhjeg3c58"]
+
+[ext_resource type="Script" uid="uid://knppiy8od0fv" path="res://scripts/element.gd" id="1_4kglk"]
+[ext_resource type="Texture2D" uid="uid://dxytgmarygufh" path="res://assets/placeholder_assets/wind.png" id="1_68yub"]
+
+[resource]
+script = ExtResource("1_4kglk")
+element_texture = ExtResource("1_68yub")
+element_name = "Wind"
+metadata/_custom_type_script = "uid://knppiy8od0fv"
