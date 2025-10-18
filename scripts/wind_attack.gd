@@ -4,7 +4,6 @@ var damage = 0
 
 func _ready() -> void:
 	$attack_timer.start(0.05)
-	damage = 50 * (0.8 + $"..".wind_level/5.0)
 
 
 func _on_attack_timer_timeout() -> void:

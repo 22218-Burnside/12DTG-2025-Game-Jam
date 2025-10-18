@@ -7,4 +7,6 @@
 script = ExtResource("1_t6evn")
 element_texture = ExtResource("1_un4av")
 element_name = "Earth"
+function = "earth_attack"
+timer = 3.0
 metadata/_custom_type_script = "uid://knppiy8od0fv"

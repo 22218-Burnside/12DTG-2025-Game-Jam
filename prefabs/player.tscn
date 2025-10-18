@@ -41,20 +41,20 @@ script = ExtResource("3_1txc5")
 [node name="immunity_icon" parent="." instance=ExtResource("3_r66lb")]
 visible = false
 
-[node name="attack_timer" type="Timer" parent="."]
+[node name="slot1timer" type="Timer" parent="."]
+
+[node name="slot2timer" type="Timer" parent="."]
+
+[node name="slot3timer" type="Timer" parent="."]
+
+[node name="slot4timer" type="Timer" parent="."]
 
 [node name="immunity_timer" type="Timer" parent="."]
 
-[node name="fire_timer" type="Timer" parent="."]
-
-[node name="earth_timer" type="Timer" parent="."]
-
-[node name="wind_timer" type="Timer" parent="."]
-
 [node name="hotbar" parent="." instance=ExtResource("5_ht1c8")]
 
-[connection signal="timeout" from="attack_timer" to="." method="water_attack"]
+[connection signal="timeout" from="slot1timer" to="." method="slot1timeout"]
+[connection signal="timeout" from="slot2timer" to="." method="slot2timeout"]
+[connection signal="timeout" from="slot3timer" to="." method="slot3timeout"]
+[connection signal="timeout" from="slot4timer" to="." method="slot4timeout"]
 [connection signal="timeout" from="immunity_timer" to="." method="_on_immunity_timer_timeout"]
-[connection signal="timeout" from="fire_timer" to="." method="fire_attack"]
-[connection signal="timeout" from="earth_timer" to="." method="earth_attack"]
-[connection signal="timeout" from="wind_timer" to="." method="wind_attack"]

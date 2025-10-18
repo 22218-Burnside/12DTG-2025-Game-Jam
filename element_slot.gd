@@ -2,7 +2,6 @@
 extends VBoxContainer
 @onready var button: Button = $Button
 @onready var label: Label = $Label
-@export var slot_id : int = 0 
 @export var element : Element
 @export var element_level : int = 0
 

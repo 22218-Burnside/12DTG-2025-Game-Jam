@@ -1,10 +1,13 @@
 [gd_resource type="Resource" script_class="Element" load_steps=3 format=3 uid="uid://dirvbjxkn2pam"]
 
-[ext_resource type="Script" uid="uid://knppiy8od0fv" path="res://scripts/element.gd" id="1_men12"]
-[ext_resource type="Texture2D" uid="uid://c1o6210heiosi" path="res://assets/placeholder_assets/fire.png" id="1_ndxbk"]
+[ext_resource type="Texture2D" uid="uid://c1o6210heiosi" path="res://assets/placeholder_assets/fire.png" id="1_4vlo4"]
+[ext_resource type="Script" uid="uid://knppiy8od0fv" path="res://scripts/element.gd" id="2_t1a8n"]
 
 [resource]
-script = ExtResource("1_men12")
-element_texture = ExtResource("1_ndxbk")
+script = ExtResource("2_t1a8n")
+element_texture = ExtResource("1_4vlo4")
 element_name = "Fire"
+function = "fire_attack"
+damage = 50
+timer = 8.0
 metadata/_custom_type_script = "uid://knppiy8od0fv"

@@ -7,4 +7,7 @@
 script = ExtResource("1_5xv4n")
 element_texture = ExtResource("1_87vnr")
 element_name = "Water"
+function = "water_attack"
+damage = 50
+timer = 1.5
 metadata/_custom_type_script = "uid://knppiy8od0fv"
