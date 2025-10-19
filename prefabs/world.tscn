@@ -105,6 +105,16 @@ offset_top = 252.0
 offset_right = 1909.0
 offset_bottom = 335.0
 theme_override_font_sizes/font_size = 60
+text = "Wave: 1"
+horizontal_alignment = 2
+
+[node name="Label5" type="Label" parent="level_ui"]
+offset_left = 1082.0
+offset_top = 358.535
+offset_right = 1909.0
+offset_bottom = 441.53503
+theme_override_font_sizes/font_size = 60
+text = "Level: 1"
 horizontal_alignment = 2
 
 [node name="player" parent="." instance=ExtResource("3_07nuu")]
