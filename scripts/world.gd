@@ -7,10 +7,10 @@ var heart = preload("res://prefabs/heart.tscn")
 
 # Wave configuration constants
 const INITIAL_WAVE_POINTS = 10
-const INITIAL_MAX_WAVE = 100
+const INITIAL_MAX_WAVE = 20
 const INITIAL_MAX_WAVE_CAPACITY = 10
 const WAVE_MULTIPLIER_MIN = 1.1
-const WAVE_MULTIPLIER_MAX = 1.5
+const WAVE_MULTIPLIER_MAX = 1.2
 const WAVE_DISPLAY_OFFSET = 9
 
 # Spawn configuration constants
@@ -40,6 +40,9 @@ var max_wave_capacity = INITIAL_MAX_WAVE_CAPACITY
 var wave_points = INITIAL_WAVE_POINTS
 var capacity = 0
 var enemy_difficulty = 1.0
+var wave = 1
+var max_wave_amount = 3
+var level = 1
 
 var enemies = {
 	"enemy" : [preload("res://prefabs/enemy.tscn"), ENEMY_COST],
@@ -61,6 +64,7 @@ var enemies = {
 @onready var enemies_left_label = $level_ui/Label2
 @onready var enemy_points_label = $level_ui/Label3
 @onready var wave_label = $level_ui/Label4
+@onready var level_label = $level_ui/Label5
 @onready var menu_label = $menu/Label
 
 # Upgrade labels
@@ -80,8 +84,6 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	enemies_left_label.text = "Enemies left: " + str(capacity)
 	enemy_points_label.text = "Enemy points: " + str(int(wave_points))
-	wave_label.text = "Wave: " + str(max_wave_capacity - WAVE_DISPLAY_OFFSET)
-	
 	if capacity < max_wave_capacity and wave_points > 0:
 		spawn_enemy()
 	if capacity <= 0 and wave_points <= 0:
@@ -92,17 +94,30 @@ func pause_game():
 	upgrade_selection.show()
 	level_ui.hide()
 	
-func next_level():
+func next_wave():
 	get_tree().paused = false
 	upgrade_selection.hide()
 	level_ui.show()
 	max_wave *= randf_range(WAVE_MULTIPLIER_MIN, WAVE_MULTIPLIER_MAX)
 	wave_points = round(max_wave)
 	max_wave_capacity += 1
+	wave += 1
+	if wave > max_wave_amount:
+		next_level()
+	else:
+		wave_label.text = "Wave: " + str(wave)
 	capacity = 0
-	
-func calculate_damage(level: int) -> int:
-	return int(BASE_DAMAGE * (DAMAGE_BASE_MULTIPLIER + level / DAMAGE_LEVEL_DIVISOR))
+
+
+func next_level():
+	level += 1
+	level_label.text = "Level: " + str(level)
+	wave = 1
+	wave_label.text = "Wave: 1"
+
+
+func calculate_damage(ability_level: int) -> int:
+	return int(BASE_DAMAGE * (DAMAGE_BASE_MULTIPLIER + ability_level / DAMAGE_LEVEL_DIVISOR))
 	
 func spawn_enemy() -> void:
 	# Don't spawn if at capacity
@@ -188,25 +203,25 @@ func _on_fire_pressed() -> void:
 	var current_damage = calculate_damage(player.fire_level - 1)
 	var next_damage = calculate_damage(player.fire_level)
 	fire_upgrade_label.text = "Fire\nLevel " + str(player.fire_level) + " >>> " + str(player.fire_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
-	next_level()
+	next_wave()
 
 func _on_earth_pressed() -> void:
 	player.earth_level += 1
 	var current_damage = calculate_damage(player.earth_level - 1)
 	var next_damage = calculate_damage(player.earth_level)
 	earth_upgrade_label.text = "Earth\nLevel " + str(player.earth_level) + " >>> " + str(player.earth_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
-	next_level()
+	next_wave()
 
 func _on_water_pressed() -> void:
 	player.water_level += 1
 	var current_damage = calculate_damage(player.water_level - 1)
 	var next_damage = calculate_damage(player.water_level)
 	water_upgrade_label.text = "Water\nLevel " + str(player.water_level) + " >>> " + str(player.water_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
-	next_level()
+	next_wave()
 
 func _on_wind_pressed() -> void:
 	player.wind_level += 1
 	var current_damage = calculate_damage(player.wind_level - 1)
 	var next_damage = calculate_damage(player.wind_level)
 	wind_upgrade_label.text = "Wind\nLevel " + str(player.wind_level) + " >>> " + str(player.wind_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
-	next_level()
+	next_wave()
