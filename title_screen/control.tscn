@@ -1,0 +1,558 @@
+[gd_scene load_steps=17 format=3 uid="uid://d4gviquaenxby"]
+
+[ext_resource type="Script" uid="uid://d4fv8hbcem10f" path="res://title_screen/control.gd" id="1_0fbet"]
+[ext_resource type="Theme" uid="uid://h22edabrcqwn" path="res://theme.tres" id="1_34clf"]
+[ext_resource type="Shader" path="res://title_screen/fire.gdshader" id="2_5fjhk"]
+[ext_resource type="Shader" path="res://title_screen/pixelate.gdshader" id="3_fdx52"]
+[ext_resource type="Shader" path="res://title_screen/vornoi.gdshader" id="3_wnaq3"]
+[ext_resource type="Script" path="res://title_screen/buttons.gd" id="4_3qiiy"]
+[ext_resource type="Script" path="res://title_screen/credits.gd" id="4_i3mxp"]
+[ext_resource type="Texture2D" uid="uid://cv6oc6iup6hb3" path="res://title_screen/cursor.png" id="5_3qiiy"]
+[ext_resource type="Script" uid="uid://cshxufh203wud" path="res://title_screen/cursor.gd" id="6_i3mxp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fdx52"]
+shader = ExtResource("2_5fjhk")
+shader_parameter/radius = 0.3
+shader_parameter/cell_amount = 10
+shader_parameter/period = Vector3(9.5, 9.5, 9.5)
+shader_parameter/tangerine = Color(0.968, 0.573, 0.337, 1)
+shader_parameter/sunset = Color(0.984, 0.82, 0.635, 1)
+shader_parameter/moonstone = Color(0, 0.698, 0.792, 1)
+shader_parameter/ylnmn_blue = Color(0.114, 0.306, 0.537, 1)
+shader_parameter/emerald = Color(0.2, 0.792, 0.498, 1)
+shader_parameter/cal_poly_green = Color(0.078, 0.349, 0.114, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f5tvq"]
+shader = ExtResource("3_wnaq3")
+shader_parameter/disp_ = Vector2(0.5, 0.5)
+shader_parameter/speed = 3.0
+shader_parameter/color1 = Vector3(0.005, 0.045, 0.075)
+shader_parameter/color2 = Vector3(0.033, 0.07, 0.03)
+shader_parameter/m3 = Basis(0.65, 1.12, -1.43, -1.75, 0.65, -0.3, 0.3, 1.4, 1.22)
+
+[sub_resource type="Animation" id="Animation_i3mxp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pixelate/pixelate:material:shader_parameter/progress_trans")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3qiiy"]
+resource_name = "pixelate"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pixelate/pixelate:material:shader_parameter/progress_trans")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wnaq3"]
+_data = {
+&"RESET": SubResource("Animation_i3mxp"),
+&"pixelate": SubResource("Animation_3qiiy")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cbw8w"]
+shader = ExtResource("3_fdx52")
+shader_parameter/progress_trans = 0.0
+shader_parameter/transition_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_5kuq4"]
+Label/font_sizes/font_size = 60
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 10
+MarginContainer/constants/margin_top = 10
+
+[node name="intro" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_34clf")
+script = ExtResource("1_0fbet")
+initial_velocity = 300.0
+intensity = 0.5
+decrease_rate = 2.0
+final_velocity = 5.0
+
+[node name="title" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_34clf")
+
+[node name="black" type="ColorRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_34clf")
+color = Color(0, 0, 0, 1)
+
+[node name="earth" type="ColorRect" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_fdx52")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_right = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_34clf")
+
+[node name="vornoi" type="ColorRect" parent="."]
+visible = false
+z_index = -1
+material = SubResource("ShaderMaterial_f5tvq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_34clf")
+
+[node name="pixelate" type="CanvasLayer" parent="."]
+
+[node name="pixelate_anim" type="AnimationPlayer" parent="pixelate"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_wnaq3")
+}
+autoplay = "pixelate"
+
+[node name="pixelate" type="ColorRect" parent="pixelate"]
+material = SubResource("ShaderMaterial_cbw8w")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="credits" type="ScrollContainer" parent="." node_paths=PackedStringArray("projects", "arts", "programmers", "levels", "juices", "gits", "trellos")]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 9.0
+offset_right = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_34clf")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+script = ExtResource("4_i3mxp")
+projects = [NodePath("VBoxContainer/project"), NodePath("VBoxContainer/cohen")]
+arts = [NodePath("VBoxContainer/art"), NodePath("VBoxContainer/Aine")]
+programmers = [NodePath("VBoxContainer/programming"), NodePath("VBoxContainer/Hayden")]
+levels = [NodePath("VBoxContainer/level & Design"), NodePath("VBoxContainer/Dexter")]
+juices = [NodePath("VBoxContainer/Juice"), NodePath("VBoxContainer/Samuel")]
+gits = [NodePath("VBoxContainer/Git"), NodePath("VBoxContainer/Ben")]
+trellos = [NodePath("VBoxContainer/trello"), NodePath("VBoxContainer/Miguel")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="credits"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+
+[node name="project" type="RichTextLabel" parent="credits/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[wave] [outline_size=8]PROJECT MANAGER"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="cohen" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Cohen Voight"
+horizontal_alignment = 1
+
+[node name="art" type="RichTextLabel" parent="credits/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[wave] [outline_size=8]Art MANAGER"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Aine" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Aine O'Conner"
+horizontal_alignment = 1
+
+[node name="jordan" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Jordan Gainsford"
+horizontal_alignment = 1
+
+[node name="xander" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Xander Hales"
+horizontal_alignment = 1
+
+[node name="Sean" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Sean Rivera"
+horizontal_alignment = 1
+
+[node name="benson" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Benson Lee"
+horizontal_alignment = 1
+
+[node name="bruno" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Bruno Studzinski"
+horizontal_alignment = 1
+
+[node name="Isaac" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Isaac Latimer"
+horizontal_alignment = 1
+
+[node name="programming" type="RichTextLabel" parent="credits/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[wave] [outline_size=8]Programming MANAGER"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hayden" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Hayden Clemence"
+horizontal_alignment = 1
+
+[node name="Miguel2" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Miguel Monreal"
+horizontal_alignment = 1
+
+[node name="pasindu" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Pasindu Vidunitha Gardi"
+horizontal_alignment = 1
+
+[node name="olly" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Olly Kitchingman"
+horizontal_alignment = 1
+
+[node name="ryan" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Ryan Zhang"
+horizontal_alignment = 1
+
+[node name="level & Design" type="RichTextLabel" parent="credits/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[wave] [outline_size=8]Level & Design MANAGER"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dexter" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Dexter Goater"
+horizontal_alignment = 1
+
+[node name="dylan" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Dylan Williams"
+horizontal_alignment = 1
+
+[node name="jonas" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Jonas Puettmann"
+horizontal_alignment = 1
+
+[node name="kyle" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Kyle Deng"
+horizontal_alignment = 1
+
+[node name="Ben2" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Ben Blakie"
+horizontal_alignment = 1
+
+[node name="Joseph" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Joseph Ke"
+horizontal_alignment = 1
+
+[node name="Git" type="RichTextLabel" parent="credits/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[wave] [outline_size=8]Git MANAGER"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ben" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Ben Blakie"
+horizontal_alignment = 1
+
+[node name="Juice" type="RichTextLabel" parent="credits/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[wave] [outline_size=8]Juice MANAGER"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Samuel" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Samuel O'Sullivan"
+horizontal_alignment = 1
+
+[node name="trello" type="RichTextLabel" parent="credits/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[wave] [outline_size=8]Trello MANAGER"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Miguel" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Miguel Monreal"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "
+"
+horizontal_alignment = 1
+
+[node name="buttons" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 112.0
+offset_top = 105.0
+offset_right = -112.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_34clf")
+script = ExtResource("4_3qiiy")
+
+[node name="PLAY" type="Button" parent="buttons"]
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 24.0
+theme = ExtResource("1_34clf")
+text = "PLAY"
+flat = true
+
+[node name="OPTIONS" type="Button" parent="buttons"]
+layout_mode = 0
+offset_top = 23.0
+offset_right = 96.0
+offset_bottom = 47.0
+theme = ExtResource("1_34clf")
+text = "OPTIONS"
+flat = true
+
+[node name="CREDITS" type="Button" parent="buttons"]
+layout_mode = 0
+offset_top = 46.0
+offset_right = 96.0
+offset_bottom = 70.0
+theme = ExtResource("1_34clf")
+text = "CREDITS"
+flat = true
+
+[node name="QUIT" type="Button" parent="buttons"]
+layout_mode = 0
+offset_top = 69.0
+offset_right = 96.0
+offset_bottom = 93.0
+theme = ExtResource("1_34clf")
+text = "QUIT"
+flat = true
+
+[node name="(c)" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+offset_right = 172.0
+grow_vertical = 0
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 0
+bbcode_enabled = true
+text = "[wave]@2025 ZEALOUS STUDIOS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="cursor" type="TextureRect" parent="."]
+z_index = 299
+layout_mode = 0
+offset_left = 115.0
+offset_top = 101.0
+offset_right = 128.0
+offset_bottom = 121.0
+mouse_filter = 2
+theme = ExtResource("1_34clf")
+texture = ExtResource("5_3qiiy")
+stretch_mode = 2
+script = ExtResource("6_i3mxp")
+
+[node name="Timer" type="Timer" parent="cursor"]
+wait_time = 0.2
+autostart = true
+
+[node name="back" type="Button" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -201.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_5kuq4")
+text = "->"
+flat = true
+alignment = 2
+
+[connection signal="mouse_entered" from="buttons/PLAY" to="buttons" method="_on_play_mouse_entered"]
+[connection signal="mouse_exited" from="buttons/PLAY" to="buttons" method="_on_play_mouse_exited"]
+[connection signal="pressed" from="buttons/PLAY" to="." method="_on_play_pressed"]
+[connection signal="mouse_entered" from="buttons/OPTIONS" to="buttons" method="_on_options_mouse_entered"]
+[connection signal="mouse_exited" from="buttons/OPTIONS" to="buttons" method="_on_options_mouse_exited"]
+[connection signal="mouse_entered" from="buttons/CREDITS" to="buttons" method="_on_credits_mouse_entered"]
+[connection signal="mouse_exited" from="buttons/CREDITS" to="buttons" method="_on_credits_mouse_exited"]
+[connection signal="pressed" from="buttons/CREDITS" to="." method="_on_credits_pressed"]
+[connection signal="mouse_entered" from="buttons/QUIT" to="buttons" method="_on_quit_mouse_entered"]
+[connection signal="mouse_exited" from="buttons/QUIT" to="buttons" method="_on_quit_mouse_exited"]
+[connection signal="timeout" from="cursor/Timer" to="cursor" method="_on_timer_timeout"]
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]

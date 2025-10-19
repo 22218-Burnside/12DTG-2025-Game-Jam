@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsyyjpdno1o6q"]
+
+[ext_resource type="Texture2D" uid="uid://q5buyptwqvr" path="res://spark.png" id="1_emt4q"]
+[ext_resource type="Script" uid="uid://b2ylvsn2ojbaf" path="res://Intro/spark.gd" id="2_4vnv6"]
+
+[sub_resource type="Curve" id="Curve_4vnv6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.14802021, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lpo54"]
+curve = SubResource("Curve_4vnv6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wnaq3"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, 98, 0)
+scale_curve = SubResource("CurveTexture_lpo54")
+
+[node name="spark" type="GPUParticles2D"]
+texture = ExtResource("1_emt4q")
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_wnaq3")
+script = ExtResource("2_4vnv6")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

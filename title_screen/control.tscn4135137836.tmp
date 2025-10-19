@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4gviquaenxby"]
+
+[ext_resource type="Script" uid="uid://d4fv8hbcem10f" path="res://Intro/control.gd" id="1_0fbet"]
+[ext_resource type="Shader" uid="uid://cifehy26c853l" path="res://Intro/fire.gdshader" id="2_5fjhk"]
+[ext_resource type="Shader" uid="uid://cqui8cawgguk5" path="res://Intro/pixelate.gdshader" id="3_fdx52"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fdx52"]
+shader = ExtResource("2_5fjhk")
+shader_parameter/fireMovement = Vector2(-0.01, 0.1)
+shader_parameter/distortionMovement = Vector2(-0.01, -0.3)
+shader_parameter/normalStrength = 40.0
+shader_parameter/distortionStrength = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cbw8w"]
+shader = ExtResource("3_fdx52")
+shader_parameter/progress_trans = 1.0
+shader_parameter/transition_color = Color(0, 0, 0, 1)
+
+[node name="intro" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0fbet")
+initial_velocity = 300.0
+intensity = 0.5
+decrease_rate = 2.0
+final_velocity = 5.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_fdx52")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="pixelate" type="CanvasLayer" parent="."]
+
+[node name="pixelate" type="ColorRect" parent="pixelate"]
+material = SubResource("ShaderMaterial_cbw8w")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

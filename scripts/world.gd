@@ -58,9 +58,9 @@ var enemies = {
 @onready var immunity_indicator = $level_ui/immunity
 
 # UI Label references
-@onready var enemies_left_label = $level_ui/Label2
-@onready var enemy_points_label = $level_ui/Label3
-@onready var wave_label = $level_ui/Label4
+@onready var enemies_left_label = $level_ui/Control/VBoxContainer/Label2
+@onready var enemy_points_label = $level_ui/Control/VBoxContainer/Label3
+@onready var wave_label =$level_ui/Control/VBoxContainer/Label4
 @onready var menu_label = $menu/Label
 
 # Upgrade labels
@@ -73,9 +73,6 @@ var enemies = {
 func _ready() -> void:
 	level_ui.hide()
 	upgrade_selection.hide()
-	menu.show()
-	menu_camera.make_current()
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	enemies_left_label.text = "Enemies left: " + str(capacity)
@@ -151,12 +148,7 @@ func player_hit(damage):
 		player_die()
 
 func player_die():
-	player.controlling = false
-	menu_label.show()
-	menu.show()
-	level_ui.hide()
-	spawn_timer.stop()
-	menu_camera.make_current()
+	get_tree().change_scene_to_file("res://title_screen/control.tscn")
 
 func _on_enemy_enemy_hit_player(damage) -> void:
 	player_hit(damage)

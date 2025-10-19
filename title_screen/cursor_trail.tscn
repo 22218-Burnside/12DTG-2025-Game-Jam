@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cni2hv052b5xd"]
+
+[ext_resource type="Script" uid="uid://dmc44f6elj32d" path="res://cursor_trail.gd" id="1_4dahn"]
+[ext_resource type="Texture2D" uid="uid://q5buyptwqvr" path="res://spark.png" id="1_aqn7k"]
+
+[node name="cursor_trail" type="TextureRect"]
+offset_right = 16.0
+offset_bottom = 16.0
+mouse_filter = 2
+texture = ExtResource("1_aqn7k")
+stretch_mode = 2
+script = ExtResource("1_4dahn")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

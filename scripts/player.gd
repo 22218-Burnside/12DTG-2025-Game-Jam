@@ -59,8 +59,8 @@ func setup():
 	controlling = true
 	health = 100
 	score = 0
-	$".."/level_ui/Label.text = "Score: 0"
-	$"../level_ui/ProgressBar".value = health
+	$".."/level_ui/Control/Label.text = "Score: 0"
+	$"../level_ui/Control/VBoxContainer/ProgressBar".value = health
 	
 	change_slot(1, WATER_ELEMENT)
 	change_slot(2, FIRE_ELEMENT)
@@ -69,7 +69,6 @@ func setup():
 
 
 func _physics_process(_delta: float) -> void:
-	if controlling:
 		var direction_x := Input.get_axis("left", "right")
 		if direction_x:
 			velocity.x = direction_x * SPEED
@@ -81,15 +80,13 @@ func _physics_process(_delta: float) -> void:
 			velocity.y = direction_y * SPEED
 		else:
 			velocity.y = move_toward(velocity.x, 0, SPEED)
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.y = move_toward(velocity.x, 0, SPEED)
-	move_and_slide()
+
+		move_and_slide()
 
 
 func update_stats():
-	$".."/level_ui/Label.text = "Score: " + str(score)
-	$"../level_ui/ProgressBar".value = health
+	$"../level_ui/Control/VBoxContainer/Label".text = "Score: " + str(score)
+	$"../level_ui/Control/VBoxContainer/ProgressBar".value = health
 
 
 func change_slot(slot_number : int, element : Element):

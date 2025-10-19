@@ -32,6 +32,7 @@ sprite_frames = SubResource("SpriteFrames_0ump0")
 animation = &"idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.25, 0.25)
 limit_left = -1575
 limit_top = -1200
 limit_right = 3950
