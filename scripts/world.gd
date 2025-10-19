@@ -188,8 +188,6 @@ func _on_fire_pressed() -> void:
 	var current_damage = calculate_damage(player.fire_level - 1)
 	var next_damage = calculate_damage(player.fire_level)
 	fire_upgrade_label.text = "Fire\nLevel " + str(player.fire_level) + " >>> " + str(player.fire_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
-	if player.fire_level == 1:
-		player.fire_attack()
 	next_level()
 
 func _on_earth_pressed() -> void:
@@ -198,8 +196,6 @@ func _on_earth_pressed() -> void:
 	var next_damage = calculate_damage(player.earth_level)
 	earth_upgrade_label.text = "Earth\nLevel " + str(player.earth_level) + " >>> " + str(player.earth_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
 	next_level()
-	if player.earth_level == 1:
-		player.earth_attack()
 
 func _on_water_pressed() -> void:
 	player.water_level += 1
@@ -213,6 +209,4 @@ func _on_wind_pressed() -> void:
 	var current_damage = calculate_damage(player.wind_level - 1)
 	var next_damage = calculate_damage(player.wind_level)
 	wind_upgrade_label.text = "Wind\nLevel " + str(player.wind_level) + " >>> " + str(player.wind_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
-	if player.wind_level == 1:
-		player.wind_attack()
 	next_level()

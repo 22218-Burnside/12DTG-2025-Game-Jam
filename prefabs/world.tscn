@@ -115,28 +115,28 @@ position = Vector2(439, 407)
 [node name="upgrade_selection" type="CanvasLayer" parent="."]
 process_mode = 2
 
-[node name="fire" type="Button" parent="upgrade_selection"]
+[node name="element1" type="Button" parent="upgrade_selection"]
 offset_left = 25.0
 offset_top = 300.0
 offset_right = 424.99994
 offset_bottom = 480.0
 text = "Fire"
 
-[node name="earth" type="Button" parent="upgrade_selection"]
+[node name="element2" type="Button" parent="upgrade_selection"]
 offset_left = 517.0
 offset_top = 300.0
 offset_right = 916.99994
 offset_bottom = 480.0
 text = "Earth"
 
-[node name="water" type="Button" parent="upgrade_selection"]
+[node name="element3" type="Button" parent="upgrade_selection"]
 offset_left = 1010.0
 offset_top = 300.0
 offset_right = 1410.0
 offset_bottom = 480.0
 text = "Water"
 
-[node name="wind" type="Button" parent="upgrade_selection"]
+[node name="element4" type="Button" parent="upgrade_selection"]
 offset_left = 1489.0
 offset_top = 300.0
 offset_right = 1889.0
@@ -186,7 +186,7 @@ horizontal_alignment = 1
 
 [connection signal="pressed" from="menu/play" to="." method="_on_play_pressed"]
 [connection signal="timeout" from="spawn_timer" to="." method="spawn_enemy"]
-[connection signal="pressed" from="upgrade_selection/fire" to="." method="_on_fire_pressed"]
-[connection signal="pressed" from="upgrade_selection/earth" to="." method="_on_earth_pressed"]
-[connection signal="pressed" from="upgrade_selection/water" to="." method="_on_water_pressed"]
-[connection signal="pressed" from="upgrade_selection/wind" to="." method="_on_wind_pressed"]
+[connection signal="pressed" from="upgrade_selection/element1" to="." method="_on_fire_pressed"]
+[connection signal="pressed" from="upgrade_selection/element2" to="." method="_on_earth_pressed"]
+[connection signal="pressed" from="upgrade_selection/element3" to="." method="_on_water_pressed"]
+[connection signal="pressed" from="upgrade_selection/element4" to="." method="_on_wind_pressed"]
