@@ -17,6 +17,7 @@ func _ready() -> void:
 	player = get_parent().get_node("player")
 	enemy_hit_player.connect($".."._on_enemy_enemy_hit_player)
 	death.connect($".."._on_enemy_killed)
+	
 
 
 func _physics_process(delta: float) -> void:
@@ -33,7 +34,7 @@ func _physics_process(delta: float) -> void:
 				can_attack = false
 				enemy_hit_player.emit(damage)
 				$attack_timer.start(1.5)
-	if self.position.distance_to(player.position) > 128:
+	if self.position.distance_squared_to(player.position) > 50**2:
 		position += speed * position.direction_to(player.position) * delta
 
 func die():

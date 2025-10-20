@@ -12,7 +12,7 @@ var ELEMENTS : Array = [
 	null
 ]
 
-const SPEED = 300.0
+const SPEED = 150.0
 var health = 100
 var score = 0
 var attack_time = 1.5
@@ -42,10 +42,10 @@ var fire_damage = 50
 var water_damage = 50
 var earth_damage = 0
 
-@onready var water = preload("res://prefabs/attack.tscn")
-@onready var fire = preload("res://prefabs/fire_attack.tscn")
-@onready var wind = preload("res://prefabs/wind_attack.tscn")
-@onready var earth = preload("res://prefabs/earth_attack.tscn")
+@onready var water = preload("res://prefabs/attacks/water_attack.tscn")
+@onready var fire = preload("res://prefabs/attacks/fire_attack/fire_attack.tscn")
+@onready var wind = preload("res://prefabs/attacks/wind_attack.tscn")
+@onready var earth = preload("res://prefabs/attacks/earth_attack.tscn")
 
 @onready var hotbar = $hotbar
 @onready var slot_1_timer = $slot1timer
@@ -106,8 +106,7 @@ func level_up_slot(slot_number : int) -> void:
 func slot_timeout(slot_number : int) -> bool:
 	if ELEMENTS[slot_number - 1]:
 		ELEMENTS[slot_number - 1][1].call(ELEMENTS[slot_number - 1][0].damage, 
-		ELEMENTS[slot_number - 1][2],
-		)
+		ELEMENTS[slot_number - 1][2])
 		return true
 	else:
 		return false
@@ -161,6 +160,8 @@ func fire_attack(damage : int, level : int):
 	if controlling:
 		var spawned_attack = fire.instantiate()
 		spawned_attack.damage = damage * (0.8 + level/5.0)
+		spawned_attack.level = level + 1
+		print(level)
 		add_child(spawned_attack)
 
 func wind_attack(damage : int, level : int):

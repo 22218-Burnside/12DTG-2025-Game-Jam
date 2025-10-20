@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bv6wqgunu7n8q" path="res://scripts/earth_attack.gd" id="1_jyjc0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyjc0"]
-size = Vector2(250, 300)
+size = Vector2(12.5, 15)
 
 [node name="earth_attack" type="Area2D"]
 script = ExtResource("1_jyjc0")
@@ -14,7 +14,6 @@ shape = SubResource("RectangleShape2D_jyjc0")
 
 [node name="Earth" type="Sprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(20, 20)
 texture = ExtResource("1_8g62b")
 
 [node name="Timer" type="Timer" parent="."]

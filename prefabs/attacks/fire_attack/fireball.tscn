@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvx2na3sdqih6"]
+
+[ext_resource type="Script" uid="uid://jc2v7bstph54" path="res://prefabs/attacks/fire_attack/fireball.gd" id="1_4wget"]
+[ext_resource type="Texture2D" uid="uid://c1o6210heiosi" path="res://assets/placeholder_assets/fire.png" id="1_40cov"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7gpr6"]
+radius = 8.0
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_4wget")
+
+[node name="Icon" type="Sprite2D" parent="."]
+modulate = Color(0.868046, 0.39493915, 1.92523e-07, 1)
+texture_filter = 1
+texture = ExtResource("1_40cov")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7gpr6")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

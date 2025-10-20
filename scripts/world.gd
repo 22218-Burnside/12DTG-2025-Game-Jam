@@ -88,8 +88,13 @@ func _process(_delta: float) -> void:
 
 func pause_game():
 	get_tree().paused = true
+	
 	upgrade_selection.show()
 	level_ui.hide()
+
+
+func update_upgrades() -> void:
+	pass
 	
 func next_wave():
 	get_tree().paused = false

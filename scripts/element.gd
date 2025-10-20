@@ -6,4 +6,3 @@ class_name Element
 @export var function : String
 @export var damage : int
 @export var timer : float
-@export var scale : float = 1

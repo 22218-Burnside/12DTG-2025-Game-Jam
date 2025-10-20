@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dkwipiknlouhf" path="res://scripts/enemy.gd" id="1_yfjof"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ks3ws"]
-size = Vector2(128, 128)
+size = Vector2(32, 32)
 
 [node name="enemy" type="Area2D" groups=["enemy"]]
 script = ExtResource("1_yfjof")
@@ -15,6 +15,7 @@ shape = SubResource("RectangleShape2D_ks3ws")
 
 [node name="Icon" type="Sprite2D" parent="."]
 z_index = 2
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_6n8dw")
 
 [node name="attack_timer" type="Timer" parent="."]
