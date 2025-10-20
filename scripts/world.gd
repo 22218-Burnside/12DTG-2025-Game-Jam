@@ -74,6 +74,7 @@ var enemies = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	player.setup()
 	level_ui.hide()
 	upgrade_selection.hide()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -107,7 +108,7 @@ func next_wave():
 
 func next_level():
 	level += 1
-	level_label.text = "Level: " + str(level)
+	#level_label.text = "Level: " + str(level)
 	wave = 1
 	wave_label.text = "Wave: 1"
 

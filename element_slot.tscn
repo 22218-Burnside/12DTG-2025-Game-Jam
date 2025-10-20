@@ -1,17 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmqqffip7hqwu"]
+[gd_scene load_steps=3 format=3 uid="uid://bmqqffip7hqwu"]
 
 [ext_resource type="Script" uid="uid://cuykllnq4vn3r" path="res://element_slot.gd" id="1_olark"]
+[ext_resource type="Theme" uid="uid://h22edabrcqwn" path="res://theme.tres" id="2_olark"]
 
 [node name="Element Slot" type="VBoxContainer"]
-custom_minimum_size = Vector2(200, 200)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -25.5
+offset_right = 15.0
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_olark")
 
 [node name="Button" type="Button" parent="."]
-texture_filter = 1
-custom_minimum_size = Vector2(90, 200)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
+theme = ExtResource("2_olark")
 icon_alignment = 1
 expand_icon = true
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
+theme = ExtResource("2_olark")
+autowrap_mode = 2

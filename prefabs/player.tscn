@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpr5p80oqae3l"]
+[gd_scene load_steps=12 format=3 uid="uid://bpr5p80oqae3l"]
 
-[ext_resource type="Texture2D" uid="uid://c25cyoy0q1giy" path="res://assets/icon.svg" id="1_s082h"]
 [ext_resource type="Script" uid="uid://dsypkhf5mj0tv" path="res://scripts/player.gd" id="1_weayp"]
+[ext_resource type="Texture2D" uid="uid://d2ugr3uh14abh" path="res://assets/walk.png" id="2_ht1c8"]
 [ext_resource type="Script" uid="uid://5abf8nsucu0e" path="res://scripts/camera_2d.gd" id="3_1txc5"]
 [ext_resource type="PackedScene" uid="uid://drvot6vrm7j1i" path="res://assets/placeholder_assets/readme/placeholder assets/immunity_icon.tscn" id="3_r66lb"]
 [ext_resource type="PackedScene" uid="uid://bqpw738s2pxnx" path="res://hotbar.tscn" id="5_ht1c8"]
@@ -9,11 +9,36 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_weayp"]
 size = Vector2(128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2jcq"]
+atlas = ExtResource("2_ht1c8")
+region = Rect2(0, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u51tk"]
+atlas = ExtResource("2_ht1c8")
+region = Rect2(34, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbsxf"]
+atlas = ExtResource("2_ht1c8")
+region = Rect2(68, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgeog"]
+atlas = ExtResource("2_ht1c8")
+region = Rect2(102, 0, 34, 34)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_0ump0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_s082h")
+"texture": SubResource("AtlasTexture_g2jcq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u51tk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbsxf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgeog")
 }],
 "loop": true,
 "name": &"idle",
@@ -32,7 +57,6 @@ sprite_frames = SubResource("SpriteFrames_0ump0")
 animation = &"idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.25, 0.25)
 limit_left = -1575
 limit_top = -1200
 limit_right = 3950

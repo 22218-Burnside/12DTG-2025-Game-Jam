@@ -59,7 +59,8 @@ func setup():
 	controlling = true
 	health = 100
 	score = 0
-	$".."/level_ui/Control/Label.text = "Score: 0"
+	
+	#$".."/level_ui/Control/Label.text = "Score: 0"
 	$"../level_ui/Control/VBoxContainer/ProgressBar".value = health
 	
 	change_slot(1, WATER_ELEMENT)
@@ -90,36 +91,47 @@ func update_stats():
 
 
 func change_slot(slot_number : int, element : Element):
-	ELEMENTS[slot_number - 1] = [element, Callable(self, element.function)]
+	ELEMENTS[slot_number - 1] = [element, Callable(self, element.function), 1]
 	var slot_timer : Timer = get_node("slot" + str(slot_number) + "timer")
 	slot_timer.wait_time = element.timer
 	slot_timer.start()
 	hotbar.element_slots[slot_number - 1].element = element
 	hotbar.element_slots[slot_number - 1].element_level = 1
 
+
+func level_up_slot(slot_number : int) -> void:
+	ELEMENTS[slot_number - 1][2] += 1
+
+
+func slot_timeout(slot_number : int) -> bool:
+	if ELEMENTS[slot_number - 1]:
+		ELEMENTS[slot_number - 1][1].call(ELEMENTS[slot_number - 1][0].damage, 
+		ELEMENTS[slot_number - 1][2],
+		)
+		return true
+	else:
+		return false
+
 func slot1timeout() -> void:
-	if ELEMENTS[0]:
-		ELEMENTS[0][1].call(ELEMENTS[0][0].damage)
+	if slot_timeout(1):
 		slot_1_timer.start()
 
+
 func slot2timeout() -> void:
-	if ELEMENTS[1]:
-		ELEMENTS[1][1].call(ELEMENTS[1][0].damage)
+	if slot_timeout(2):
 		slot_2_timer.start()
 
 
 func slot3timeout() -> void:
-	if ELEMENTS[2]:
-		ELEMENTS[2][1].call(ELEMENTS[2][0].damage)
+	if slot_timeout(3):
 		slot_3_timer.start()
 
 
 func slot4timeout() -> void:
-	if ELEMENTS[3]:
-		ELEMENTS[3][1].call(ELEMENTS[3][0].damage)
+	if slot_timeout(4):
 		slot_4_timer.start()
 
-func water_attack(damage : int):
+func water_attack(damage : int, level : int):
 	if controlling:
 		var closest_enemy_distance = INF
 		var closest_enemy_position = Vector2.ZERO
@@ -135,7 +147,7 @@ func water_attack(damage : int):
 		# Only fire if an enemy was actually found
 		if enemy_found:
 			var spawned_attack = water.instantiate()
-			spawned_attack.damage = damage * (0.8 + water_level/5.0)
+			spawned_attack.damage = damage * (0.8 + level/5.0)
 			
 			spawned_attack.position = self.position
 			# Calculate direction FROM player TO enemy
@@ -145,20 +157,20 @@ func water_attack(damage : int):
 				spawned_attack.find_child("Icon").flip_v = true
 			get_parent().add_child(spawned_attack)
 
-func fire_attack(damage : int):
+func fire_attack(damage : int, level : int):
 	if controlling:
 		var spawned_attack = fire.instantiate()
-		spawned_attack.damage = damage * (0.8 + fire_level/5.0)
+		spawned_attack.damage = damage * (0.8 + level/5.0)
 		add_child(spawned_attack)
 
-func wind_attack(damage : int):
+func wind_attack(damage : int, level : int):
 	if controlling:
 		var spawned_attack = wind.instantiate()
-		spawned_attack.damage = damage * (0.8 + wind_level/5.0)
+		spawned_attack.damage = damage * (0.8 + level/5.0)
 		add_child(spawned_attack)
 
 
-func earth_attack(_damage : int):
+func earth_attack(_damage : int, _level : int):
 	if controlling:
 		var spawned_attack = earth.instantiate()
 		spawned_attack.position = Vector2(randf_range(position.x-500.0,position.x + 500.0), randf_range(position.y-500.0,position.y + 500.0))
