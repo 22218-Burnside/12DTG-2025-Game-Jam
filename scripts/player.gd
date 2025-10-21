@@ -15,7 +15,7 @@ var ELEMENTS : Array = [
 	null
 ]
 
-const SPEED = 150.0
+const SPEED = 50.0
 var health = 100
 var score = 0
 var can_hit = true

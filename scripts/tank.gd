@@ -1,12 +1,11 @@
 extends Area2D
 
-var speed : int = 50
+var speed : int = 15
 var health = 200
 var damage = 10
 var points = 10
 var player : Node2D
 var can_attack = true
-var vulnerable = false
 
 signal death
 signal enemy_hit_player
@@ -20,21 +19,13 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if vulnerable:
-		speed = 5
-		$Icon.flip_v = true
-	else:
-		speed = 50
-		$Icon.flip_v = false
-
 	if can_attack:
 		for i in get_overlapping_bodies():
-			if i.name == "player":
+			if i is Player:
 				can_attack = false
 				enemy_hit_player.emit(damage)
 				$attack_timer.start(1.5)
-	if self.position.distance_to(player.position) > 128:
-		position += speed * position.direction_to(player.position) * delta
+	position += speed * position.direction_to(player.position) * delta
 
 func die():
 	death.emit(points,self.position)

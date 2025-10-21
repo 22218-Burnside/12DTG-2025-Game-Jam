@@ -1,15 +1,16 @@
 extends Area2D
 
-var speed : int = 150
+var speed : int = 20
 var health = 100
 var damage = 10
 var points = 10
 var player : Node2D
 var can_attack = true
-var vulnerable = false
 
 signal death
 signal enemy_hit_player
+
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -21,12 +22,12 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if vulnerable:
-		speed = 50
-		$Icon.flip_v = true
+	var direction = player.position.x - position.x
+	if direction > 0:
+		animated_sprite_2d.flip_h = true
 	else:
-		speed = 150
-		$Icon.flip_v = false
+		animated_sprite_2d.flip_h = false
+		#$Icon.flip_v = false
 
 	if can_attack:
 		for i in get_overlapping_bodies():
@@ -34,8 +35,7 @@ func _physics_process(delta: float) -> void:
 				can_attack = false
 				enemy_hit_player.emit(damage)
 				$attack_timer.start(1.5)
-	if self.position.distance_squared_to(player.position) > 50**2:
-		position += speed * position.direction_to(player.position) * delta
+	position += speed * position.direction_to(player.position) * delta
 
 func die():
 	death.emit(points,self.position)
