@@ -65,10 +65,10 @@ var enemies = {
 @onready var level_label = $level_ui/Control/VBoxContainer/level
 
 # Upgrade labels
-@onready var fire_upgrade_label = $upgrade_selection/Label
-@onready var earth_upgrade_label = $upgrade_selection/Label2
-@onready var water_upgrade_label = $upgrade_selection/Label3
-@onready var wind_upgrade_label = $upgrade_selection/Label4
+@onready var upgrade_1_label = $upgrade_selection/Label
+@onready var upgrade_2_label = $upgrade_selection/Label2
+@onready var upgrade_3_label = $upgrade_selection/Label3
+@onready var upgrade_4_label = $upgrade_selection/Label4
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -194,7 +194,6 @@ func _on_enemy_killed(score, death_position):
 func _on_play_pressed() -> void:
 	for i in get_tree().get_nodes_in_group("enemy"):
 		i.queue_free()
-	menu.hide()
 	level_ui.show()
 	player.setup()
 	player_camera.make_current()
@@ -204,8 +203,6 @@ func _on_play_pressed() -> void:
 	capacity = 0
 
 func element_1_upgrade() -> void:
-func _on_fire_pressed() -> void:
-	player.fire_level += 1
 	var current_damage = calculate_damage(player.fire_level - 1)
 	var next_damage = calculate_damage(player.fire_level)
 	fire_upgrade_label.text = "Fire\nLevel " + str(player.fire_level) + " >>> " + str(player.fire_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
@@ -228,7 +225,3 @@ func element_4_upgrade() -> void:
 	var next_damage = calculate_damage(player.wind_level)
 	wind_upgrade_label.text = "Wind\nLevel " + str(player.wind_level) + " >>> " + str(player.wind_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
 	next_wave()
-
-
-func _on_element_4_pressed() -> void:
-	pass # Replace with function body.

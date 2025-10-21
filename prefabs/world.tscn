@@ -202,4 +202,4 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="upgrade_selection/element1" to="." method="element_1_upgrade"]
 [connection signal="pressed" from="upgrade_selection/element2" to="." method="element_2_upgrade"]
 [connection signal="pressed" from="upgrade_selection/element3" to="." method="element_3_upgrade"]
-[connection signal="pressed" from="upgrade_selection/element4" to="." method="_on_element_4_pressed"]
+[connection signal="pressed" from="upgrade_selection/element4" to="." method="element_4_upgrade"]
