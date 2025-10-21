@@ -14,8 +14,8 @@ const WAVE_MULTIPLIER_MAX = 1.2
 const WAVE_DISPLAY_OFFSET = 9
 
 # Spawn configuration constants
-const MIN_SPAWN_DISTANCE = 500
-const SPAWN_RANGE = 1000
+const MIN_SPAWN_DISTANCE = 200
+const SPAWN_RANGE = 500
 
 # Drop configuration constants
 const HEART_DROP_CHANCE_MIN = 85
@@ -135,9 +135,6 @@ func next_level():
 	wave_label.text = "Wave: 1"
 
 
-func calculate_damage(ability_level: int) -> int:
-	return int(BASE_DAMAGE * (DAMAGE_BASE_MULTIPLIER + ability_level / DAMAGE_LEVEL_DIVISOR))
-	
 func spawn_enemy() -> void:
 	# Don't spawn if at capacity
 	if capacity >= max_wave_capacity:
