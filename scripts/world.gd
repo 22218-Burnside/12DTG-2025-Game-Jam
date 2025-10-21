@@ -195,30 +195,30 @@ func _on_play_pressed() -> void:
 	max_wave = INITIAL_MAX_WAVE
 	capacity = 0
 
-func _on_fire_pressed() -> void:
-	player.fire_level += 1
+func element_1_upgrade() -> void:
 	var current_damage = calculate_damage(player.fire_level - 1)
 	var next_damage = calculate_damage(player.fire_level)
 	fire_upgrade_label.text = "Fire\nLevel " + str(player.fire_level) + " >>> " + str(player.fire_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
 	next_wave()
 
-func _on_earth_pressed() -> void:
-	player.earth_level += 1
+func element_2_upgrade() -> void:
 	var current_damage = calculate_damage(player.earth_level - 1)
 	var next_damage = calculate_damage(player.earth_level)
 	earth_upgrade_label.text = "Earth\nLevel " + str(player.earth_level) + " >>> " + str(player.earth_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
 	next_wave()
 
-func _on_water_pressed() -> void:
-	player.water_level += 1
+func element_3_upgrade() -> void:
 	var current_damage = calculate_damage(player.water_level - 1)
 	var next_damage = calculate_damage(player.water_level)
 	water_upgrade_label.text = "Water\nLevel " + str(player.water_level) + " >>> " + str(player.water_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
 	next_wave()
 
-func _on_wind_pressed() -> void:
-	player.wind_level += 1
+func element_4_upgrade() -> void:
 	var current_damage = calculate_damage(player.wind_level - 1)
 	var next_damage = calculate_damage(player.wind_level)
 	wind_upgrade_label.text = "Wind\nLevel " + str(player.wind_level) + " >>> " + str(player.wind_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
 	next_wave()
+
+
+func _on_element_4_pressed() -> void:
+	pass # Replace with function body.

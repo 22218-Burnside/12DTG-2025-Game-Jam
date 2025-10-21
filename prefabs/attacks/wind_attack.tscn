@@ -4,11 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://dxytgmarygufh" path="res://assets/placeholder_assets/wind.png" id="2_mqtjm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqtjm"]
-radius = 256.0
+radius = 85.33
 
 [sub_resource type="SphereMesh" id="SphereMesh_ot4cc"]
-radius = 0.6
-height = 0.8
+radius = 0.2
+height = 0.267
 radial_segments = 4
 rings = 12
 

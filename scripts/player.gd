@@ -160,8 +160,7 @@ func fire_attack(damage : int, level : int):
 	if controlling:
 		var spawned_attack = fire.instantiate()
 		spawned_attack.damage = damage * (0.8 + level/5.0)
-		spawned_attack.level = level + 1
-		print(level)
+		spawned_attack.level = level
 		add_child(spawned_attack)
 
 func wind_attack(damage : int, level : int):
