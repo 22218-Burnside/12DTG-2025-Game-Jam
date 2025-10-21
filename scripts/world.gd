@@ -14,8 +14,8 @@ const WAVE_MULTIPLIER_MAX = 1.2
 const WAVE_DISPLAY_OFFSET = 9
 
 # Spawn configuration constants
-const MIN_SPAWN_DISTANCE = 500
-const SPAWN_RANGE = 1000
+const MIN_SPAWN_DISTANCE = 200
+const SPAWN_RANGE = 500
 
 # Drop configuration constants
 const HEART_DROP_CHANCE_MIN = 85
@@ -63,12 +63,6 @@ var enemies = {
 @onready var enemy_points_label = $level_ui/Control/VBoxContainer2/wave_points
 @onready var wave_label = $level_ui/Control/VBoxContainer/wave
 @onready var level_label = $level_ui/Control/VBoxContainer/level
-
-# Upgrade labels
-@onready var upgrade_1_label = $upgrade_selection/Label
-@onready var upgrade_2_label = $upgrade_selection/Label2
-@onready var upgrade_3_label = $upgrade_selection/Label3
-@onready var upgrade_4_label = $upgrade_selection/Label4
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -126,9 +120,6 @@ func next_level():
 	wave_label.text = "Wave: 1"
 
 
-func calculate_damage(ability_level: int) -> int:
-	return int(BASE_DAMAGE * (DAMAGE_BASE_MULTIPLIER + ability_level / DAMAGE_LEVEL_DIVISOR))
-	
 func spawn_enemy() -> void:
 	# Don't spawn if at capacity
 	if capacity >= max_wave_capacity:
@@ -203,25 +194,13 @@ func _on_play_pressed() -> void:
 	capacity = 0
 
 func element_1_upgrade() -> void:
-	var current_damage = calculate_damage(player.fire_level - 1)
-	var next_damage = calculate_damage(player.fire_level)
-	fire_upgrade_label.text = "Fire\nLevel " + str(player.fire_level) + " >>> " + str(player.fire_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
 	next_wave()
 
 func element_2_upgrade() -> void:
-	var current_damage = calculate_damage(player.earth_level - 1)
-	var next_damage = calculate_damage(player.earth_level)
-	earth_upgrade_label.text = "Earth\nLevel " + str(player.earth_level) + " >>> " + str(player.earth_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
 	next_wave()
 
 func element_3_upgrade() -> void:
-	var current_damage = calculate_damage(player.water_level - 1)
-	var next_damage = calculate_damage(player.water_level)
-	water_upgrade_label.text = "Water\nLevel " + str(player.water_level) + " >>> " + str(player.water_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
 	next_wave()
 
 func element_4_upgrade() -> void:
-	var current_damage = calculate_damage(player.wind_level - 1)
-	var next_damage = calculate_damage(player.wind_level)
-	wind_upgrade_label.text = "Wind\nLevel " + str(player.wind_level) + " >>> " + str(player.wind_level + 1) + "\nDamage " + str(current_damage) + " >>> " + str(next_damage)
 	next_wave()
