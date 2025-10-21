@@ -52,8 +52,6 @@ var enemies = {
 # Node references
 @onready var level_ui = $level_ui
 @onready var upgrade_selection = $upgrade_selection
-@onready var menu = $menu
-@onready var menu_camera = $menu/menu_camera
 @onready var player = $player
 @onready var player_camera = $player/Camera2D
 @onready var immunity_timer = $player/immunity_timer
@@ -64,7 +62,6 @@ var enemies = {
 @onready var enemies_left_label = $level_ui/Control/VBoxContainer/Label2
 @onready var enemy_points_label = $level_ui/Control/VBoxContainer/Label3
 @onready var wave_label =$level_ui/Control/VBoxContainer/Label4
-@onready var menu_label = $menu/Label
 
 # Upgrade labels
 @onready var fire_upgrade_label = $upgrade_selection/Label
@@ -186,7 +183,6 @@ func _on_enemy_killed(score, death_position):
 func _on_play_pressed() -> void:
 	for i in get_tree().get_nodes_in_group("enemy"):
 		i.queue_free()
-	menu.hide()
 	level_ui.show()
 	player.setup()
 	player_camera.make_current()
