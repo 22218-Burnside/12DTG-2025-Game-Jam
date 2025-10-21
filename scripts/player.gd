@@ -59,9 +59,7 @@ func setup():
 	controlling = true
 	health = 100
 	score = 0
-	
-	#$".."/level_ui/Control/Label.text = "Score: 0"
-	$"../level_ui/Control/VBoxContainer/ProgressBar".value = health
+	update_stats()
 	
 	change_slot(1, WATER_ELEMENT)
 	change_slot(2, FIRE_ELEMENT)
@@ -86,8 +84,8 @@ func _physics_process(_delta: float) -> void:
 
 
 func update_stats():
-	$"../level_ui/Control/VBoxContainer/Label".text = "Score: " + str(score)
-	$"../level_ui/Control/VBoxContainer/ProgressBar".value = health
+	$"../level_ui/Control/VBoxContainer/score".text = "Score: " + str(score)
+	$"../level_ui/Control/ProgressBar".value = health
 
 
 func change_slot(slot_number : int, element : Element):

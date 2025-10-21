@@ -1,8 +1,4 @@
 extends Control
-@onready var play: Button = $VBoxContainer/PLAY
-@onready var options: Button = $VBoxContainer/OPTIONS
-@onready var credits: Button = $VBoxContainer/CREDITS
-@onready var quit: Button = $VBoxContainer/QUIT
 @onready var pixelate_anim: AnimationPlayer = $pixelate/pixelate_anim
 @onready var buttons: Control = $buttons
 @onready var credits_container: ScrollContainer = $credits
@@ -38,7 +34,7 @@ func _ready() -> void:
 	for i in range(title_text.length()):
 		var label = Label.new()
 		label.text = str(title_text[i])
-		label.theme = load("res://Intro/theme.tres")
+		label.theme = load("res://theme.tres")
 		label.add_theme_font_size_override("font_size", CHAR_SIZE)
 		label.position = Vector2((i * SPACING )+ POSX, POSY)
 		title.add_child(label)
