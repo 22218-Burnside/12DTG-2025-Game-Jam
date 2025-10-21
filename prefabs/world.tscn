@@ -121,7 +121,6 @@ offset_left = 15.0
 offset_top = 133.0
 offset_right = 75.0
 offset_bottom = 172.99994
-text = "Fire"
 metadata/_edit_use_anchors_ = true
 
 [node name="element2" type="Button" parent="upgrade_selection"]
@@ -129,7 +128,6 @@ offset_left = 92.0
 offset_top = 133.0
 offset_right = 152.0
 offset_bottom = 172.99994
-text = "Earth"
 metadata/_edit_use_anchors_ = true
 
 [node name="element3" type="Button" parent="upgrade_selection"]
@@ -137,7 +135,6 @@ offset_left = 174.0
 offset_top = 133.0
 offset_right = 234.0
 offset_bottom = 172.99994
-text = "Water"
 metadata/_edit_use_anchors_ = true
 
 [node name="element4" type="Button" parent="upgrade_selection"]
@@ -145,7 +142,6 @@ offset_left = 248.0
 offset_top = 133.0
 offset_right = 308.0
 offset_bottom = 172.99994
-text = "Wind"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="upgrade_selection"]

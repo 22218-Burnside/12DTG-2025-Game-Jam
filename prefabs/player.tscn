@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://drvot6vrm7j1i" path="res://assets/placeholder_assets/readme/placeholder assets/immunity_icon.tscn" id="3_r66lb"]
 [ext_resource type="PackedScene" uid="uid://bqpw738s2pxnx" path="res://hotbar.tscn" id="5_ht1c8"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_weayp"]
-size = Vector2(32, 32)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ht1c8"]
+radius = 13.5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2jcq"]
 atlas = ExtResource("2_ht1c8")
@@ -49,7 +49,7 @@ animations = [{
 script = ExtResource("1_weayp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_weayp")
+shape = SubResource("CircleShape2D_ht1c8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 5

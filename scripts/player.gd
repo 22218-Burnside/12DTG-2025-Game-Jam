@@ -38,8 +38,8 @@ func setup():
 	
 	change_slot(1, WATER_ELEMENT)
 	change_slot(2, FIRE_ELEMENT)
-	change_slot(3, WIND_ELEMENT)
-	change_slot(4, EARTH_ELEMENT)
+	#dchange_slot(3, WIND_ELEMENT)
+	#change_slot(4, EARTH_ELEMENT)
 
 
 func _physics_process(_delta: float) -> void:

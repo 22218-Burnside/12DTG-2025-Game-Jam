@@ -107,10 +107,29 @@ func pause_game():
 
 
 func update_upgrades() -> void:
-	element_1.text = player.ELEMENTS[0][0].element_name
-	element_2.text = player.ELEMENTS[1][0].element_name
-	element_3.text = player.ELEMENTS[2][0].element_name
-	element_4.text = player.ELEMENTS[3][0].element_name
+	if player.ELEMENTS[0]:
+		element_1.text = player.ELEMENTS[0][0].element_name
+		element_1.disabled = false
+	else:
+		element_1.disabled = true
+	
+	if player.ELEMENTS[1]:
+		element_2.text = player.ELEMENTS[1][0].element_name
+		element_2.disabled = false
+	else:
+		element_2.disabled = true
+
+	if player.ELEMENTS[2]:
+		element_3.text = player.ELEMENTS[2][0].element_name
+		element_3.disabled = false
+	else:
+		element_3.disabled = true
+
+	if player.ELEMENTS[3]:
+		element_4.text = player.ELEMENTS[3][0].element_name
+		element_4.disabled = false
+	else:
+		element_4.disabled = true
 	
 func next_wave():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
