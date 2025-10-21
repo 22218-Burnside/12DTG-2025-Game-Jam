@@ -59,9 +59,7 @@ func setup():
 	controlling = true
 	health = 100
 	score = 0
-	
-	#$".."/level_ui/Control/Label.text = "Score: 0"
-	$"../level_ui/Control/VBoxContainer/ProgressBar".value = health
+	update_stats()
 	
 	change_slot(1, WATER_ELEMENT)
 	change_slot(2, FIRE_ELEMENT)
@@ -86,8 +84,8 @@ func _physics_process(_delta: float) -> void:
 
 
 func update_stats():
-	$"../level_ui/Control/VBoxContainer/Label".text = "Score: " + str(score)
-	$"../level_ui/Control/VBoxContainer/ProgressBar".value = health
+	$"../level_ui/Control/VBoxContainer/score".text = "Score: " + str(score)
+	$"../level_ui/Control/ProgressBar".value = health
 
 
 func change_slot(slot_number : int, element : Element):
@@ -161,7 +159,6 @@ func fire_attack(damage : int, level : int):
 		var spawned_attack = fire.instantiate()
 		spawned_attack.damage = damage * (0.8 + level/5.0)
 		spawned_attack.level = level + 1
-		print(level)
 		add_child(spawned_attack)
 
 func wind_attack(damage : int, level : int):

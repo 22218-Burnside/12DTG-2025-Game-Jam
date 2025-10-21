@@ -59,9 +59,10 @@ var enemies = {
 @onready var immunity_indicator = $level_ui/immunity
 
 # UI Label references
-@onready var enemies_left_label = $level_ui/Control/VBoxContainer/Label2
-@onready var enemy_points_label = $level_ui/Control/VBoxContainer/Label3
-@onready var wave_label =$level_ui/Control/VBoxContainer/Label4
+@onready var enemies_left_label = $level_ui/Control/VBoxContainer/enemies_left
+@onready var enemy_points_label = $level_ui/Control/VBoxContainer2/wave_points
+@onready var wave_label = $level_ui/Control/VBoxContainer/wave
+@onready var level_label = $level_ui/Control/VBoxContainer/level
 
 # Upgrade labels
 @onready var fire_upgrade_label = $upgrade_selection/Label
@@ -71,9 +72,17 @@ var enemies = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	player.setup()
-	level_ui.hide()
+	level_ui.show()
 	upgrade_selection.hide()
+	for i in get_tree().get_nodes_in_group("enemy"):
+		i.queue_free()
+	player.setup()
+	player_camera.make_current()
+	wave_points = INITIAL_WAVE_POINTS
+	max_wave_capacity = INITIAL_MAX_WAVE_CAPACITY
+	max_wave = INITIAL_MAX_WAVE
+	level = 1
+	capacity = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	enemies_left_label.text = "Enemies left: " + str(capacity)
@@ -88,12 +97,14 @@ func pause_game():
 	
 	upgrade_selection.show()
 	level_ui.hide()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
 func update_upgrades() -> void:
 	pass
 	
 func next_wave():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	get_tree().paused = false
 	upgrade_selection.hide()
 	level_ui.show()
@@ -110,7 +121,7 @@ func next_wave():
 
 func next_level():
 	level += 1
-	#level_label.text = "Level: " + str(level)
+	level_label.text = "Level: " + str(level)
 	wave = 1
 	wave_label.text = "Wave: 1"
 
@@ -179,17 +190,6 @@ func _on_enemy_killed(score, death_position):
 		call_deferred("add_child", spawned_heart)
 		spawned_heart.position = death_position
 	player.update_stats()
-
-func _on_play_pressed() -> void:
-	for i in get_tree().get_nodes_in_group("enemy"):
-		i.queue_free()
-	level_ui.show()
-	player.setup()
-	player_camera.make_current()
-	wave_points = INITIAL_WAVE_POINTS
-	max_wave_capacity = INITIAL_MAX_WAVE_CAPACITY
-	max_wave = INITIAL_MAX_WAVE
-	capacity = 0
 
 func _on_fire_pressed() -> void:
 	player.fire_level += 1
