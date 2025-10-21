@@ -1,8 +1,10 @@
 extends Area2D
 
-var damage = 0
+var damage : int = 0
+var level : int = 0
 
 func _ready() -> void:
+	damage = 50 + level * 10
 	$attack_timer.start(0.05)
 
 

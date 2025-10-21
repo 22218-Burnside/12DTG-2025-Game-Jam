@@ -5,6 +5,8 @@ const FIRE_ELEMENT = preload("uid://dirvbjxkn2pam")
 const WIND_ELEMENT = preload("uid://duoekhjeg3c58")
 const EARTH_ELEMENT = preload("uid://cikihy5ag5kj7")
 
+
+## Format: [element resource, attack function, level]
 var ELEMENTS : Array = [
 	null,
 	null,
@@ -15,32 +17,8 @@ var ELEMENTS : Array = [
 const SPEED = 150.0
 var health = 100
 var score = 0
-var attack_time = 1.5
-var fire_attack_time = 8
-var wind_attack_time = 0.8
-var earth_attack_time = 3
 var controlling = false
 var can_hit = true
-var water_level = 1 :
-	set(value):
-		water_level = value
-		hotbar.element_slots[0].element_level += 1
-var fire_level = 0 : 
-	set(value):
-		fire_level = value
-		hotbar.element_slots[1].element_level += 1
-var earth_level = 0 :
-	set(value):
-		earth_level = value
-		hotbar.element_slots[3].element_level += 1
-var wind_level = 0 :
-	set(value):
-		wind_level = value
-		hotbar.element_slots[2].element_level += 1
-var wind_damage = 50
-var fire_damage = 50
-var water_damage = 50
-var earth_damage = 0
 
 @onready var water = preload("res://prefabs/attacks/water_attack.tscn")
 @onready var fire = preload("res://prefabs/attacks/fire_attack/fire_attack.tscn")
@@ -52,7 +30,6 @@ var earth_damage = 0
 @onready var slot_2_timer = $slot2timer
 @onready var slot_3_timer = $slot3timer
 @onready var slot_4_timer = $slot4timer
-
 
 
 func setup():
@@ -99,12 +76,12 @@ func change_slot(slot_number : int, element : Element):
 
 func level_up_slot(slot_number : int) -> void:
 	ELEMENTS[slot_number - 1][2] += 1
+	hotbar.element_slots[slot_number - 1].element_level += 1
 
 
 func slot_timeout(slot_number : int) -> bool:
 	if ELEMENTS[slot_number - 1]:
-		ELEMENTS[slot_number - 1][1].call(ELEMENTS[slot_number - 1][0].damage, 
-		ELEMENTS[slot_number - 1][2])
+		ELEMENTS[slot_number - 1][1].call(ELEMENTS[slot_number - 1][2])
 		return true
 	else:
 		return false
@@ -128,7 +105,7 @@ func slot4timeout() -> void:
 	if slot_timeout(4):
 		slot_4_timer.start()
 
-func water_attack(damage : int, level : int):
+func water_attack(level : int):
 	if controlling:
 		var closest_enemy_distance = INF
 		var closest_enemy_position = Vector2.ZERO
@@ -144,7 +121,7 @@ func water_attack(damage : int, level : int):
 		# Only fire if an enemy was actually found
 		if enemy_found:
 			var spawned_attack = water.instantiate()
-			spawned_attack.damage = damage * (0.8 + level/5.0)
+			spawned_attack.level = level
 			
 			spawned_attack.position = self.position
 			# Calculate direction FROM player TO enemy
@@ -154,24 +131,24 @@ func water_attack(damage : int, level : int):
 				spawned_attack.find_child("Icon").flip_v = true
 			get_parent().add_child(spawned_attack)
 
-func fire_attack(damage : int, level : int):
+func fire_attack(level : int):
 	if controlling:
 		var spawned_attack = fire.instantiate()
-		spawned_attack.damage = damage * (0.8 + level/5.0)
 		spawned_attack.level = level
 		add_child(spawned_attack)
 
-func wind_attack(damage : int, level : int):
+func wind_attack(level : int):
 	if controlling:
 		var spawned_attack = wind.instantiate()
-		spawned_attack.damage = damage * (0.8 + level/5.0)
+		spawned_attack.level = level
 		add_child(spawned_attack)
 
 
-func earth_attack(_damage : int, _level : int):
+func earth_attack(level : int):
 	if controlling:
 		var spawned_attack = earth.instantiate()
-		spawned_attack.position = Vector2(randf_range(position.x-500.0,position.x + 500.0), randf_range(position.y-500.0,position.y + 500.0))
+		spawned_attack.level = level
+		spawned_attack.position = Vector2(randf_range(-500.0, 500.0), randf_range(-500.0, 500.0)) + position
 		get_parent().add_child(spawned_attack)
 		
 

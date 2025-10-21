@@ -1,4 +1,7 @@
 extends Area2D
+
+var level : int
+
 func _ready() -> void:
 	$Timer.start(5)
 

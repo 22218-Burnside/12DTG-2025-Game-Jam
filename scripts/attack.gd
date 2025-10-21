@@ -1,10 +1,12 @@
 extends Area2D
-var damage = 0
+var damage : int
 var speed = 200
 var direction = Vector2.ZERO
+var level : int
 
 func _ready() -> void:
 	$die_time.start(2)
+	damage = 50 + level * 10
 	
 	
 func _physics_process(delta: float) -> void:

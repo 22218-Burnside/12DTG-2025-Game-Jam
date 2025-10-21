@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://d4fv8hbcem10f" path="res://title_screen/control.gd" id="1_0fbet"]
 [ext_resource type="Theme" uid="uid://h22edabrcqwn" path="res://theme.tres" id="1_34clf"]
-[ext_resource type="Shader" uid="uid://cifehy26c853l" path="res://title_screen/fire.gdshader" id="2_5fjhk"]
-[ext_resource type="Shader" uid="uid://cqui8cawgguk5" path="res://title_screen/pixelate.gdshader" id="3_fdx52"]
-[ext_resource type="Shader" uid="uid://b8n7iwh6sso3m" path="res://title_screen/vornoi.gdshader" id="3_wnaq3"]
+[ext_resource type="Shader" path="res://title_screen/fire.gdshader" id="2_5fjhk"]
+[ext_resource type="Shader" path="res://title_screen/pixelate.gdshader" id="3_fdx52"]
+[ext_resource type="Shader" path="res://title_screen/vornoi.gdshader" id="3_wnaq3"]
 [ext_resource type="Script" uid="uid://doxs60p6iilce" path="res://title_screen/buttons.gd" id="4_3qiiy"]
-[ext_resource type="Script" uid="uid://cx8tyaqch3f71" path="res://title_screen/credits.gd" id="4_i3mxp"]
+[ext_resource type="Script" path="res://title_screen/credits.gd" id="4_i3mxp"]
 [ext_resource type="Texture2D" uid="uid://cv6oc6iup6hb3" path="res://title_screen/cursor.png" id="5_3qiiy"]
 [ext_resource type="Script" uid="uid://cshxufh203wud" path="res://title_screen/cursor.gd" id="6_i3mxp"]
 
@@ -554,5 +554,6 @@ alignment = 2
 [connection signal="pressed" from="buttons/CREDITS" to="." method="_on_credits_pressed"]
 [connection signal="mouse_entered" from="buttons/QUIT" to="buttons" method="_on_quit_mouse_entered"]
 [connection signal="mouse_exited" from="buttons/QUIT" to="buttons" method="_on_quit_mouse_exited"]
+[connection signal="pressed" from="buttons/QUIT" to="." method="_on_quit_pressed"]
 [connection signal="timeout" from="cursor/Timer" to="cursor" method="_on_timer_timeout"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
