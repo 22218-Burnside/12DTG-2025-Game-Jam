@@ -6,7 +6,7 @@ var level : int
 
 func _ready() -> void:
 	$die_time.start(2)
-	damage = 50 + level * 10
+	damage = 50 + (level - 1) * 10
 	
 	
 func _physics_process(delta: float) -> void:
