@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 const WATER_ELEMENT = preload("uid://bm0nfhtxr8et8")
 const FIRE_ELEMENT = preload("uid://dirvbjxkn2pam")
@@ -17,13 +18,7 @@ var ELEMENTS : Array = [
 const SPEED = 150.0
 var health = 100
 var score = 0
-var controlling = false
 var can_hit = true
-
-@onready var water = preload("res://prefabs/attacks/water_attack.tscn")
-@onready var fire = preload("res://prefabs/attacks/fire_attack/fire_attack.tscn")
-@onready var wind = preload("res://prefabs/attacks/wind_attack.tscn")
-@onready var earth = preload("res://prefabs/attacks/earth_attack.tscn")
 
 @onready var hotbar = $hotbar
 @onready var slot_1_timer = $slot1timer
@@ -31,9 +26,12 @@ var can_hit = true
 @onready var slot_3_timer = $slot3timer
 @onready var slot_4_timer = $slot4timer
 
+var element_abilities : ElementAbilities = ElementAbilities.new()
+
 
 func setup():
-	controlling = true
+	element_abilities.player = self
+	add_child(element_abilities)
 	health = 100
 	score = 0
 	update_stats()
@@ -66,7 +64,7 @@ func update_stats():
 
 
 func change_slot(slot_number : int, element : Element):
-	ELEMENTS[slot_number - 1] = [element, Callable(self, element.function), 1]
+	ELEMENTS[slot_number - 1] = [element, Callable(element_abilities, element.function), 1]
 	var slot_timer : Timer = get_node("slot" + str(slot_number) + "timer")
 	slot_timer.wait_time = element.timer
 	slot_timer.start()
@@ -104,53 +102,6 @@ func slot3timeout() -> void:
 func slot4timeout() -> void:
 	if slot_timeout(4):
 		slot_4_timer.start()
-
-func water_attack(level : int):
-	if controlling:
-		var closest_enemy_distance = INF
-		var closest_enemy_position = Vector2.ZERO
-		var enemy_found = false
-		
-		for i in get_tree().get_nodes_in_group("enemy"):
-			var distance = i.position.distance_squared_to(self.position)
-			if distance < closest_enemy_distance:
-				closest_enemy_distance = distance
-				closest_enemy_position = i.position
-				enemy_found = true
-		
-		# Only fire if an enemy was actually found
-		if enemy_found:
-			var spawned_attack = water.instantiate()
-			spawned_attack.level = level
-			
-			spawned_attack.position = self.position
-			# Calculate direction FROM player TO enemy
-			spawned_attack.look_at(closest_enemy_position)
-			spawned_attack.direction = (closest_enemy_position - self.position).normalized()
-			if closest_enemy_position.x < self.position.x:
-				spawned_attack.find_child("Icon").flip_v = true
-			get_parent().add_child(spawned_attack)
-
-func fire_attack(level : int):
-	if controlling:
-		var spawned_attack = fire.instantiate()
-		spawned_attack.level = level
-		add_child(spawned_attack)
-
-func wind_attack(level : int):
-	if controlling:
-		var spawned_attack = wind.instantiate()
-		spawned_attack.level = level
-		add_child(spawned_attack)
-
-
-func earth_attack(level : int):
-	if controlling:
-		var spawned_attack = earth.instantiate()
-		spawned_attack.level = level
-		spawned_attack.position = Vector2(randf_range(-500.0, 500.0), randf_range(-500.0, 500.0)) + position
-		get_parent().add_child(spawned_attack)
-		
 
 
 func _on_immunity_timer_timeout() -> void:
