@@ -19,6 +19,7 @@ const SPEED = 50.0
 var health = 100
 var score = 0
 var can_hit = true
+@onready var sprite: AnimatedSprite2D = $sprite
 
 @onready var hotbar = $hotbar
 @onready var slot_1_timer = $slot1timer
@@ -44,6 +45,10 @@ func setup():
 
 func _physics_process(_delta: float) -> void:
 		var direction_x := Input.get_axis("left", "right")
+		
+		if Input.is_action_just_pressed("left"): sprite.flip_h = false
+		if Input.is_action_just_pressed("right"): sprite.flip_h = true
+		
 		if direction_x:
 			velocity.x = direction_x * SPEED
 		else:

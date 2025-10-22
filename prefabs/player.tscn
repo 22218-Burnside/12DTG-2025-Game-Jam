@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bpr5p80oqae3l"]
+[gd_scene load_steps=11 format=3 uid="uid://bpr5p80oqae3l"]
 
 [ext_resource type="Script" uid="uid://dsypkhf5mj0tv" path="res://scripts/player.gd" id="1_weayp"]
-[ext_resource type="Texture2D" uid="uid://d2ugr3uh14abh" path="res://assets/walk.png" id="2_ht1c8"]
+[ext_resource type="Texture2D" uid="uid://c3otjo85y3im5" path="res://assets/player.png" id="2_ht1c8"]
 [ext_resource type="Script" uid="uid://5abf8nsucu0e" path="res://scripts/camera_2d.gd" id="3_1txc5"]
 [ext_resource type="PackedScene" uid="uid://drvot6vrm7j1i" path="res://assets/placeholder_assets/readme/placeholder assets/immunity_icon.tscn" id="3_r66lb"]
 [ext_resource type="PackedScene" uid="uid://bqpw738s2pxnx" path="res://hotbar.tscn" id="5_ht1c8"]
@@ -11,19 +11,15 @@ radius = 13.5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2jcq"]
 atlas = ExtResource("2_ht1c8")
-region = Rect2(0, 0, 34, 34)
+region = Rect2(0, 0, 32, 34)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u51tk"]
 atlas = ExtResource("2_ht1c8")
-region = Rect2(34, 0, 34, 34)
+region = Rect2(32, 0, 32, 34)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kbsxf"]
 atlas = ExtResource("2_ht1c8")
-region = Rect2(68, 0, 34, 34)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rgeog"]
-atlas = ExtResource("2_ht1c8")
-region = Rect2(102, 0, 34, 34)
+region = Rect2(64, 0, 32, 34)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0ump0"]
 animations = [{
@@ -36,9 +32,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kbsxf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rgeog")
 }],
 "loop": true,
 "name": &"idle",
@@ -51,10 +44,12 @@ script = ExtResource("1_weayp")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ht1c8")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="."]
 z_index = 5
 sprite_frames = SubResource("SpriteFrames_0ump0")
 animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.5700883
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = -1575

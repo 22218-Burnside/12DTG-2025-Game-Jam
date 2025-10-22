@@ -1,10 +1,53 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0wk1e0jhquh3"]
+[gd_scene load_steps=10 format=3 uid="uid://d0wk1e0jhquh3"]
 
-[ext_resource type="Texture2D" uid="uid://bk83y0mtiqttt" path="res://assets/placeholder_assets/earth.png" id="1_8g62b"]
 [ext_resource type="Script" uid="uid://bv6wqgunu7n8q" path="res://scripts/earth_attack.gd" id="1_jyjc0"]
+[ext_resource type="Texture2D" uid="uid://dx0v55a4q6m4o" path="res://assets/earth-Sheet.png" id="2_7eu23"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyjc0"]
 size = Vector2(12.5, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_projr"]
+atlas = ExtResource("2_7eu23")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6i3bx"]
+atlas = ExtResource("2_7eu23")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbppa"]
+atlas = ExtResource("2_7eu23")
+region = Rect2(192, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2v466"]
+atlas = ExtResource("2_7eu23")
+region = Rect2(288, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16obt"]
+atlas = ExtResource("2_7eu23")
+region = Rect2(384, 0, 96, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e80ag"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_projr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6i3bx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbppa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2v466")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16obt")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="earth_attack" type="Area2D"]
 script = ExtResource("1_jyjc0")
@@ -12,9 +55,10 @@ script = ExtResource("1_jyjc0")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jyjc0")
 
-[node name="Earth" type="Sprite2D" parent="."]
+[node name="Earth" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("1_8g62b")
+sprite_frames = SubResource("SpriteFrames_e80ag")
+autoplay = "default"
 
 [node name="Timer" type="Timer" parent="."]
 

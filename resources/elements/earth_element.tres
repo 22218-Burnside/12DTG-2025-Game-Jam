@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Element" load_steps=3 format=3 uid="uid://cikihy5ag5kj7"]
 
 [ext_resource type="Script" uid="uid://knppiy8od0fv" path="res://scripts/element.gd" id="1_t6evn"]
-[ext_resource type="Texture2D" uid="uid://bk83y0mtiqttt" path="res://assets/placeholder_assets/earth.png" id="1_un4av"]
+[ext_resource type="Texture2D" uid="uid://lnsxs2nj3eny" path="res://assets/rock_icon.png" id="1_un4av"]
 
 [resource]
 script = ExtResource("1_t6evn")

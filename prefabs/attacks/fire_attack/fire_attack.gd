@@ -1,6 +1,6 @@
 extends Node2D
 var damage = 0
-var speed = 600
+var speed = 1
 var level : int
 var direction = Vector2.ZERO
 
@@ -20,7 +20,7 @@ func _ready() -> void:
 	
 	
 func _physics_process(delta: float) -> void:
-	self.rotation += delta*10
+	self.rotation += delta * speed
 
 
 func _on_die_time_timeout() -> void:
