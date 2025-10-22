@@ -1,16 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://ddqebhywyimhg"]
+[gd_scene load_steps=11 format=3 uid="uid://ddqebhywyimhg"]
 
 [ext_resource type="Script" uid="uid://dikdpg5vhgmje" path="res://scripts/wind_attack.gd" id="1_mqtjm"]
 [ext_resource type="Texture2D" uid="uid://bdplxerjh4e6b" path="res://assets/wind-Sheet.png" id="2_uv2gv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqtjm"]
 radius = 85.33
-
-[sub_resource type="SphereMesh" id="SphereMesh_ot4cc"]
-radius = 0.2
-height = 0.267
-radial_segments = 4
-rings = 12
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hu748"]
 atlas = ExtResource("2_uv2gv")
@@ -57,7 +51,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_037sh")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
 "speed": 5.0
 }]
@@ -68,16 +62,13 @@ script = ExtResource("1_mqtjm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_mqtjm")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-modulate = Color(1, 1, 1, 0.3647059)
-scale = Vector2(427.15048, 640)
-mesh = SubResource("SphereMesh_ot4cc")
-
 [node name="attack_timer" type="Timer" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_if7no")
-frame_progress = 0.5491888
+autoplay = "default"
+frame = 5
+frame_progress = 1.0
 speed_scale = 3.0
 
 [connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]

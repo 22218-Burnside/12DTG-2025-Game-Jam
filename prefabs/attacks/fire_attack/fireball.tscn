@@ -50,7 +50,7 @@ modulate = Color(0.868046, 0.39493915, 1.92523e-07, 1)
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_105e3")
 autoplay = "default"
-frame_progress = 0.5434511
+frame_progress = 0.9124697
 speed_scale = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

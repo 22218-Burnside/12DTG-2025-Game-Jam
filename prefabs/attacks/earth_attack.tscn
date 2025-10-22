@@ -59,6 +59,9 @@ shape = SubResource("RectangleShape2D_jyjc0")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_e80ag")
 autoplay = "default"
+frame = 4
+frame_progress = 1.0
+speed_scale = 3.0
 
 [node name="Timer" type="Timer" parent="."]
 
