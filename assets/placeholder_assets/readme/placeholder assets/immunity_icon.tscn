@@ -49,6 +49,7 @@ gravity = Vector3(0, 0, 0)
 color_ramp = SubResource("GradientTexture1D_qc515")
 
 [node name="immunity_icon" type="Node2D"]
+scale = Vector2(0.25, 0.25)
 
 [node name="Area2D" type="Area2D" parent="."]
 
