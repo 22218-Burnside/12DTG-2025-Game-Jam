@@ -7,7 +7,7 @@ extends Control
 @onready var _main_container: Control = $menus/main
 
 @onready var buttons: Control = $menus/main/buttons
-@onready var title: Control = $menus/main/title
+#@onready var title: Control = $menus/main/title
 
 # options
 @onready var _options_container: VBoxContainer = $menus/options
@@ -87,7 +87,7 @@ func _process(delta: float) -> void:
 	time += delta * 6.0 
 	velocity = lerp(velocity, final_velocity, delta * decrease_rate)
 	
-	var credits_posx = (160 - (credits_container.size.x/2))
+	#var credits_posx = (160 - (credits_container.size.x/2))
 	
 		
 	var target = 0.0

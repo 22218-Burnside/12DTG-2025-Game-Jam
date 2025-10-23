@@ -9,7 +9,7 @@ const BUTTON_FONT_SIZE := 16
 
 var ui_scale = 1
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	ui_scale = Settings.ui_scale
 
 func update():

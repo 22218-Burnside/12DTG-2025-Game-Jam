@@ -22,7 +22,7 @@ const MUSIC_EXTENSIONS = ["ogg", "mp3", "wav", "flac"]
 
 # --- Built-in Functions ---
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	for player in get_children():
 		player.volume_db = Settings.master_volume
 

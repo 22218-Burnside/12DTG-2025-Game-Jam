@@ -7,6 +7,7 @@
 size = Vector2(64, 64)
 
 [node name="heart" type="Area2D"]
+scale = Vector2(0.25, 0.25)
 script = ExtResource("1_sjtqc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
