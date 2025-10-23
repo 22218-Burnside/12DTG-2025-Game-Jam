@@ -1,19 +1,42 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://h22edabrcqwn"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://h22edabrcqwn"]
 
+[ext_resource type="Texture2D" uid="uid://cbrwpgg06138i" path="res://assets/grabber.png" id="1_cjfk0"]
 [ext_resource type="FontFile" uid="uid://2olmbhuj1ptt" path="res://title_screen/Alkhemikal.ttf" id="1_e1x85"]
+[ext_resource type="Texture2D" uid="uid://cna57r16lr24s" path="res://assets/grabber_hover.png" id="2_vj6dk"]
+[ext_resource type="Texture2D" uid="uid://dyu3aqpe2kknn" path="res://assets/tick.png" id="3_110ce"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xfmkh"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vj6dk"]
+texture = ExtResource("1_cjfk0")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_110ce"]
+texture = ExtResource("2_vj6dk")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
 
 [resource]
 default_font = ExtResource("1_e1x85")
 default_font_size = 16
 Button/colors/font_color = Color(1, 1, 1, 1)
-Button/colors/font_hover_color = Color(0.73333335, 0.23137255, 0.23137255, 1)
-Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0.42, 0.5319999, 0.84, 1)
+Button/colors/font_pressed_color = Color(0.0792, 0.0792, 0.44, 1)
 Button/constants/outline_size = 8
 Button/font_sizes/font_size = 16
 Button/styles/focus = SubResource("StyleBoxEmpty_xfmkh")
 Button/styles/pressed = null
+HSlider/icons/grabber = ExtResource("1_cjfk0")
+HSlider/icons/grabber_highlight = ExtResource("2_vj6dk")
+HSlider/icons/tick = ExtResource("3_110ce")
+HSlider/styles/grabber_area = SubResource("StyleBoxTexture_vj6dk")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxTexture_vj6dk")
+HSlider/styles/slider = SubResource("StyleBoxTexture_110ce")
 Label/constants/outline_size = 16
 Label/constants/shadow_offset_y = 15
 Label/constants/shadow_outline_size = 6

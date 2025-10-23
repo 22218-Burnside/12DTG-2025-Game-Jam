@@ -6,7 +6,7 @@ var tank = preload("res://prefabs/tank.tscn")
 var heart = preload("res://prefabs/heart.tscn")
 
 # Wave configuration constants
-const INITIAL_WAVE_POINTS = 10
+const INITIAL_WAVE_POINTS = 100
 const INITIAL_MAX_WAVE = 20
 const INITIAL_MAX_WAVE_CAPACITY = 10
 const WAVE_MULTIPLIER_MIN = 1.1
@@ -103,7 +103,6 @@ func pause_game():
 	update_upgrades()
 	upgrade_selection.show()
 	level_ui.hide()
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
 func update_upgrades() -> void:
@@ -132,7 +131,6 @@ func update_upgrades() -> void:
 		element_4.disabled = true
 	
 func next_wave():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	get_tree().paused = false
 	upgrade_selection.hide()
 	level_ui.show()

@@ -22,6 +22,10 @@ const MUSIC_EXTENSIONS = ["ogg", "mp3", "wav", "flac"]
 
 # --- Built-in Functions ---
 
+func _process(delta: float) -> void:
+	for player in get_children():
+		player.volume_db = Settings.master_volume
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# 1. Setup the AudioStreamPlayer

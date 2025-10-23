@@ -1,7 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvx2na3sdqih6"]
+[gd_scene load_steps=9 format=3 uid="uid://cvx2na3sdqih6"]
 
 [ext_resource type="Script" uid="uid://jc2v7bstph54" path="res://prefabs/attacks/fire_attack/fireball.gd" id="1_4wget"]
-[ext_resource type="Texture2D" uid="uid://c1o6210heiosi" path="res://assets/placeholder_assets/fire.png" id="1_40cov"]
+[ext_resource type="Texture2D" uid="uid://bh50ci4jbxuv7" path="res://assets/fire-Sheet.png" id="2_4wget"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k16vn"]
+atlas = ExtResource("2_4wget")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10byh"]
+atlas = ExtResource("2_4wget")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rle27"]
+atlas = ExtResource("2_4wget")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjeer"]
+atlas = ExtResource("2_4wget")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_105e3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k16vn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_10byh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rle27")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjeer")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7gpr6"]
 radius = 8.0
@@ -9,12 +45,16 @@ radius = 8.0
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_4wget")
 
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="Icon" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.868046, 0.39493915, 1.92523e-07, 1)
 texture_filter = 1
-texture = ExtResource("1_40cov")
+sprite_frames = SubResource("SpriteFrames_105e3")
+autoplay = "default"
+frame_progress = 0.9124697
+speed_scale = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_7gpr6")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

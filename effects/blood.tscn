@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://c86x45q5nqmiw"]
+
+[ext_resource type="Script" uid="uid://cxebma77fyd2k" path="res://effects/blood.gd" id="1_xnilh"]
+
+[sub_resource type="Gradient" id="Gradient_6vqwl"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.67546225, 0, 0.11559766, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xnilh"]
+gradient = SubResource("Gradient_6vqwl")
+width = 4
+height = 8
+
+[sub_resource type="Curve" id="Curve_4337f"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_53cnx"]
+curve = SubResource("Curve_4337f")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o1frw"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 25.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 400, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_53cnx")
+
+[node name="blood" type="GPUParticles2D"]
+emitting = false
+amount = 20
+texture = SubResource("GradientTexture2D_xnilh")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_o1frw")
+script = ExtResource("1_xnilh")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

@@ -1,12 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://d4gviquaenxby"]
+[gd_scene load_steps=15 format=3 uid="uid://d4gviquaenxby"]
 
 [ext_resource type="Script" uid="uid://d4fv8hbcem10f" path="res://title_screen/control.gd" id="1_0fbet"]
 [ext_resource type="Theme" uid="uid://h22edabrcqwn" path="res://theme.tres" id="1_34clf"]
-[ext_resource type="Shader" path="res://title_screen/fire.gdshader" id="2_5fjhk"]
-[ext_resource type="Shader" path="res://title_screen/pixelate.gdshader" id="3_fdx52"]
-[ext_resource type="Shader" path="res://title_screen/vornoi.gdshader" id="3_wnaq3"]
+[ext_resource type="Shader" uid="uid://cifehy26c853l" path="res://title_screen/fire.gdshader" id="2_5fjhk"]
+[ext_resource type="Shader" uid="uid://cqui8cawgguk5" path="res://title_screen/pixelate.gdshader" id="3_fdx52"]
 [ext_resource type="Script" uid="uid://doxs60p6iilce" path="res://title_screen/buttons.gd" id="4_3qiiy"]
-[ext_resource type="Script" path="res://title_screen/credits.gd" id="4_i3mxp"]
+[ext_resource type="Script" uid="uid://cx8tyaqch3f71" path="res://title_screen/credits.gd" id="4_i3mxp"]
 [ext_resource type="Texture2D" uid="uid://cv6oc6iup6hb3" path="res://title_screen/cursor.png" id="5_3qiiy"]
 [ext_resource type="Script" uid="uid://cshxufh203wud" path="res://title_screen/cursor.gd" id="6_i3mxp"]
 
@@ -21,14 +20,6 @@ shader_parameter/moonstone = Color(0, 0.698, 0.792, 1)
 shader_parameter/ylnmn_blue = Color(0.114, 0.306, 0.537, 1)
 shader_parameter/emerald = Color(0.2, 0.792, 0.498, 1)
 shader_parameter/cal_poly_green = Color(0.078, 0.349, 0.114, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f5tvq"]
-shader = ExtResource("3_wnaq3")
-shader_parameter/disp_ = Vector2(0.5, 0.5)
-shader_parameter/speed = 3.0
-shader_parameter/color1 = Vector3(0.005, 0.045, 0.075)
-shader_parameter/color2 = Vector3(0.033, 0.07, 0.03)
-shader_parameter/m3 = Basis(0.65, 1.12, -1.43, -1.75, 0.65, -0.3, 0.3, 1.4, 1.22)
 
 [sub_resource type="Animation" id="Animation_i3mxp"]
 length = 0.001
@@ -124,19 +115,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 40.0
 offset_right = -40.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = ExtResource("1_34clf")
-
-[node name="vornoi" type="ColorRect" parent="."]
-visible = false
-z_index = -1
-material = SubResource("ShaderMaterial_f5tvq")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -448,6 +426,54 @@ text = "
 "
 horizontal_alignment = 1
 
+[node name="options" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 9.0
+offset_right = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_34clf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="options"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+
+[node name="project" type="RichTextLabel" parent="options/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[wave] [outline_size=8]Settings"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="master_volume" type="HBoxContainer" parent="options/VBoxContainer"]
+layout_mode = 2
+
+[node name="master_volume_label" type="Label" parent="options/VBoxContainer/master_volume"]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="master_volume_slider" type="HSlider" parent="options/VBoxContainer/master_volume"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme = ExtResource("1_34clf")
+min_value = -80.0
+max_value = 0.0
+step = 8.0
+value = -80.0
+tick_count = 10
+ticks_on_borders = true
+ticks_position = 3
+
 [node name="buttons" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -544,11 +570,27 @@ text = "->"
 flat = true
 alignment = 2
 
+[node name="forward" type="Button" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -201.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_5kuq4")
+text = "<-"
+flat = true
+alignment = 0
+
+[connection signal="value_changed" from="options/VBoxContainer/master_volume/master_volume_slider" to="." method="_on_master_volume_slider_value_changed"]
 [connection signal="mouse_entered" from="buttons/PLAY" to="buttons" method="_on_play_mouse_entered"]
 [connection signal="mouse_exited" from="buttons/PLAY" to="buttons" method="_on_play_mouse_exited"]
 [connection signal="pressed" from="buttons/PLAY" to="." method="_on_play_pressed"]
 [connection signal="mouse_entered" from="buttons/OPTIONS" to="buttons" method="_on_options_mouse_entered"]
 [connection signal="mouse_exited" from="buttons/OPTIONS" to="buttons" method="_on_options_mouse_exited"]
+[connection signal="pressed" from="buttons/OPTIONS" to="." method="_on_options_pressed"]
 [connection signal="mouse_entered" from="buttons/CREDITS" to="buttons" method="_on_credits_mouse_entered"]
 [connection signal="mouse_exited" from="buttons/CREDITS" to="buttons" method="_on_credits_mouse_exited"]
 [connection signal="pressed" from="buttons/CREDITS" to="." method="_on_credits_pressed"]
@@ -557,3 +599,4 @@ alignment = 2
 [connection signal="pressed" from="buttons/QUIT" to="." method="_on_quit_pressed"]
 [connection signal="timeout" from="cursor/Timer" to="cursor" method="_on_timer_timeout"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="forward" to="." method="_on_forward_pressed"]

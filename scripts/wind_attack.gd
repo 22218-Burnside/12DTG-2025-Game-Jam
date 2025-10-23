@@ -2,6 +2,7 @@ extends Area2D
 
 var damage : int = 0
 var level : int = 0
+@onready var sprite: AnimatedSprite2D = $sprite
 
 func _ready() -> void:
 	damage = 50 + level * 10
@@ -14,4 +15,5 @@ func _on_attack_timer_timeout() -> void:
 			i.health -= damage
 			if i.health <= 0:
 				i.die()
+	await sprite.animation_finished
 	self.queue_free()
