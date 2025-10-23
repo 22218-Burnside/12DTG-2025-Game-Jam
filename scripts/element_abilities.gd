@@ -47,5 +47,5 @@ func wind_attack(level : int):
 func earth_attack(level : int):
 	var spawned_attack = earth.instantiate()
 	spawned_attack.level = level
-	spawned_attack.position = Vector2(randf_range(-500.0, 500.0), randf_range(-500.0, 500.0)) + player.position
+	spawned_attack.position = Vector2(randf_range(-50.0, 50.0), randf_range(-50.0, 50.0)) + player.position
 	player.get_parent().add_child(spawned_attack)

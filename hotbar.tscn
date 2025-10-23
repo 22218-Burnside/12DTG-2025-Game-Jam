@@ -36,6 +36,7 @@ theme = SubResource("Theme_5kuq4")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 24
 
 [node name="Element Slot1" parent="Control/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_0tjp8")]
 layout_mode = 2

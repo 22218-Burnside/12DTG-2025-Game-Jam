@@ -1,12 +1,32 @@
 extends Control
+
 @onready var pixelate_anim: AnimationPlayer = $pixelate/pixelate_anim
-@onready var buttons: Control = $buttons
-@onready var credits_container: ScrollContainer = $credits
-@onready var title: Control = $title
-@onready var back: Button = $back
-@onready var options: CenterContainer = $options
-@onready var forward: Button = $forward
-@onready var master_volume_slider: HSlider = $options/VBoxContainer/master_volume/master_volume_slider
+@onready var earth: ColorRect = $earth
+
+# main
+@onready var _main_container: Control = $menus/main
+
+@onready var buttons: Control = $menus/main/buttons
+@onready var title: Control = $menus/main/title
+
+# options
+@onready var _options_container: VBoxContainer = $menus/options
+
+
+@onready var options: CenterContainer = $menus/options/options
+@onready var forward: Button = $menus/options/forward
+@onready var master_volume_slider: HSlider = $menus/options/options/VBoxContainer/master_volume/master_volume_slider
+@onready var ui_scale_slider: HSlider = $menus/options/options/VBoxContainer/ui_scale/ui_scale_slider
+
+# credits
+@onready var _credits_container: VBoxContainer = $menus/credits
+@onready var menus_container: HBoxContainer = $menus
+@onready var credits: ScrollContainer = $menus/credits/credits
+@onready var names: VBoxContainer = $menus/credits/credits/names
+
+
+@onready var back: Button = $menus/credits/back
+@onready var credits_container: Control = $menus/credits/credits 
 
 @export var initial_velocity : float
 @export var intensity : float 
@@ -33,16 +53,25 @@ enum menus {
 }
 
 func _ready() -> void:
-	velocity = initial_velocity
+	credits.custom_minimum_size.y = (get_viewport_rect().size.y - back.size.y)
+	names.custom_minimum_size.x = get_viewport_rect().size.x
 	
-	for i in range(title_text.length()):
-		var label = Label.new()
-		label.text = str(title_text[i])
-		label.theme = load("res://theme.tres")
-		label.add_theme_font_size_override("font_size", CHAR_SIZE)
-		label.position = Vector2((i * SPACING )+ POSX, POSY)
-		title.add_child(label)
-		letters.append(label)
+	earth.size.x = earth.size.y
+	earth.position.x = (get_viewport_rect().size.x/2) - (earth.size.x/2)
+	
+	for node in get_all_nodes(self):
+		if node is Button:
+			node.pivot_offset = node.size/2
+	
+	_main_container.custom_minimum_size = get_viewport_rect().size
+	_options_container.custom_minimum_size = get_viewport_rect().size
+	_credits_container.custom_minimum_size = get_viewport_rect().size
+	
+	velocity = initial_velocity
+
+	Settings.ui_scale = ui_scale_slider.value
+	await get_tree().process_frame
+	ThemeManager.update()
 
 func _process(delta: float) -> void:
 	master_volume_slider.pivot_offset = master_volume_slider.size/2
@@ -50,50 +79,26 @@ func _process(delta: float) -> void:
 	master_volume_slider.scale = lerp(master_volume_slider.scale,Vector2.ONE,delta*10)
 	Settings.master_volume = master_volume_slider.value
 	
+	ui_scale_slider.pivot_offset = ui_scale_slider.size/2
+	ui_scale_slider.rotation = lerp(ui_scale_slider.rotation,0.0,delta*10)
+	ui_scale_slider.scale = lerp(ui_scale_slider.scale,Vector2.ONE,delta*10)
+	Settings.ui_scale = ui_scale_slider.value
+	
 	time += delta * 6.0 
 	velocity = lerp(velocity, final_velocity, delta * decrease_rate)
 	
 	var credits_posx = (160 - (credits_container.size.x/2))
 	
-	for i in range(letters.size()):
-		var label = letters[i]
-		label.position.y = POSY + sin(time - i * intensity) * velocity 
-		var dist = (label.global_position + (label.size/2)).distance_to(get_global_mouse_position()) 
-		var scale_factor = clamp(1.5 - dist / 150.0, 1.0, 1.5)
-		var color_factor = clamp((dist/50),0,1)
-		label.modulate = lerp(Color.CORNFLOWER_BLUE,Color.WHITE,color_factor)
-		label.add_theme_font_size_override("font_size", CHAR_SIZE * scale_factor)
-	
+		
+	var target = 0.0
 	match current_menu:
 		menus.MAIN:
-			title.position.x = lerp(title.position.x,0.0,delta*10)
-			buttons.position.x = lerp(buttons.position.x,112.0,delta*10)
-			
-			back.position.x = lerp(back.position.x,-400.0,delta*10)
-			credits_container.position.x = lerp(credits_container.position.x,-400.0,delta*10)
-			
-			forward.position.x = lerp(forward.position.x,400.0,delta*10)
-			options.position.x = lerp(options.position.x, 400.0, delta *10)
-			
-		menus.CREDITS:
-			title.position.x = lerp(title.position.x,400.0,delta*10)
-			buttons.position.x = lerp(buttons.position.x,400.0,delta*10)
-			
-			back.position.x = lerp(back.position.x,0.0,delta*10)
-			credits_container.position.x = lerp(credits_container.position.x,credits_posx,delta*10)
-		
-			forward.position.x = lerp(forward.position.x,800.0,delta*10)
-			options.position.x = lerp(options.position.x, 800.0, delta *10)
-			
+			target = -(get_viewport_rect().size.x)
 		menus.OPTIONS:
-			title.position.x = lerp(title.position.x,-400.0,delta*10)
-			buttons.position.x = lerp(buttons.position.x,-400.0,delta*10)
-			
-			back.position.x = lerp(back.position.x,-800.0,delta*10)
-			credits_container.position.x = lerp(credits_container.position.x,-800.0,delta*10)
-						
-			forward.position.x = lerp(forward.position.x,0.0,delta*10)
-			options.position.x = lerp(options.position.x, 0.0, delta *10)
+			target = -(get_viewport_rect().size.x) * 2
+	
+	menus_container.position.x = lerp(menus_container.position.x,target,delta*10)
+	
 			
 	
 func _on_play_pressed() -> void: 
@@ -117,3 +122,21 @@ func _on_master_volume_slider_value_changed(value: float) -> void:
 	master_volume_slider.scale.x = (new_val/10) + 1
 	master_volume_slider.scale.y = master_volume_slider.scale.x
 	master_volume_slider.rotation = randf_range(-new_val/10,new_val/10)
+
+
+func _on_ui_scale_slider_value_changed(value: float) -> void:
+	ThemeManager.update()
+	var new_val = (value / 2)
+	
+	ui_scale_slider.scale.x = (new_val/10) + 1
+	ui_scale_slider.scale.y = ui_scale_slider.scale.x
+	ui_scale_slider.rotation = randf_range(-new_val/10,new_val/10)
+
+func get_all_nodes(root: Node) -> Array:
+	var result: Array = [root]
+	
+	for child in root.get_children():
+		if child is Node:
+			result += get_all_nodes(child)
+	
+	return result

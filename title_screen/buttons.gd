@@ -13,13 +13,13 @@ var quit_hover : bool = false
 const HOVER_SCALE := 1.2
 const SCALE_DELTA_MOD := 5
 
-func _ready() -> void:
+func _process(delta: float) -> void:
 	play.pivot_offset = play.size/2
 	options.pivot_offset = options.size/2
 	credits.pivot_offset = credits.size/2
 	quit.pivot_offset = quit.size/2
 
-func _process(delta: float) -> void:
+	
 	if play_hover: play.scale = lerp(play.scale,Vector2(HOVER_SCALE,HOVER_SCALE),SCALE_DELTA_MOD * delta)
 	else: play.scale = lerp(play.scale,Vector2.ONE,SCALE_DELTA_MOD * delta)
 	

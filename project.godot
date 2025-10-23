@@ -21,11 +21,10 @@ MusicManager="*res://scripts/musicManager.gd"
 AudioManager="*res://scripts/audioManager.gd"
 Globals="*res://scripts/Globals.gd"
 Settings="*res://Settings.gd"
+ThemeManager="*res://title_screen/theme_manager.gd"
 
 [display]
 
-window/size/viewport_width=320
-window/size/viewport_height=240
 window/size/mode=2
 window/stretch/mode="viewport"
 

@@ -1,4 +1,4 @@
-extends ScrollContainer
+extends Control
 
 const project_color = Color.CRIMSON
 const art_color = Color.GOLDENROD
