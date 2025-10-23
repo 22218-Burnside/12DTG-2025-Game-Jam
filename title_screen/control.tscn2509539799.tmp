@@ -90,331 +90,385 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -320.0
+offset_right = 320.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="credits" type="VBoxContainer" parent="menus"]
-custom_minimum_size = Vector2(1152, 648)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="menus/credits"]
+[node name="credits" type="Control" parent="menus"]
+custom_minimum_size = Vector2(320, 240)
 layout_mode = 2
 
 [node name="back" type="Button" parent="menus/credits"]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 24.0
+grow_horizontal = 2
 theme = SubResource("Theme_5kuq4")
 text = "->"
 flat = true
 alignment = 2
 
 [node name="credits" type="ScrollContainer" parent="menus/credits" node_paths=PackedStringArray("projects", "arts", "programmers", "levels", "juices", "gits", "trellos")]
-custom_minimum_size = Vector2(0, 500)
-layout_mode = 2
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 29.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_34clf")
-horizontal_scroll_mode = 3
+horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 script = ExtResource("4_i3mxp")
-projects = [NodePath("names/project"), NodePath("names/cohen")]
-arts = [NodePath("names/art"), NodePath("names/Aine")]
-programmers = [NodePath("names/programming"), NodePath("names/Hayden")]
-levels = [NodePath("names/level & Design"), NodePath("names/Dexter")]
-juices = [NodePath("names/Juice"), NodePath("names/Samuel")]
-gits = [NodePath("names/Git"), NodePath("names/Ben")]
-trellos = [NodePath("names/trello"), NodePath("names/Miguel")]
+projects = [NodePath("VBoxContainer/project"), NodePath("VBoxContainer/cohen")]
+arts = [NodePath("VBoxContainer/art"), NodePath("VBoxContainer/Aine")]
+programmers = [NodePath("VBoxContainer/programming"), NodePath("VBoxContainer/Hayden")]
+levels = [NodePath("VBoxContainer/level & Design"), NodePath("VBoxContainer/Dexter")]
+juices = [NodePath("VBoxContainer/Juice"), NodePath("VBoxContainer/Samuel")]
+gits = [NodePath("VBoxContainer/Git"), NodePath("VBoxContainer/Ben")]
+trellos = [NodePath("VBoxContainer/trello"), NodePath("VBoxContainer/Miguel")]
 
-[node name="names" type="VBoxContainer" parent="menus/credits/credits"]
-custom_minimum_size = Vector2(400, 0)
+[node name="VBoxContainer" type="VBoxContainer" parent="menus/credits/credits"]
 layout_mode = 2
 theme = ExtResource("1_34clf")
 
-[node name="project" type="RichTextLabel" parent="menus/credits/credits/names"]
+[node name="project" type="RichTextLabel" parent="menus/credits/credits/VBoxContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme = ExtResource("1_34clf")
 bbcode_enabled = true
-text = "[wave] [outline_size=16]Project Manager"
+text = "[wave] [outline_size=8]PROJECT MANAGER"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="cohen" type="Label" parent="menus/credits/credits/names"]
+[node name="cohen" type="Label" parent="menus/credits/credits/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
 text = "Cohen Voight"
 horizontal_alignment = 1
 
-[node name="art" type="RichTextLabel" parent="menus/credits/credits/names"]
+[node name="art" type="RichTextLabel" parent="menus/credits/credits/VBoxContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme = ExtResource("1_34clf")
 bbcode_enabled = true
-text = "[wave] [outline_size=16]Artists"
+text = "[wave] [outline_size=8]Art MANAGER"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Aine" type="Label" parent="menus/credits/credits/names"]
+[node name="Aine" type="Label" parent="menus/credits/credits/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_34clf")
-text = "Aine O'Conner - Manager"
+theme_override_constants/outline_size = 8
+text = "Aine O'Conner"
 horizontal_alignment = 1
 
-[node name="benson" type="Label" parent="menus/credits/credits/names"]
+[node name="jordan" type="Label" parent="menus/credits/credits/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_34clf")
-text = "Benson Lee - Element Effects"
+theme_override_constants/outline_size = 8
+text = "Jordan Gainsford"
 horizontal_alignment = 1
 
-[node name="xander" type="Label" parent="menus/credits/credits/names"]
+[node name="xander" type="Label" parent="menus/credits/credits/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_34clf")
-text = "Xander Hales - Enemies"
+theme_override_constants/outline_size = 8
+text = "Xander Hales"
 horizontal_alignment = 1
 
-[node name="Isaac" type="Label" parent="menus/credits/credits/names"]
+[node name="Sean" type="Label" parent="menus/credits/credits/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_34clf")
-text = "Isaac Latimer - Element Icons"
+theme_override_constants/outline_size = 8
+text = "Sean Rivera"
 horizontal_alignment = 1
 
-[node name="Sean" type="Label" parent="menus/credits/credits/names"]
+[node name="benson" type="Label" parent="menus/credits/credits/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_34clf")
-text = "Sean Rivera - Enemies"
+theme_override_constants/outline_size = 8
+text = "Benson Lee"
 horizontal_alignment = 1
 
-[node name="bruno" type="Label" parent="menus/credits/credits/names"]
+[node name="bruno" type="Label" parent="menus/credits/credits/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_34clf")
-text = "Bruno Studzinski - ???"
+theme_override_constants/outline_size = 8
+text = "Bruno Studzinski"
 horizontal_alignment = 1
 
-[node name="jordan" type="Label" parent="menus/credits/credits/names"]
+[node name="Isaac" type="Label" parent="menus/credits/credits/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_34clf")
-text = "Jordan Gainsford - ???"
+theme_override_constants/outline_size = 8
+text = "Isaac Latimer"
 horizontal_alignment = 1
 
-[node name="programming" type="RichTextLabel" parent="menus/credits/credits/names"]
+[node name="programming" type="RichTextLabel" parent="menus/credits/credits/VBoxContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme = ExtResource("1_34clf")
 bbcode_enabled = true
-text = "[wave] [outline_size=16]Progrogrammers"
+text = "[wave] [outline_size=8]Programming MANAGER"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Hayden" type="Label" parent="menus/credits/credits/names"]
+[node name="Hayden" type="Label" parent="menus/credits/credits/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_34clf")
-text = "Hayden Clemence - Manager"
+theme_override_constants/outline_size = 8
+text = "Hayden Clemence"
 horizontal_alignment = 1
 
-[node name="olly" type="Label" parent="menus/credits/credits/names"]
+[node name="Miguel2" type="Label" parent="menus/credits/credits/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_34clf")
-text = "Olly Kitchingman - Element Logic"
-horizontal_alignment = 1
-
-[node name="Miguel2" type="Label" parent="menus/credits/credits/names"]
-layout_mode = 2
-theme = ExtResource("1_34clf")
-text = "Miguel Monreal - ???"
-horizontal_alignment = 1
-
-[node name="pasindu" type="Label" parent="menus/credits/credits/names"]
-layout_mode = 2
-theme = ExtResource("1_34clf")
-text = "Pasindu Vidunitha Gardi - ???"
-horizontal_alignment = 1
-
-[node name="ryan" type="Label" parent="menus/credits/credits/names"]
-layout_mode = 2
-theme = ExtResource("1_34clf")
-text = "Ryan Zhang - ???"
-horizontal_alignment = 1
-
-[node name="level & Design" type="RichTextLabel" parent="menus/credits/credits/names"]
-clip_contents = false
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme = ExtResource("1_34clf")
-bbcode_enabled = true
-text = "[wave] [outline_size=16]Level & Design MANAGER"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Dexter" type="Label" parent="menus/credits/credits/names"]
-layout_mode = 2
-theme = ExtResource("1_34clf")
-text = "Dexter Goater - Manager"
-horizontal_alignment = 1
-
-[node name="dylan" type="Label" parent="menus/credits/credits/names"]
-layout_mode = 2
-theme = ExtResource("1_34clf")
-text = "Dylan Williams"
-horizontal_alignment = 1
-
-[node name="jonas" type="Label" parent="menus/credits/credits/names"]
-layout_mode = 2
-theme = ExtResource("1_34clf")
-text = "Jonas Puettmann"
-horizontal_alignment = 1
-
-[node name="kyle" type="Label" parent="menus/credits/credits/names"]
-layout_mode = 2
-theme = ExtResource("1_34clf")
-text = "Kyle Deng"
-horizontal_alignment = 1
-
-[node name="Ben2" type="Label" parent="menus/credits/credits/names"]
-layout_mode = 2
-theme = ExtResource("1_34clf")
-text = "Ben Blakie"
-horizontal_alignment = 1
-
-[node name="Joseph" type="Label" parent="menus/credits/credits/names"]
-layout_mode = 2
-theme = ExtResource("1_34clf")
-text = "Joseph Ke"
-horizontal_alignment = 1
-
-[node name="Git" type="RichTextLabel" parent="menus/credits/credits/names"]
-clip_contents = false
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme = ExtResource("1_34clf")
-bbcode_enabled = true
-text = "[wave] [outline_size=16]Git MANAGER"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Ben" type="Label" parent="menus/credits/credits/names"]
-layout_mode = 2
-theme = ExtResource("1_34clf")
-text = "Ben Blakie"
-horizontal_alignment = 1
-
-[node name="Juice" type="RichTextLabel" parent="menus/credits/credits/names"]
-clip_contents = false
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme = ExtResource("1_34clf")
-bbcode_enabled = true
-text = "[wave] [outline_size=16]Juice MANAGER"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Samuel" type="Label" parent="menus/credits/credits/names"]
-layout_mode = 2
-theme = ExtResource("1_34clf")
-text = "Samuel O'Sullivan"
-horizontal_alignment = 1
-
-[node name="trello" type="RichTextLabel" parent="menus/credits/credits/names"]
-clip_contents = false
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-theme = ExtResource("1_34clf")
-bbcode_enabled = true
-text = "[wave] [outline_size=16]Trello MANAGER"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Miguel" type="Label" parent="menus/credits/credits/names"]
-layout_mode = 2
-theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
 text = "Miguel Monreal"
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="menus/credits/credits/names"]
+[node name="pasindu" type="Label" parent="menus/credits/credits/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Pasindu Vidunitha Gardi"
+horizontal_alignment = 1
+
+[node name="olly" type="Label" parent="menus/credits/credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Olly Kitchingman"
+horizontal_alignment = 1
+
+[node name="ryan" type="Label" parent="menus/credits/credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Ryan Zhang"
+horizontal_alignment = 1
+
+[node name="level & Design" type="RichTextLabel" parent="menus/credits/credits/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("1_34clf")
+bbcode_enabled = true
+text = "[wave] [outline_size=8]Level & Design MANAGER"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dexter" type="Label" parent="menus/credits/credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Dexter Goater"
+horizontal_alignment = 1
+
+[node name="dylan" type="Label" parent="menus/credits/credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Dylan Williams"
+horizontal_alignment = 1
+
+[node name="jonas" type="Label" parent="menus/credits/credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Jonas Puettmann"
+horizontal_alignment = 1
+
+[node name="kyle" type="Label" parent="menus/credits/credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Kyle Deng"
+horizontal_alignment = 1
+
+[node name="Ben2" type="Label" parent="menus/credits/credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Ben Blakie"
+horizontal_alignment = 1
+
+[node name="Joseph" type="Label" parent="menus/credits/credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Joseph Ke"
+horizontal_alignment = 1
+
+[node name="Git" type="RichTextLabel" parent="menus/credits/credits/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("1_34clf")
+bbcode_enabled = true
+text = "[wave] [outline_size=8]Git MANAGER"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ben" type="Label" parent="menus/credits/credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Ben Blakie"
+horizontal_alignment = 1
+
+[node name="Juice" type="RichTextLabel" parent="menus/credits/credits/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("1_34clf")
+bbcode_enabled = true
+text = "[wave] [outline_size=8]Juice MANAGER"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Samuel" type="Label" parent="menus/credits/credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Samuel O'Sullivan"
+horizontal_alignment = 1
+
+[node name="trello" type="RichTextLabel" parent="menus/credits/credits/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("1_34clf")
+bbcode_enabled = true
+text = "[wave] [outline_size=8]Trello MANAGER"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Miguel" type="Label" parent="menus/credits/credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
+text = "Miguel Monreal"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="menus/credits/credits/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
 text = "
 "
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="menus/credits/credits/names"]
+[node name="Label2" type="Label" parent="menus/credits/credits/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_34clf")
+theme_override_constants/outline_size = 8
 text = "
 "
 horizontal_alignment = 1
 
 [node name="main" type="Control" parent="menus"]
-custom_minimum_size = Vector2(1152, 648)
+custom_minimum_size = Vector2(320, 240)
 layout_mode = 2
 
-[node name="buttons" type="VBoxContainer" parent="menus/main"]
+[node name="title" type="Control" parent="menus/main"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 320.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_34clf")
+
+[node name="buttons" type="Control" parent="menus/main"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 95.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_34clf")
-alignment = 1
 script = ExtResource("4_3qiiy")
 
-[node name="title" type="RichTextLabel" parent="menus/main/buttons"]
-layout_mode = 2
-theme = ExtResource("1_34clf")
-bbcode_enabled = true
-text = "[center][outline_size=16] [wave]Acropolis"
-fit_content = true
-
 [node name="PLAY" type="Button" parent="menus/main/buttons"]
-layout_mode = 2
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 24.0
 theme = ExtResource("1_34clf")
 text = "PLAY"
 flat = true
 
 [node name="OPTIONS" type="Button" parent="menus/main/buttons"]
-layout_mode = 2
+layout_mode = 0
+offset_top = 28.0
+offset_right = 320.0
+offset_bottom = 52.0
 theme = ExtResource("1_34clf")
 text = "OPTIONS"
 flat = true
 
 [node name="CREDITS" type="Button" parent="menus/main/buttons"]
-layout_mode = 2
+layout_mode = 0
+offset_top = 56.0
+offset_right = 320.0
+offset_bottom = 80.0
 theme = ExtResource("1_34clf")
 text = "CREDITS"
 flat = true
 
 [node name="QUIT" type="Button" parent="menus/main/buttons"]
-layout_mode = 2
+layout_mode = 0
+offset_top = 84.0
+offset_right = 320.0
+offset_bottom = 108.0
 theme = ExtResource("1_34clf")
 text = "QUIT"
 flat = true
 
-[node name="options" type="VBoxContainer" parent="menus"]
-custom_minimum_size = Vector2(1152, 648)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="menus/options"]
+[node name="options" type="Control" parent="menus"]
+custom_minimum_size = Vector2(320, 240)
 layout_mode = 2
 
 [node name="forward" type="Button" parent="menus/options"]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 24.0
+grow_horizontal = 2
 theme = SubResource("Theme_5kuq4")
 text = "<-"
 flat = true
 alignment = 0
 
 [node name="options" type="CenterContainer" parent="menus/options"]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 27.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_34clf")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="menus/options/options"]
@@ -427,7 +481,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme = ExtResource("1_34clf")
 bbcode_enabled = true
-text = "[wave] [outline_size=16]Settings"
+text = "[wave] [outline_size=8]Settings"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -435,7 +489,6 @@ vertical_alignment = 1
 [node name="master_volume" type="HBoxContainer" parent="menus/options/options/VBoxContainer"]
 z_index = 1
 layout_mode = 2
-alignment = 1
 
 [node name="master_volume_label" type="Label" parent="menus/options/options/VBoxContainer/master_volume"]
 z_index = 1
@@ -456,15 +509,12 @@ ticks_on_borders = true
 ticks_position = 3
 
 [node name="ui_scale" type="HBoxContainer" parent="menus/options/options/VBoxContainer"]
-visible = false
 z_index = 1
 layout_mode = 2
-alignment = 1
 
 [node name="ui_scale_label" type="Label" parent="menus/options/options/VBoxContainer/ui_scale"]
 z_index = 1
 layout_mode = 2
-theme = ExtResource("1_34clf")
 text = "UI Scale"
 
 [node name="ui_scale_slider" type="HSlider" parent="menus/options/options/VBoxContainer/ui_scale"]
@@ -472,15 +522,15 @@ z_index = 1
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme = ExtResource("1_34clf")
-min_value = 1.0
+min_value = 0.5
 max_value = 2.0
-step = 0.2
-value = 1.0
+step = 0.15
+value = 0.5
 tick_count = 10
 ticks_on_borders = true
 ticks_position = 3
 
-[node name="(c)" type="Label" parent="."]
+[node name="(c)" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -490,8 +540,10 @@ offset_top = -16.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("1_34clf")
-theme_override_colors/font_color = Color(0.38689998, 0.45606494, 0.53, 0.49019608)
-text = "2025 ZEALOUS STUDIOS"
+bbcode_enabled = true
+text = "[left][wave]@2025 ZEALOUS STUDIOS"
+fit_content = true
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="cursor" type="TextureRect" parent="."]

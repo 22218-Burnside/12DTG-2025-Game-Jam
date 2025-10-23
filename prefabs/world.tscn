@@ -116,35 +116,44 @@ position = Vector2(1714, 773)
 [node name="upgrade_selection" type="CanvasLayer" parent="."]
 process_mode = 2
 
-[node name="element1" type="Button" parent="upgrade_selection"]
-offset_left = 15.0
-offset_top = 133.0
-offset_right = 75.0
-offset_bottom = 172.99994
+[node name="Control" type="Control" parent="upgrade_selection"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="upgrade_selection/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 303.0
+offset_bottom = -303.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="element1" type="Button" parent="upgrade_selection/Control/HBoxContainer"]
+layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="element2" type="Button" parent="upgrade_selection"]
-offset_left = 92.0
-offset_top = 133.0
-offset_right = 152.0
-offset_bottom = 172.99994
+[node name="element2" type="Button" parent="upgrade_selection/Control/HBoxContainer"]
+layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="element3" type="Button" parent="upgrade_selection"]
-offset_left = 174.0
-offset_top = 133.0
-offset_right = 234.0
-offset_bottom = 172.99994
+[node name="element3" type="Button" parent="upgrade_selection/Control/HBoxContainer"]
+layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="element4" type="Button" parent="upgrade_selection"]
-offset_left = 248.0
-offset_top = 133.0
-offset_right = 308.0
-offset_bottom = 172.99994
+[node name="element4" type="Button" parent="upgrade_selection/Control/HBoxContainer"]
+layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="upgrade_selection"]
+visible = false
 offset_left = -47.0
 offset_top = 68.0
 offset_right = 303.0
@@ -155,6 +164,7 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Label2" type="Label" parent="upgrade_selection"]
+visible = false
 offset_left = 28.0
 offset_top = 68.0
 offset_right = 378.0
@@ -165,6 +175,7 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Label3" type="Label" parent="upgrade_selection"]
+visible = false
 offset_left = 113.0
 offset_top = 68.0
 offset_right = 463.0
@@ -175,6 +186,7 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Label4" type="Label" parent="upgrade_selection"]
+visible = false
 offset_left = 187.0
 offset_top = 68.0
 offset_right = 537.0
@@ -185,7 +197,7 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [connection signal="timeout" from="spawn_timer" to="." method="spawn_enemy"]
-[connection signal="pressed" from="upgrade_selection/element1" to="." method="element_1_upgrade"]
-[connection signal="pressed" from="upgrade_selection/element2" to="." method="element_2_upgrade"]
-[connection signal="pressed" from="upgrade_selection/element3" to="." method="element_3_upgrade"]
-[connection signal="pressed" from="upgrade_selection/element4" to="." method="element_4_upgrade"]
+[connection signal="pressed" from="upgrade_selection/Control/HBoxContainer/element1" to="." method="element_1_upgrade"]
+[connection signal="pressed" from="upgrade_selection/Control/HBoxContainer/element2" to="." method="element_2_upgrade"]
+[connection signal="pressed" from="upgrade_selection/Control/HBoxContainer/element3" to="." method="element_3_upgrade"]
+[connection signal="pressed" from="upgrade_selection/Control/HBoxContainer/element4" to="." method="element_4_upgrade"]

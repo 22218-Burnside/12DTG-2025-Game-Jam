@@ -70,10 +70,10 @@ var enemies = {
 @onready var upgrade_3_label = $upgrade_selection/Label3
 @onready var upgrade_4_label = $upgrade_selection/Label4
 
-@onready var element_1: Button = $upgrade_selection/element1
-@onready var element_2: Button = $upgrade_selection/element2
-@onready var element_3: Button = $upgrade_selection/element3
-@onready var element_4: Button = $upgrade_selection/element4
+@onready var element_1: Button = $upgrade_selection/Control/HBoxContainer/element1
+@onready var element_2: Button = $upgrade_selection/Control/HBoxContainer/element2
+@onready var element_3: Button = $upgrade_selection/Control/HBoxContainer/element3
+@onready var element_4: Button = $upgrade_selection/Control/HBoxContainer/element4
 
 
 # Called when the node enters the scene tree for the first time.
