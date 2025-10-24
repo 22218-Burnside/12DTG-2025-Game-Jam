@@ -95,8 +95,14 @@ func _process(_delta: float) -> void:
 	enemy_points_label.text = "Enemy points: " + str(int(wave_points))
 	if capacity < max_wave_capacity and wave_points > 0:
 		spawn_enemy()
-	if capacity <= 0 and wave_points <= 0:
+		
+	Globals.exp_to_next_level = (Globals.level + 1) * 2
+	if Globals.experiance >= Globals.exp_to_next_level:
+		Globals.level += 1
+		Globals.experiance = 0
 		pause_game()
+		
+		
 
 func pause_game():
 	get_tree().paused = true

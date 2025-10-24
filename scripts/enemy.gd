@@ -10,10 +10,12 @@ var can_attack = true
 signal death
 signal enemy_hit_player
 
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var die_anim: AnimationPlayer = $die_anim
 const BLOOD = preload("uid://c86x45q5nqmiw")
 const DAMAGE_INDICATOR = preload("uid://drucr8c11yv4b")
+const EXPERIANCE = preload("uid://cwfm62bvsyiby")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -44,6 +46,10 @@ func die():
 	# creates a blood particles that kills itself after emmiting. Also plays
 	# an animation showing the enemy dissolving. Await waits for the animation
 	# to finish before queue freeing
+	
+	var exper = EXPERIANCE.instantiate()
+	get_parent().add_child(exper)
+	exper.position = position
 	
 	death.emit(points,self.position)
 	var blood = BLOOD.instantiate()

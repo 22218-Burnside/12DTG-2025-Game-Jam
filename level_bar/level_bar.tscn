@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbqlmqd5jrpmw"]
+
+[ext_resource type="Script" uid="uid://b53x7tvcjoimb" path="res://level_bar/level_bar.gd" id="1_am0wt"]
+[ext_resource type="Theme" uid="uid://h22edabrcqwn" path="res://theme.tres" id="1_dvn2l"]
+[ext_resource type="Texture2D" uid="uid://dxrggmnnlf20k" path="res://assets/npr.png" id="2_am0wt"]
+[ext_resource type="Texture2D" uid="uid://d2hd3svjsh3gr" path="res://assets/over.png" id="3_s5fqo"]
+
+[node name="level_bar" type="CanvasLayer"]
+script = ExtResource("1_am0wt")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_dvn2l")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_dvn2l")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_dvn2l")
+theme_override_constants/separation = 9
+
+[node name="bar" type="TextureProgressBar" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_dvn2l")
+value = 50.0
+nine_patch_stretch = true
+stretch_margin_left = 10
+stretch_margin_top = 10
+stretch_margin_right = 10
+stretch_margin_bottom = 10
+texture_under = ExtResource("2_am0wt")
+texture_progress = ExtResource("3_s5fqo")
+
+[node name="level" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_dvn2l")
+text = "Lvl 200"
+horizontal_alignment = 1
+vertical_alignment = 1

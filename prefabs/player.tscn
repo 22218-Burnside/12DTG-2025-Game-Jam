@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bpr5p80oqae3l"]
+[gd_scene load_steps=12 format=3 uid="uid://bpr5p80oqae3l"]
 
 [ext_resource type="Script" uid="uid://dsypkhf5mj0tv" path="res://scripts/player.gd" id="1_weayp"]
 [ext_resource type="Texture2D" uid="uid://c3otjo85y3im5" path="res://assets/player.png" id="2_ht1c8"]
 [ext_resource type="Script" uid="uid://5abf8nsucu0e" path="res://scripts/camera_2d.gd" id="3_1txc5"]
 [ext_resource type="PackedScene" uid="uid://drvot6vrm7j1i" path="res://assets/placeholder_assets/readme/placeholder assets/immunity_icon.tscn" id="3_r66lb"]
 [ext_resource type="PackedScene" uid="uid://bqpw738s2pxnx" path="res://hotbar.tscn" id="5_ht1c8"]
+[ext_resource type="PackedScene" uid="uid://cbqlmqd5jrpmw" path="res://level_bar/level_bar.tscn" id="6_g2jcq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ht1c8"]
 radius = 13.5
@@ -73,6 +74,8 @@ visible = false
 [node name="immunity_timer" type="Timer" parent="."]
 
 [node name="hotbar" parent="." instance=ExtResource("5_ht1c8")]
+
+[node name="level_bar" parent="." instance=ExtResource("6_g2jcq")]
 
 [connection signal="timeout" from="slot1timer" to="." method="slot1timeout"]
 [connection signal="timeout" from="slot2timer" to="." method="slot2timeout"]
