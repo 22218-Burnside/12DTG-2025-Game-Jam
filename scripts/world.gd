@@ -70,10 +70,10 @@ var enemies = {
 @onready var upgrade_3_label = $upgrade_selection/Label3
 @onready var upgrade_4_label = $upgrade_selection/Label4
 
-@onready var element_1: Button = $upgrade_selection/Control/HBoxContainer/element1
-@onready var element_2: Button = $upgrade_selection/Control/HBoxContainer/element2
-@onready var element_3: Button = $upgrade_selection/Control/HBoxContainer/element3
-@onready var element_4: Button = $upgrade_selection/Control/HBoxContainer/element4
+@onready var element_1: Button = $upgrade_selection/Control/HBoxContainer/upgrade1
+@onready var element_2: Button = $upgrade_selection/Control/HBoxContainer/upgrade2
+@onready var element_3: Button = $upgrade_selection/Control/HBoxContainer/upgrade3
+@onready var element_4: Button = $upgrade_selection/Control/HBoxContainer/upgrade4
 
 
 # Called when the node enters the scene tree for the first time.
@@ -89,8 +89,11 @@ func _ready() -> void:
 	max_wave = INITIAL_MAX_WAVE
 	level = 1
 	capacity = 0
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+
+	
 	enemies_left_label.text = "Enemies left: " + str(capacity)
 	enemy_points_label.text = "Enemy points: " + str(int(wave_points))
 	if capacity < max_wave_capacity and wave_points > 0:
@@ -113,25 +116,33 @@ func pause_game():
 
 func update_upgrades() -> void:
 	if player.ELEMENTS[0]:
-		element_1.text = player.ELEMENTS[0][0].element_name
+		element_1.upgrade_name = player.ELEMENTS[0][0].element_name
+		element_1.upgrade_icon = player.ELEMENTS[0][0].element_texture
+
 		element_1.disabled = false
 	else:
 		element_1.disabled = true
 	
 	if player.ELEMENTS[1]:
-		element_2.text = player.ELEMENTS[1][0].element_name
+		element_2.upgrade_name = player.ELEMENTS[1][0].element_name
+		element_2.upgrade_icon = player.ELEMENTS[1][0].element_texture
+
 		element_2.disabled = false
 	else:
 		element_2.disabled = true
 
 	if player.ELEMENTS[2]:
-		element_3.text = player.ELEMENTS[2][0].element_name
+		element_3.upgrade_name = player.ELEMENTS[2][0].element_name
+		element_3.upgrade_icon = player.ELEMENTS[2][0].element_texture
+
 		element_3.disabled = false
 	else:
 		element_3.disabled = true
 
 	if player.ELEMENTS[3]:
-		element_4.text = player.ELEMENTS[3][0].element_name
+		element_4.upgrade_name = player.ELEMENTS[3][0].element_name
+		element_4.upgrade_icon = player.ELEMENTS[3][0].element_texture
+
 		element_4.disabled = false
 	else:
 		element_4.disabled = true
