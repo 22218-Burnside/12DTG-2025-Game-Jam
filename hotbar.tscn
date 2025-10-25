@@ -5,10 +5,10 @@
 
 [sub_resource type="Theme" id="Theme_5kuq4"]
 Label/font_sizes/font_size = 60
-MarginContainer/constants/margin_bottom = 5
-MarginContainer/constants/margin_left = 5
-MarginContainer/constants/margin_right = 5
-MarginContainer/constants/margin_top = 5
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 10
+MarginContainer/constants/margin_top = 10
 
 [node name="hotbar" type="CanvasLayer"]
 script = ExtResource("1_0tjp8")
@@ -34,18 +34,28 @@ alignment = 2
 layout_mode = 2
 theme = SubResource("Theme_5kuq4")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer/MarginContainer"]
+[node name="split" type="HBoxContainer" parent="Control/VBoxContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 24
+theme_override_constants/separation = 924
+alignment = 1
 
-[node name="Element Slot1" parent="Control/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_0tjp8")]
+[node name="left" type="VBoxContainer" parent="Control/VBoxContainer/MarginContainer/split"]
+layout_mode = 2
+theme_override_constants/separation = 39
+
+[node name="Element Slot1" parent="Control/VBoxContainer/MarginContainer/split/left" instance=ExtResource("2_0tjp8")]
 layout_mode = 2
 
-[node name="Element Slot2" parent="Control/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_0tjp8")]
+[node name="Element Slot2" parent="Control/VBoxContainer/MarginContainer/split/left" instance=ExtResource("2_0tjp8")]
 layout_mode = 2
 
-[node name="Element Slot3" parent="Control/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_0tjp8")]
+[node name="right" type="VBoxContainer" parent="Control/VBoxContainer/MarginContainer/split"]
+layout_mode = 2
+theme_override_constants/separation = 39
+alignment = 2
+
+[node name="Element Slot3" parent="Control/VBoxContainer/MarginContainer/split/right" instance=ExtResource("2_0tjp8")]
 layout_mode = 2
 
-[node name="Element Slot4" parent="Control/VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("2_0tjp8")]
+[node name="Element Slot4" parent="Control/VBoxContainer/MarginContainer/split/right" instance=ExtResource("2_0tjp8")]
 layout_mode = 2

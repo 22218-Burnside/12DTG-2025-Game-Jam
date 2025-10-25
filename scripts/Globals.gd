@@ -1,6 +1,6 @@
 extends Node
 
 const ELEMENTS : Array = ["fire_element"]
-var experiance : int = 0
-var level : int = 0
-var exp_to_next_level : int = 0
+var experiance : float = 0
+var level : float = 0
+var exp_to_next_level : float = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ddqebhywyimhg"]
+[gd_scene load_steps=12 format=3 uid="uid://ddqebhywyimhg"]
 
 [ext_resource type="Script" uid="uid://dikdpg5vhgmje" path="res://scripts/wind_attack.gd" id="1_mqtjm"]
 [ext_resource type="Texture2D" uid="uid://bdplxerjh4e6b" path="res://assets/wind-Sheet.png" id="2_uv2gv"]
@@ -30,6 +30,10 @@ region = Rect2(640, 0, 160, 160)
 atlas = ExtResource("2_uv2gv")
 region = Rect2(800, 0, 160, 160)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_uv2gv"]
+atlas = ExtResource("2_uv2gv")
+region = Rect2(936, 36, 24, 4)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_if7no"]
 animations = [{
 "frames": [{
@@ -50,6 +54,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_037sh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uv2gv")
 }],
 "loop": false,
 "name": &"default",
@@ -62,13 +69,11 @@ script = ExtResource("1_mqtjm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_mqtjm")
 
-[node name="attack_timer" type="Timer" parent="."]
-
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_if7no")
 autoplay = "default"
-frame = 5
+frame = 6
 frame_progress = 1.0
 speed_scale = 3.0
 
-[connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
+[connection signal="animation_finished" from="sprite" to="." method="_on_sprite_animation_finished"]

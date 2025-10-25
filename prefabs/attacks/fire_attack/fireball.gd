@@ -9,6 +9,4 @@ func _on_area_entered(area: Area2D) -> void:
 		get_parent().add_child(ind)
 		ind.position = global_position
 		
-		area.health -= damage
-		if area.health <= 0:
-			area.die()
+		area.hit(damage)

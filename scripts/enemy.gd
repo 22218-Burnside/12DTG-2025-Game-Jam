@@ -12,7 +12,7 @@ signal enemy_hit_player
 
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var die_anim: AnimationPlayer = $die_anim
+@onready var die_anim: AnimationPlayer = $anim
 const BLOOD = preload("uid://c86x45q5nqmiw")
 const DAMAGE_INDICATOR = preload("uid://drucr8c11yv4b")
 const EXPERIANCE = preload("uid://cwfm62bvsyiby")
@@ -41,6 +41,18 @@ func _physics_process(delta: float) -> void:
 				enemy_hit_player.emit(damage)
 				$attack_timer.start(1.5)
 	position += speed * position.direction_to(player.position) * delta
+
+func hit(inflicted_damage := 1.0): 
+	health -= inflicted_damage
+	
+	var ind = DAMAGE_INDICATOR.instantiate()
+	get_parent().add_child(ind)
+	ind.position = global_position
+	
+	if health <= 0:
+		die()
+	else:
+		die_anim.play("hurt")
 
 func die():
 	# creates a blood particles that kills itself after emmiting. Also plays

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://2olmbhuj1ptt"
-path="res://.godot/imported/Alkhemikal.ttf-5aa23a83ff621df28015918ab82d2ea8.fontdata"
+uid="uid://ddtt7oybjx1vj"
+path="res://.godot/imported/pixel.ttf-53545f4e3a5008b663bf4a27ccf34079.fontdata"
 
 [deps]
 
-source_file="res://title_screen/Alkhemikal.ttf"
-dest_files=["res://.godot/imported/Alkhemikal.ttf-5aa23a83ff621df28015918ab82d2ea8.fontdata"]
+source_file="res://assets/pixel.ttf"
+dest_files=["res://.godot/imported/pixel.ttf-53545f4e3a5008b663bf4a27ccf34079.fontdata"]
 
 [params]
 
@@ -30,12 +30,7 @@ Fallbacks=null
 fallbacks=[]
 Compress=null
 compress=true
-preload=[{
-"chars": [],
-"glyphs": [],
-"name": "New Configuration",
-"size": Vector2i(16, 0)
-}]
+preload=[]
 language_support={}
 script_support={}
 opentype_features={}
