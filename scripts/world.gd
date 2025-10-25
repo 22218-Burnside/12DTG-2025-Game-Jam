@@ -2,6 +2,8 @@ extends Node2D
 
 # Preloaded scenes
 var enemy = preload("res://prefabs/enemy.tscn")
+var enemies = [preload("res://Enemy/ranged.tres"), preload("res://Enemy/spider.tres")]
+
 var tank = preload("res://prefabs/tank.tscn")
 var heart = preload("res://prefabs/heart.tscn")
 
@@ -43,11 +45,6 @@ var enemy_difficulty = 1.0
 var wave = 1
 var max_wave_amount = 3
 var level = 1
-
-var enemies = {
-	"enemy" : [preload("res://prefabs/enemy.tscn"), ENEMY_COST],
-	"tank" : [preload("res://prefabs/tank.tscn"), TANK_COST],
-}
 
 # Node references
 @onready var level_ui = $level_ui
@@ -92,8 +89,6 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-
-	
 	enemies_left_label.text = "Enemies left: " + str(capacity)
 	enemy_points_label.text = "Enemy points: " + str(int(wave_points))
 	if capacity < max_wave_capacity and wave_points > 0:
@@ -174,22 +169,19 @@ func spawn_enemy() -> void:
 	if capacity >= max_wave_capacity:
 		return
 		
-	var spawned_enemy
-	var enemy_keys = enemies.keys()
-	
-	# Find all enemies that can be spawned with current wave_points
 	var valid_enemies = []
-	for key in enemy_keys:
-		if enemies[key][1] <= wave_points:
-			valid_enemies.append(key)
-	
+	for _enemy in enemies:
+		if _enemy.enemy_spawn_cost <= wave_points:
+			valid_enemies.append(_enemy)
+		
 	# Only spawn if there's at least one valid enemy
 	if valid_enemies.size() > 0:
+		var spawned_enemy = enemy.instantiate()
 		var random_enemy = valid_enemies[randi_range(0, valid_enemies.size() - 1)]
 		
-		wave_points -= enemies[random_enemy][1]
-		spawned_enemy = enemies[random_enemy][0].instantiate()
 		capacity += 1
+		wave_points -= random_enemy.enemy_spawn_cost
+		spawned_enemy.enemy_type = random_enemy
 		add_child(spawned_enemy)
 		
 		# Spawn at least MIN_SPAWN_DISTANCE pixels away from player

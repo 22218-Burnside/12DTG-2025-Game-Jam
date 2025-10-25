@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://xik0kqxbwkf5"]
+[gd_scene load_steps=16 format=3 uid="uid://xik0kqxbwkf5"]
 
 [ext_resource type="Script" uid="uid://dkwipiknlouhf" path="res://scripts/enemy.gd" id="1_yfjof"]
+[ext_resource type="Resource" uid="uid://b5vs14opf250m" path="res://Enemy/ranged.tres" id="2_a7d0n"]
 [ext_resource type="Shader" uid="uid://ccupbirwubbu3" path="res://prefabs/flash.gdshader" id="2_cypye"]
 [ext_resource type="Texture2D" uid="uid://ckb6uyw2nhcu2" path="res://assets/spider-Sheet.png" id="2_yfjof"]
 
@@ -51,7 +52,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/make_white")
+tracks/0/path = NodePath("sprite:material:shader_parameter/make_white")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -67,7 +68,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/progress")
+tracks/0/path = NodePath("sprite:material:shader_parameter/progress")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -83,7 +84,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/make_white")
+tracks/0/path = NodePath("sprite:material:shader_parameter/make_white")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -102,6 +103,7 @@ _data = {
 
 [node name="enemy" type="Area2D" groups=["enemy"]]
 script = ExtResource("1_yfjof")
+enemy_type = ExtResource("2_a7d0n")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -110,7 +112,7 @@ shape = SubResource("CircleShape2D_yfjof")
 
 [node name="attack_timer" type="Timer" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_a7d0n")
 sprite_frames = SubResource("SpriteFrames_2nw32")
 animation = &"walk"

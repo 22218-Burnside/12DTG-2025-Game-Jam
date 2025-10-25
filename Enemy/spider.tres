@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyType" load_steps=3 format=3 uid="uid://clwqpx53tjdvq"]
+
+[ext_resource type="SpriteFrames" uid="uid://bnl8iy03lhwap" path="res://Enemy/EnemyFrames.tres" id="1_5gb58"]
+[ext_resource type="Script" uid="uid://c4id4tcqx5boy" path="res://enemytype.gd" id="2_q52bf"]
+
+[resource]
+script = ExtResource("2_q52bf")
+enemy_name = "Spider"
+enemy_health = 5.0
+enemy_speed = 1.0
+ememy_damage = 1.0
+enemy_anims = ExtResource("1_5gb58")
+enemy_walk_anim = "cannon_fodder"
+metadata/_custom_type_script = "uid://c4id4tcqx5boy"
