@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ld6oihqgao74"]
+
+[ext_resource type="FontFile" uid="uid://ddtt7oybjx1vj" path="res://assets/pixel.ttf" id="1_80p5g"]
+
+[resource]
+default_font = ExtResource("1_80p5g")
+default_font_size = 10
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 4

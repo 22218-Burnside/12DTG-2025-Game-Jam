@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwfm62bvsyiby"]
+[gd_scene load_steps=12 format=3 uid="uid://cwfm62bvsyiby"]
 
 [ext_resource type="Script" uid="uid://b7ng2e0e6cyds" path="res://level_bar/experiance.gd" id="1_a4quf"]
 [ext_resource type="Texture2D" uid="uid://pw5cqfhy7wdb" path="res://assets/experiance.png" id="1_btqh7"]
@@ -45,6 +45,68 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7qtng"]
+radius = 35.0
+
+[sub_resource type="Animation" id="Animation_a4quf"]
+resource_name = "anim"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.18301068, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.18301068, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5gffr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5gffr"]
+_data = {
+&"RESET": SubResource("Animation_5gffr"),
+&"anim": SubResource("Animation_a4quf")
+}
 
 [node name="experiance" type="Area2D"]
 script = ExtResource("1_a4quf")
@@ -53,9 +115,15 @@ script = ExtResource("1_a4quf")
 sprite_frames = SubResource("SpriteFrames_v5pj3")
 animation = &"new_animation"
 autoplay = "new_animation"
-frame_progress = 0.15797608
+frame_progress = 0.52385014
+speed_scale = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_7qtng")
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5gffr")
+}
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

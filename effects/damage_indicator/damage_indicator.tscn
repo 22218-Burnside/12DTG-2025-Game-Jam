@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://drucr8c11yv4b"]
 
-[ext_resource type="Theme" uid="uid://h22edabrcqwn" path="res://theme.tres" id="1_8vp3a"]
+[ext_resource type="Theme" uid="uid://ld6oihqgao74" path="res://effects/damage_indicator/damage_indicator_theme.tres" id="1_8vp3a"]
 [ext_resource type="Script" uid="uid://bow7nur0go3w6" path="res://effects/damage_indicator/damage_indicator.gd" id="2_xjqnx"]
 
 [node name="damage_indicator" type="Label"]
@@ -9,16 +9,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -162.5
-offset_top = -128.0
-offset_right = -157.5
-offset_bottom = -112.0
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -568.0
+offset_bottom = -306.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(24.5, 0)
 theme = ExtResource("1_8vp3a")
 text = "1"
-horizontal_alignment = 1
 script = ExtResource("2_xjqnx")
 
 [node name="Timer" type="Timer" parent="."]

@@ -38,7 +38,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nbppa")
 }, {
-"duration": 1.0,
+"duration": 10.0,
 "texture": SubResource("AtlasTexture_2v466")
 }, {
 "duration": 1.0,
@@ -62,8 +62,3 @@ autoplay = "default"
 frame = 4
 frame_progress = 1.0
 speed_scale = 3.0
-
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -4,8 +4,7 @@ extends CanvasLayer
 @onready var level: Label = $Control/MarginContainer/VBoxContainer/level
 
 func _process(delta: float) -> void:
-	
-	bar.value = Globals.experiance
 	bar.max_value = Globals.exp_to_next_level
+	bar.value = lerp(bar.value,Globals.experiance,delta*10)
 	level.text = str("Level " + str(Globals.level))
 	

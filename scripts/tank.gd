@@ -27,6 +27,9 @@ func _physics_process(delta: float) -> void:
 				$attack_timer.start(1.5)
 	position += speed * position.direction_to(player.position) * delta
 
+func hit(inflicted_damage := 1.0):
+	health -= inflicted_damage
+
 func die():
 	death.emit(points,self.position)
 	self.queue_free()

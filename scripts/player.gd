@@ -43,7 +43,7 @@ func setup():
 	change_slot(4, EARTH_ELEMENT)
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:	
 		var direction_x := Input.get_axis("left", "right")
 		
 		if Input.is_action_just_pressed("left"): sprite.flip_h = false
@@ -69,6 +69,8 @@ func update_stats():
 
 
 func change_slot(slot_number : int, element : Element):
+
+	
 	ELEMENTS[slot_number - 1] = [element, Callable(element_abilities, element.function), 1]
 	var slot_timer : Timer = get_node("slot" + str(slot_number) + "timer")
 	slot_timer.wait_time = element.timer

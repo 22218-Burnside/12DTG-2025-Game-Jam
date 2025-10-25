@@ -9,5 +9,5 @@ element_texture = ExtResource("1_68yub")
 element_name = "Wind"
 function = "wind_attack"
 damage = 50
-timer = 0.8
+timer = 2.0
 metadata/_custom_type_script = "uid://knppiy8od0fv"

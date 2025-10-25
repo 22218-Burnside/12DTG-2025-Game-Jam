@@ -3,17 +3,15 @@ extends Area2D
 var damage : int = 0
 var level : int = 0
 @onready var sprite: AnimatedSprite2D = $sprite
+var delay = 1 # 1 seccond delay between attacks
 
 func _ready() -> void:
 	damage = 50 + level * 10
-	$attack_timer.start(0.05)
 
 
-func _on_attack_timer_timeout() -> void:
+func _on_sprite_animation_finished() -> void:
 	for i in get_overlapping_areas():
 		if i.is_in_group("enemy"):
-			i.health -= damage
-			if i.health <= 0:
-				i.die()
-	await sprite.animation_finished
+			i.hit(damage)
+
 	self.queue_free()
