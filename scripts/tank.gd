@@ -9,8 +9,9 @@ var can_attack = true
 
 signal death
 signal enemy_hit_player
+@onready var icon: Sprite2D = $Icon
 
-
+var time = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player = get_parent().get_node("player")
@@ -19,6 +20,10 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	time += 1
+	
+	icon.skew = sin(time/5) / 10
+	
 	if can_attack:
 		for i in get_overlapping_bodies():
 			if i is Player:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://damf4jskubnf2"]
+[gd_scene load_steps=27 format=4 uid="uid://damf4jskubnf2"]
 
 [ext_resource type="Script" uid="uid://6bnfxtto1tr3" path="res://scripts/world.gd" id="1_4d63b"]
 [ext_resource type="Texture2D" uid="uid://bh43mhs7rfodt" path="res://assets/placeholder_assets/readme/placeholder assets/sprite_0.png" id="2_4d63b"]
@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://c25cyoy0q1giy" path="res://assets/icon.svg" id="5_4284n"]
 [ext_resource type="Texture2D" uid="uid://dxrggmnnlf20k" path="res://assets/npr.png" id="8_0xhmi"]
 [ext_resource type="Texture2D" uid="uid://r4xatx1lqlbp" path="res://assets/over_red.png" id="9_m1sej"]
+[ext_resource type="Script" uid="uid://bydsahwjdbcti" path="res://prefabs/upgrade_selection.gd" id="11_le6xu"]
+[ext_resource type="Shader" uid="uid://coc3ujuonfxa1" path="res://prefabs/spin.gdshader" id="11_m1sej"]
+[ext_resource type="PackedScene" uid="uid://vrhs1j4yoavp" path="res://upgrade/upgrade.tscn" id="12_k40i2"]
 
 [sub_resource type="Gradient" id="Gradient_07nuu"]
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.45490196)
@@ -91,6 +94,14 @@ sources/1 = SubResource("TileSetAtlasSource_6be4p")
 sources/0 = SubResource("TileSetAtlasSource_4284n")
 sources/2 = SubResource("TileSetAtlasSource_5f5nf")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k40i2"]
+shader = ExtResource("11_m1sej")
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/stripes = 12
+shader_parameter/speed = 3.5000000521542
+shader_parameter/direction = 1
+shader_parameter/stripe_color = Color(1, 0.7921569, 0.39607844, 0.41960785)
+
 [node name="world" type="Node2D"]
 script = ExtResource("1_4d63b")
 
@@ -170,7 +181,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 26.0
+offset_top = 66.0
 offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -205,7 +216,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 26.0
+offset_top = 60.0
 offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -222,7 +233,9 @@ position = Vector2(1714, 773)
 [node name="spawn_timer" type="Timer" parent="."]
 
 [node name="upgrade_selection" type="CanvasLayer" parent="."]
-process_mode = 2
+process_mode = 3
+layer = 2
+script = ExtResource("11_le6xu")
 
 [node name="Control" type="Control" parent="upgrade_selection"]
 layout_mode = 3
@@ -231,81 +244,52 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(576, 324)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="upgrade_selection/Control"]
+[node name="effect_shader" type="ColorRect" parent="upgrade_selection/Control"]
+material = SubResource("ShaderMaterial_k40i2")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 303.0
-offset_bottom = -303.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 12
+
+[node name="HBoxContainer" type="VBoxContainer" parent="upgrade_selection/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 418.0
+offset_top = -87.0
+offset_right = -418.0
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
 alignment = 1
 
-[node name="element1" type="Button" parent="upgrade_selection/Control/HBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="upgrade_selection/Control/HBoxContainer"]
 layout_mode = 2
-metadata/_edit_use_anchors_ = true
+theme = ExtResource("4_4284n")
+bbcode_enabled = true
+text = "[center][outline_size=16][wave][color=gold]Level up!"
+fit_content = true
 
-[node name="element2" type="Button" parent="upgrade_selection/Control/HBoxContainer"]
+[node name="upgrade1" parent="upgrade_selection/Control/HBoxContainer" instance=ExtResource("12_k40i2")]
 layout_mode = 2
-metadata/_edit_use_anchors_ = true
 
-[node name="element3" type="Button" parent="upgrade_selection/Control/HBoxContainer"]
+[node name="upgrade2" parent="upgrade_selection/Control/HBoxContainer" instance=ExtResource("12_k40i2")]
 layout_mode = 2
-metadata/_edit_use_anchors_ = true
 
-[node name="element4" type="Button" parent="upgrade_selection/Control/HBoxContainer"]
+[node name="upgrade3" parent="upgrade_selection/Control/HBoxContainer" instance=ExtResource("12_k40i2")]
 layout_mode = 2
-metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="upgrade_selection"]
-visible = false
-offset_left = -47.0
-offset_top = 68.0
-offset_right = 303.0
-offset_bottom = 218.00043
-scale = Vector2(0.52, 0.52)
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Label2" type="Label" parent="upgrade_selection"]
-visible = false
-offset_left = 28.0
-offset_top = 68.0
-offset_right = 378.0
-offset_bottom = 218.00043
-scale = Vector2(0.52, 0.52)
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Label3" type="Label" parent="upgrade_selection"]
-visible = false
-offset_left = 113.0
-offset_top = 68.0
-offset_right = 463.0
-offset_bottom = 218.00043
-scale = Vector2(0.52, 0.52)
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Label4" type="Label" parent="upgrade_selection"]
-visible = false
-offset_left = 187.0
-offset_top = 68.0
-offset_right = 537.0
-offset_bottom = 218.00043
-scale = Vector2(0.52, 0.52)
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="upgrade4" parent="upgrade_selection/Control/HBoxContainer" instance=ExtResource("12_k40i2")]
+layout_mode = 2
 
 [connection signal="timeout" from="spawn_timer" to="." method="spawn_enemy"]
-[connection signal="pressed" from="upgrade_selection/Control/HBoxContainer/element1" to="." method="element_1_upgrade"]
-[connection signal="pressed" from="upgrade_selection/Control/HBoxContainer/element2" to="." method="element_2_upgrade"]
-[connection signal="pressed" from="upgrade_selection/Control/HBoxContainer/element3" to="." method="element_3_upgrade"]
-[connection signal="pressed" from="upgrade_selection/Control/HBoxContainer/element4" to="." method="element_4_upgrade"]
+[connection signal="pressed" from="upgrade_selection/Control/HBoxContainer/upgrade1" to="." method="element_1_upgrade"]
+[connection signal="pressed" from="upgrade_selection/Control/HBoxContainer/upgrade2" to="." method="element_2_upgrade"]
+[connection signal="pressed" from="upgrade_selection/Control/HBoxContainer/upgrade3" to="." method="element_3_upgrade"]
+[connection signal="pressed" from="upgrade_selection/Control/HBoxContainer/upgrade4" to="." method="element_4_upgrade"]
