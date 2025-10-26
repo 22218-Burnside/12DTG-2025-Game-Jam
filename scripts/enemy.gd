@@ -11,6 +11,7 @@ var time = 0
 
 var health
 var parent
+var dead : bool = false
 
 @export var enemy_type : EnemyType
 @onready var sprite: AnimatedSprite2D = $sprite
@@ -20,9 +21,14 @@ var parent
 const BLOOD = preload("uid://c86x45q5nqmiw")
 const DAMAGE_INDICATOR = preload("uid://drucr8c11yv4b")
 const EXPERIANCE = preload("uid://cwfm62bvsyiby")
+const FLASH_TIMER = 0.1
+
+const ENEMY_DIE = preload("uid://wb0oo4qlcsuu")
+const FLASH_SHADER = preload("uid://4dola2cm1n5j")
 
 
 func _ready() -> void:
+	sprite.material = FLASH_SHADER.duplicate()
 	parent = get_parent()
 	
 	if enemy_type:
@@ -39,21 +45,28 @@ func _ready() -> void:
 	
 
 func _physics_process(delta: float) -> void:
-	time += 1
-	sprite.skew = sin(time/5) / 10
-	
-	var direction = player.position.x - position.x
-	if direction > 0: sprite.flip_h = true
-	else: sprite.flip_h = false
+	if dead:
+		var rate = lerp(sprite.material.get_shader_parameter("progress"),1.0,delta*5)
+		sprite.material.set_shader_parameter("progress",rate)
+		
+		if rate >= 0.95: self.queue_free()
+		
+	else:
+		time += 1
+		sprite.skew = sin(time/5) / 10
+		
+		var direction = player.position.x - position.x
+		if direction > 0: sprite.flip_h = true
+		else: sprite.flip_h = false
 
-	if can_attack:
-		for body in get_overlapping_bodies():
-			if body is Player:
-				can_attack = false
-				enemy_hit_player.emit(enemy_type.damage)
-				attack_timer.start()
-				
-	position += enemy_type.enemy_speed * position.direction_to(player.position) * delta
+		if can_attack:
+			for body in get_overlapping_bodies():
+				if body is Player:
+					can_attack = false
+					enemy_hit_player.emit(enemy_type.ememy_damage)
+					attack_timer.start()
+					
+		position += enemy_type.enemy_speed * position.direction_to(player.position) * delta
 
 func hit(inflicted_damage := 1.0): 
 	health -= inflicted_damage
@@ -63,7 +76,10 @@ func hit(inflicted_damage := 1.0):
 	ind.position = global_position
 	
 	if health <= 0: die()
-	else: anim.play("hurt")
+	else: 
+		sprite.material.set_shader_parameter("make_white",true)
+		await get_tree().create_timer(FLASH_TIMER).timeout
+		sprite.material.set_shader_parameter("make_white",false)
 
 func die():	
 	var exper = EXPERIANCE.instantiate()
@@ -75,7 +91,8 @@ func die():
 	blood.position = position
 	
 	death.emit(points,self.position)
-	self.queue_free()
+	dead = true
+	sprite.material = ENEMY_DIE.duplicate()
 
 
 func _on_attack_timer_timeout() -> void:
