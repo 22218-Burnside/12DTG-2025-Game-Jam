@@ -5,7 +5,7 @@ var enemy = preload("res://prefabs/enemy.tscn")
 var enemies = [preload("res://Enemy/ranged.tres"), preload("res://Enemy/spider.tres")]
 
 var tank = preload("res://prefabs/tank.tscn")
-var heart = preload("res://prefabs/heart.tscn")
+
 
 # Wave configuration constants
 const INITIAL_WAVE_POINTS = 100
@@ -18,10 +18,6 @@ const WAVE_DISPLAY_OFFSET = 9
 # Spawn configuration constants
 const MIN_SPAWN_DISTANCE = 200
 const SPAWN_RANGE = 500
-
-# Drop configuration constants
-const HEART_DROP_CHANCE_MIN = 85
-const HEART_DROP_CHANCE_MAX = 100
 
 # Camera shake constants
 const CAMERA_SHAKE_STRENGTH = 7.0
@@ -56,9 +52,9 @@ var level = 1
 @onready var immunity_indicator = $level_ui/immunity
 
 # UI Label references
-@onready var enemies_left_label = $level_ui/Control/VBoxContainer/enemies_left
+@onready var enemies_left_label: Label = $level_ui/Control/VBoxContainer/enemies_left/enemies_left_label
 @onready var enemy_points_label = $level_ui/Control/VBoxContainer2/wave_points
-@onready var wave_label = $level_ui/Control/VBoxContainer/wave
+@onready var wave_label = $level_ui/Control/VBoxContainer/wave2/wave
 @onready var level_label = $level_ui/Control/VBoxContainer/level
 
 # Upgrade labels
@@ -89,7 +85,7 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	enemies_left_label.text = "Enemies left: " + str(capacity)
+	enemies_left_label.text = str(str(max_wave_capacity - capacity) + ' / ' + str(max_wave_capacity))
 	enemy_points_label.text = "Enemy points: " + str(int(wave_points))
 	if capacity < max_wave_capacity and wave_points > 0:
 		spawn_enemy()
@@ -153,7 +149,7 @@ func next_wave():
 	if wave > max_wave_amount:
 		next_level()
 	else:
-		wave_label.text = "Wave: " + str(wave)
+		wave_label.text = str(wave)
 	capacity = 0
 
 
@@ -161,7 +157,7 @@ func next_level():
 	level += 1
 	level_label.text = "Level: " + str(level)
 	wave = 1
-	wave_label.text = "Wave: 1"
+	wave_label.text = "1"
 
 
 func spawn_enemy() -> void:
@@ -216,11 +212,6 @@ func _on_enemy_enemy_hit_player(damage) -> void:
 func _on_enemy_killed(score, death_position):
 	capacity -= 1  # Decrease capacity when enemy dies
 	player.score += score
-	var drop_chance = randi_range(1, HEART_DROP_CHANCE_MAX)
-	if drop_chance >= HEART_DROP_CHANCE_MIN:
-		var spawned_heart = heart.instantiate()
-		call_deferred("add_child", spawned_heart)
-		spawned_heart.position = death_position
 	player.update_stats()
 
 func _on_play_pressed() -> void:

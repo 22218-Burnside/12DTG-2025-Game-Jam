@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://damf4jskubnf2"]
+[gd_scene load_steps=30 format=4 uid="uid://damf4jskubnf2"]
 
 [ext_resource type="Script" uid="uid://6bnfxtto1tr3" path="res://scripts/world.gd" id="1_4d63b"]
 [ext_resource type="Texture2D" uid="uid://bh43mhs7rfodt" path="res://assets/placeholder_assets/readme/placeholder assets/sprite_0.png" id="2_4d63b"]
@@ -10,9 +10,12 @@
 [ext_resource type="Texture2D" uid="uid://c25cyoy0q1giy" path="res://assets/icon.svg" id="5_4284n"]
 [ext_resource type="Texture2D" uid="uid://dxrggmnnlf20k" path="res://assets/npr.png" id="8_0xhmi"]
 [ext_resource type="Texture2D" uid="uid://r4xatx1lqlbp" path="res://assets/over_red.png" id="9_m1sej"]
+[ext_resource type="Texture2D" uid="uid://kdrfqe0b5rfn" path="res://assets/skull-icon.png" id="10_q76tg"]
 [ext_resource type="Script" uid="uid://bydsahwjdbcti" path="res://prefabs/upgrade_selection.gd" id="11_le6xu"]
 [ext_resource type="Shader" uid="uid://coc3ujuonfxa1" path="res://prefabs/spin.gdshader" id="11_m1sej"]
+[ext_resource type="Texture2D" uid="uid://bg4umsphl71lb" path="res://assets/spark.png" id="11_sxw1y"]
 [ext_resource type="PackedScene" uid="uid://vrhs1j4yoavp" path="res://upgrade/upgrade.tscn" id="12_k40i2"]
+[ext_resource type="Texture2D" uid="uid://c7xprr0ruvheh" path="res://assets/wave-icon.png" id="12_nwl14"]
 
 [sub_resource type="Gradient" id="Gradient_07nuu"]
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.45490196)
@@ -176,42 +179,69 @@ stretch_margin_bottom = 20
 texture_under = ExtResource("8_0xhmi")
 texture_progress = ExtResource("9_m1sej")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="level_ui/Control"]
+[node name="VBoxContainer" type="HBoxContainer" parent="level_ui/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 66.0
-offset_bottom = 26.0
+offset_top = 63.0
+offset_bottom = -569.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_4284n")
+theme_override_constants/separation = 44
 
-[node name="score" type="Label" parent="level_ui/Control/VBoxContainer"]
+[node name="enemies_left" type="HBoxContainer" parent="level_ui/Control/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("4_4284n")
-text = "SCORE:0"
-horizontal_alignment = 2
+theme_override_constants/separation = 12
+alignment = 2
 
-[node name="enemies_left" type="Label" parent="level_ui/Control/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="level_ui/Control/VBoxContainer/enemies_left"]
+layout_mode = 2
+texture = ExtResource("10_q76tg")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="enemies_left_label" type="Label" parent="level_ui/Control/VBoxContainer/enemies_left"]
 layout_mode = 2
 theme = ExtResource("4_4284n")
 text = "adsfhpiasdhfa;dj"
 horizontal_alignment = 2
 
-[node name="wave" type="Label" parent="level_ui/Control/VBoxContainer"]
+[node name="score" type="HBoxContainer" parent="level_ui/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="level_ui/Control/VBoxContainer/score"]
+layout_mode = 2
+texture = ExtResource("11_sxw1y")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="score_label" type="Label" parent="level_ui/Control/VBoxContainer/score"]
 layout_mode = 2
 theme = ExtResource("4_4284n")
-text = "Wave: 1"
+text = "SCORE:0"
 horizontal_alignment = 2
 
-[node name="level" type="Label" parent="level_ui/Control/VBoxContainer"]
+[node name="wave2" type="HBoxContainer" parent="level_ui/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="level_ui/Control/VBoxContainer/wave2"]
+layout_mode = 2
+texture = ExtResource("12_nwl14")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="wave" type="Label" parent="level_ui/Control/VBoxContainer/wave2"]
 layout_mode = 2
 theme = ExtResource("4_4284n")
-text = "Level: 1"
+text = "1"
 horizontal_alignment = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="level_ui/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

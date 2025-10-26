@@ -5,7 +5,7 @@
 
 [sub_resource type="Theme" id="Theme_5kuq4"]
 Label/font_sizes/font_size = 60
-MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_bottom = 0
 MarginContainer/constants/margin_left = 10
 MarginContainer/constants/margin_right = 10
 MarginContainer/constants/margin_top = 10
@@ -26,6 +26,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 14.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
@@ -36,12 +38,12 @@ theme = SubResource("Theme_5kuq4")
 
 [node name="split" type="HBoxContainer" parent="Control/VBoxContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 924
+theme_override_constants/separation = 949
 alignment = 1
 
 [node name="left" type="VBoxContainer" parent="Control/VBoxContainer/MarginContainer/split"]
 layout_mode = 2
-theme_override_constants/separation = 39
+theme_override_constants/separation = 9
 
 [node name="Element Slot1" parent="Control/VBoxContainer/MarginContainer/split/left" instance=ExtResource("2_0tjp8")]
 layout_mode = 2
@@ -51,7 +53,7 @@ layout_mode = 2
 
 [node name="right" type="VBoxContainer" parent="Control/VBoxContainer/MarginContainer/split"]
 layout_mode = 2
-theme_override_constants/separation = 39
+theme_override_constants/separation = 9
 alignment = 2
 
 [node name="Element Slot3" parent="Control/VBoxContainer/MarginContainer/split/right" instance=ExtResource("2_0tjp8")]

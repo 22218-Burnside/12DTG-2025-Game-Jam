@@ -64,7 +64,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func update_stats():
-	$"../level_ui/Control/VBoxContainer/score".text = "Score: " + str(score)
+	$"../level_ui/Control/VBoxContainer/score/score_label".text = str(score)
 	$"../level_ui/Control/ProgressBar".value = health
 
 

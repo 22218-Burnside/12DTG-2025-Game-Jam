@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://4dola2cm1n5j"]
+
+[ext_resource type="Shader" uid="uid://ccupbirwubbu3" path="res://prefabs/flash.gdshader" id="1_8ppgr"]
+
+[resource]
+shader = ExtResource("1_8ppgr")
+shader_parameter/make_white = false

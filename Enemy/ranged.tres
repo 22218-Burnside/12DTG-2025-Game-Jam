@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("2_4m6ub")
 enemy_name = "ranged"
-enemy_health = 15.0
-enemy_speed = 2.0
+enemy_health = 350.0
+enemy_speed = 15.0
 ememy_damage = 3.0
 enemy_attack_cooldown = 0.1
 enemy_anims = ExtResource("1_6i515")

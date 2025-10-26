@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://wb0oo4qlcsuu"]
+
+[ext_resource type="Shader" uid="uid://slxhbv6c1obd" path="res://prefabs/enemy_die.gdshader" id="1_7y081"]
+
+[resource]
+shader = ExtResource("1_7y081")
+shader_parameter/progress = 0.0
+shader_parameter/block_size = 1.0
