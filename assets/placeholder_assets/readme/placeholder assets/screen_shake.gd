@@ -21,6 +21,7 @@ func _input(event):
 				$"../GPUParticles2D2".emitting = true
 				$"../GPUParticles2D3".emitting = true
 				$"../Timer".start(15)
+				$"../Kill_Timer".start(0.1)
 				$"../Icon".hide()
 				$"../../Camera2D".shake(10.0,15.0)
 				self.show()
@@ -30,13 +31,6 @@ func _input(event):
 		else:
 			# Reset on wrong key or partial input error
 			domain_progress = 0
-
-func _physics_process(_delta: float) -> void:
-	if domain_expanding:
-		var areas = $"../Area2D".get_overlapping_areas()
-		for i in areas:
-			if i.is_in_group("enemy"):
-				i.die()
 
 func _on_timer_timeout() -> void:
 	domain_expanding = false
@@ -48,8 +42,18 @@ func _on_timer_timeout() -> void:
 	$"..".hide()
 	self.hide()
 	can_expand = true
+	$"../Kill_Timer".stop()
 
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy") and domain_expanding:
 		area.die()
+
+
+func _on_kill_timer_timeout() -> void:
+	if domain_expanding:
+		var bodies = $"../Area2D".get_overlapping_bodies()
+		for i in bodies:
+			if i.is_in_group("enemy"):
+				i.die()
+		$"../Kill_Timer".start(0.1)
