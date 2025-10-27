@@ -2,7 +2,7 @@ extends Node2D
 
 # Preloaded scenes
 var enemy = preload("res://prefabs/enemy.tscn")
-var enemies = [preload("res://Enemy/ranged.tres"), preload("res://Enemy/spider.tres")]
+var enemies = [preload("res://Enemy/ranged.tres"), preload("res://Enemy/spider.tres"),preload("uid://cdogctudku1eg")]
 
 var tank = preload("res://prefabs/tank.tscn")
 
@@ -41,6 +41,17 @@ var enemy_difficulty = 1.0
 var wave = 1
 var max_wave_amount = 3
 var level = 1
+
+# new element
+@onready var choose_new_element_manager: Node = $choose_new_element
+var queued_new_element
+@onready var new_element: Control = $new_element/new_element
+@onready var hotbar: CanvasLayer = $player/hotbar
+@onready var element_slot_1: Button = $"player/hotbar/Control/VBoxContainer/MarginContainer/split/left/Element Slot1"
+@onready var element_slot_2: Button = $"player/hotbar/Control/VBoxContainer/MarginContainer/split/left/Element Slot2"
+@onready var element_slot_3: Button = $"player/hotbar/Control/VBoxContainer/MarginContainer/split/right/Element Slot3"
+@onready var element_slot_4: Button = $"player/hotbar/Control/VBoxContainer/MarginContainer/split/right/Element Slot4"
+
 
 # Node references
 @onready var level_ui = $level_ui
@@ -104,6 +115,34 @@ func pause_game():
 	upgrade_selection.show()
 	level_ui.hide()
 
+func choose_new_element():
+	element_slot_1.connect("pressed",Callable(choose_new_element_manager.slot1_selected))
+	element_slot_2.connect("pressed",Callable(choose_new_element_manager.slot2_selected))
+	element_slot_3.connect("pressed",Callable(choose_new_element_manager.slot3_selected))
+	element_slot_4.connect("pressed",Callable(choose_new_element_manager.slot4_selected))
+	
+	element_slot_1.connect("pressed",Callable(choose_new_element_manager.disable_element_slots))
+	element_slot_2.connect("pressed",Callable(choose_new_element_manager.disable_element_slots))
+	element_slot_3.connect("pressed",Callable(choose_new_element_manager.disable_element_slots))
+	element_slot_4.connect("pressed",Callable(choose_new_element_manager.disable_element_slots))
+	
+	element_slot_1.disabled = false
+	element_slot_2.disabled = false
+	element_slot_3.disabled = false
+	element_slot_4.disabled = false
+	
+	queued_new_element = null
+	var elements = (Globals.ELEMENTS.duplicate())
+	elements.shuffle()
+	
+	for element in elements:
+		if not element in Globals.player_elements:
+			queued_new_element = element
+	
+	choose_new_element_manager.queued_new_element = queued_new_element
+	new_element.show()
+	get_tree().paused = true
+	
 
 func update_upgrades() -> void:
 	if player.ELEMENTS[0]:
@@ -155,7 +194,6 @@ func next_wave():
 
 func next_level():
 	level += 1
-	level_label.text = "Level: " + str(level)
 	wave = 1
 	wave_label.text = "1"
 

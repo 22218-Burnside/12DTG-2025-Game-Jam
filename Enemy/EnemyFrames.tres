@@ -1,7 +1,8 @@
-[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://bnl8iy03lhwap"]
+[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://bnl8iy03lhwap"]
 
 [ext_resource type="Texture2D" uid="uid://ckb6uyw2nhcu2" path="res://assets/spider-Sheet.png" id="1_wsvvb"]
 [ext_resource type="Texture2D" uid="uid://d2ugr3uh14abh" path="res://assets/walk.png" id="2_rs4wd"]
+[ext_resource type="Texture2D" uid="uid://cfnkpes1inlqk" path="res://assets/skelebone.png" id="3_rs4wd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lk55u"]
 atlas = ExtResource("1_wsvvb")
@@ -34,6 +35,10 @@ region = Rect2(68, 0, 34, 34)
 [sub_resource type="AtlasTexture" id="AtlasTexture_imnol"]
 atlas = ExtResource("2_rs4wd")
 region = Rect2(102, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rs4wd"]
+atlas = ExtResource("3_rs4wd")
+region = Rect2(0, 0, 55, 69)
 
 [resource]
 resource_local_to_scene = true
@@ -70,5 +75,13 @@ animations = [{
 }],
 "loop": true,
 "name": &"ranged",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rs4wd")
+}],
+"loop": true,
+"name": &"skelebone",
 "speed": 5.0
 }]

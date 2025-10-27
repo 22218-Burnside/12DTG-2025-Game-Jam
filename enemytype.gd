@@ -7,6 +7,7 @@ class_name EnemyType
 @export var ememy_damage : float
 @export var enemy_attack_cooldown : float
 
+@export var drops_chest : bool = false
 @export var enemy_spawn_cost : float = 1
 
 @export var enemy_anims: SpriteFrames

@@ -37,30 +37,30 @@ func setup():
 	score = 0
 	update_stats()
 	
-	change_slot(1, WATER_ELEMENT)
-	change_slot(2, FIRE_ELEMENT)
-	change_slot(3, WIND_ELEMENT)
-	change_slot(4, EARTH_ELEMENT)
+	var starting_elements = [WATER_ELEMENT,FIRE_ELEMENT,WIND_ELEMENT,EARTH_ELEMENT]
+	change_slot(1, WIND_ELEMENT)
 
 
 func _physics_process(_delta: float) -> void:	
-		var direction_x := Input.get_axis("left", "right")
-		
-		if Input.is_action_just_pressed("left"): sprite.flip_h = false
-		if Input.is_action_just_pressed("right"): sprite.flip_h = true
-		
-		if direction_x:
-			velocity.x = direction_x * SPEED
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-		
-		var direction_y := Input.get_axis("up", "down")
-		if direction_y:
-			velocity.y = direction_y * SPEED
-		else:
-			velocity.y = move_toward(velocity.x, 0, SPEED)
+	Globals.player_elements = ELEMENTS
+	
+	var direction_x := Input.get_axis("left", "right")
+	
+	if Input.is_action_just_pressed("left"): sprite.flip_h = false
+	if Input.is_action_just_pressed("right"): sprite.flip_h = true
+	
+	if direction_x:
+		velocity.x = direction_x * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+	
+	var direction_y := Input.get_axis("up", "down")
+	if direction_y:
+		velocity.y = direction_y * SPEED
+	else:
+		velocity.y = move_toward(velocity.x, 0, SPEED)
 
-		move_and_slide()
+	move_and_slide()
 
 
 func update_stats():
