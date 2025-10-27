@@ -1,0 +1,94 @@
+[gd_scene load_steps=5 format=3 uid="uid://7jpph4fdn1cg"]
+
+[ext_resource type="Script" uid="uid://cwba5ak8jarc2" path="res://new_element.gd" id="1_drirl"]
+[ext_resource type="Texture2D" uid="uid://dxrggmnnlf20k" path="res://assets/npr.png" id="1_xhixq"]
+[ext_resource type="Theme" uid="uid://h22edabrcqwn" path="res://theme.tres" id="2_tdqqq"]
+[ext_resource type="Texture2D" uid="uid://lnsxs2nj3eny" path="res://assets/rock_icon.png" id="3_tdqqq"]
+
+[node name="new_element" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_drirl")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -117.0
+offset_top = -10.0
+offset_right = 117.0
+offset_bottom = 227.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_xhixq")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -48.0
+offset_right = -7.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_tdqqq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="name" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_tdqqq")
+bbcode_enabled = true
+text = "[outline_size=8][wave]New Element!"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="name2" type="RichTextLabel" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_tdqqq")
+bbcode_enabled = true
+text = "[outline_size=8][wave][color=red]Stone"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="upgrade_desc" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_tdqqq")
+text = "Select empty element slot or ovveride pre-existing element"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="icon" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+mouse_filter = 2
+theme = ExtResource("2_tdqqq")
+texture = ExtResource("3_tdqqq")
+stretch_mode = 3

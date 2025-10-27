@@ -1,8 +1,9 @@
-[gd_scene load_steps=30 format=4 uid="uid://damf4jskubnf2"]
+[gd_scene load_steps=32 format=4 uid="uid://damf4jskubnf2"]
 
 [ext_resource type="Script" uid="uid://6bnfxtto1tr3" path="res://scripts/world.gd" id="1_4d63b"]
 [ext_resource type="Texture2D" uid="uid://bh43mhs7rfodt" path="res://assets/placeholder_assets/readme/placeholder assets/sprite_0.png" id="2_4d63b"]
 [ext_resource type="Script" uid="uid://cv2janiq8xatr" path="res://prefabs/background_stuff.gd" id="2_5f5nf"]
+[ext_resource type="Script" uid="uid://bvtpc7b7ip2fb" path="res://prefabs/choose_new_element.gd" id="2_deaom"]
 [ext_resource type="Texture2D" uid="uid://lle8mdu10m6l" path="res://assets/cthulu.png" id="3_5hu44"]
 [ext_resource type="PackedScene" uid="uid://bpr5p80oqae3l" path="res://prefabs/player.tscn" id="3_07nuu"]
 [ext_resource type="Texture2D" uid="uid://bx1u2idxl73k" path="res://assets/tilesheet.png" id="4_07nuu"]
@@ -16,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bg4umsphl71lb" path="res://assets/spark.png" id="11_sxw1y"]
 [ext_resource type="PackedScene" uid="uid://vrhs1j4yoavp" path="res://upgrade/upgrade.tscn" id="12_k40i2"]
 [ext_resource type="Texture2D" uid="uid://c7xprr0ruvheh" path="res://assets/wave-icon.png" id="12_nwl14"]
+[ext_resource type="PackedScene" uid="uid://7jpph4fdn1cg" path="res://new_element.tscn" id="17_2a2la"]
 
 [sub_resource type="Gradient" id="Gradient_07nuu"]
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.45490196)
@@ -108,6 +110,10 @@ shader_parameter/stripe_color = Color(1, 0.7921569, 0.39607844, 0.41960785)
 [node name="world" type="Node2D"]
 script = ExtResource("1_4d63b")
 
+[node name="choose_new_element" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("2_deaom")
+
 [node name="background" type="Node2D" parent="."]
 script = ExtResource("2_5f5nf")
 
@@ -156,6 +162,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("4_4284n")
 
 [node name="ProgressBar" type="TextureProgressBar" parent="level_ui/Control"]
@@ -170,6 +177,7 @@ offset_right = -259.0
 offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 theme = ExtResource("4_4284n")
 nine_patch_stretch = true
 stretch_margin_left = 20
@@ -188,16 +196,19 @@ offset_top = 63.0
 offset_bottom = -569.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("4_4284n")
 theme_override_constants/separation = 44
 
 [node name="enemies_left" type="HBoxContainer" parent="level_ui/Control/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 12
 alignment = 2
 
 [node name="TextureRect" type="TextureRect" parent="level_ui/Control/VBoxContainer/enemies_left"]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("10_q76tg")
 expand_mode = 2
 stretch_mode = 3
@@ -210,10 +221,12 @@ horizontal_alignment = 2
 
 [node name="score" type="HBoxContainer" parent="level_ui/Control/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 12
 
 [node name="TextureRect" type="TextureRect" parent="level_ui/Control/VBoxContainer/score"]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("11_sxw1y")
 expand_mode = 2
 stretch_mode = 3
@@ -226,10 +239,12 @@ horizontal_alignment = 2
 
 [node name="wave2" type="HBoxContainer" parent="level_ui/Control/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 12
 
 [node name="TextureRect" type="TextureRect" parent="level_ui/Control/VBoxContainer/wave2"]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("12_nwl14")
 expand_mode = 2
 stretch_mode = 3
@@ -250,6 +265,7 @@ offset_top = 60.0
 offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("4_4284n")
 
 [node name="wave_points" type="Label" parent="level_ui/Control/VBoxContainer2"]
@@ -275,6 +291,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(576, 324)
+mouse_filter = 2
 
 [node name="effect_shader" type="ColorRect" parent="upgrade_selection/Control"]
 material = SubResource("ShaderMaterial_k40i2")
@@ -284,6 +301,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="HBoxContainer" type="VBoxContainer" parent="upgrade_selection/Control"]
 layout_mode = 1
@@ -296,11 +314,13 @@ offset_right = -418.0
 offset_bottom = 113.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/separation = 8
 alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="upgrade_selection/Control/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme = ExtResource("4_4284n")
 bbcode_enabled = true
 text = "[center][outline_size=16][wave][color=gold]Level up!"
@@ -318,8 +338,16 @@ layout_mode = 2
 [node name="upgrade4" parent="upgrade_selection/Control/HBoxContainer" instance=ExtResource("12_k40i2")]
 layout_mode = 2
 
+[node name="new_element" type="CanvasLayer" parent="."]
+
+[node name="new_element" parent="new_element" instance=ExtResource("17_2a2la")]
+visible = false
+
 [connection signal="timeout" from="spawn_timer" to="." method="spawn_enemy"]
 [connection signal="pressed" from="upgrade_selection/Control/HBoxContainer/upgrade1" to="." method="element_1_upgrade"]
 [connection signal="pressed" from="upgrade_selection/Control/HBoxContainer/upgrade2" to="." method="element_2_upgrade"]
 [connection signal="pressed" from="upgrade_selection/Control/HBoxContainer/upgrade3" to="." method="element_3_upgrade"]
 [connection signal="pressed" from="upgrade_selection/Control/HBoxContainer/upgrade4" to="." method="element_4_upgrade"]
+
+[editable path="player"]
+[editable path="player/hotbar"]

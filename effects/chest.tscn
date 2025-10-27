@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://c41gvio14sn4j"]
+
+[ext_resource type="Texture2D" uid="uid://3mpgjhofpl5m" path="res://assets/chest.png" id="1_36sw2"]
+[ext_resource type="Script" uid="uid://b8bmp2f2w7mfy" path="res://effects/chest.gd" id="1_e3euq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3euq"]
+atlas = ExtResource("1_36sw2")
+region = Rect2(0, 0, 22, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0y8le"]
+atlas = ExtResource("1_36sw2")
+region = Rect2(22, 0, 22, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vm6d8"]
+atlas = ExtResource("1_36sw2")
+region = Rect2(44, 0, 22, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qei58"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3euq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0y8le")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vm6d8")
+}],
+"loop": false,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hw2dh"]
+radius = 20.0
+
+[node name="chest" type="Area2D"]
+script = ExtResource("1_e3euq")
+
+[node name="anim" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qei58")
+animation = &"new_animation"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hw2dh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

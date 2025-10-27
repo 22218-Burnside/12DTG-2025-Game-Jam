@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterBody2D
 class_name Enemy
 
 signal death
@@ -17,11 +17,14 @@ var dead : bool = false
 @onready var sprite: AnimatedSprite2D = $sprite
 @onready var anim: AnimationPlayer = $anim
 @onready var attack_timer: Timer = $attack_timer
+@onready var detect_box: Area2D = $detect_box
 
 const BLOOD = preload("uid://c86x45q5nqmiw")
 const DAMAGE_INDICATOR = preload("uid://drucr8c11yv4b")
 const EXPERIANCE = preload("uid://cwfm62bvsyiby")
 const FLASH_TIMER = 0.1
+const KNOCKBACK = 1
+const CHEST = preload("uid://c41gvio14sn4j")
 
 const ENEMY_DIE = preload("uid://wb0oo4qlcsuu")
 const FLASH_SHADER = preload("uid://4dola2cm1n5j")
@@ -45,6 +48,8 @@ func _ready() -> void:
 	
 
 func _physics_process(delta: float) -> void:
+	sprite.position = lerp(sprite.position,Vector2.ZERO,delta*10)
+	
 	if dead:
 		var rate = lerp(sprite.material.get_shader_parameter("progress"),1.0,delta*5)
 		sprite.material.set_shader_parameter("progress",rate)
@@ -60,18 +65,21 @@ func _physics_process(delta: float) -> void:
 		else: sprite.flip_h = false
 
 		if can_attack:
-			for body in get_overlapping_bodies():
+			for body in detect_box.get_overlapping_bodies():
 				if body is Player:
 					can_attack = false
 					enemy_hit_player.emit(enemy_type.ememy_damage)
 					attack_timer.start()
 					
-		position += enemy_type.enemy_speed * position.direction_to(player.position) * delta
+		velocity = enemy_type.enemy_speed * (position.direction_to(player.position) * delta).normalized()
+		move_and_slide()
+		
 
 func hit(inflicted_damage := 1.0): 
 	health -= inflicted_damage
 	
 	var ind = DAMAGE_INDICATOR.instantiate()
+	ind.damage = inflicted_damage
 	get_parent().add_child(ind)
 	ind.position = global_position
 	
@@ -81,15 +89,18 @@ func hit(inflicted_damage := 1.0):
 		await get_tree().create_timer(FLASH_TIMER).timeout
 		sprite.material.set_shader_parameter("make_white",false)
 
+	sprite.position = -velocity.normalized() * KNOCKBACK
+
 func die():	
 	var exper = EXPERIANCE.instantiate()
 	get_parent().add_child(exper)
 	exper.position = position
 	
-	var blood = BLOOD.instantiate()
-	get_parent().add_child(blood)
-	blood.position = position
-	
+	if enemy_type.drops_chest:
+		var chest = CHEST.instantiate()
+		get_parent().add_child(chest)
+		chest.position = position
+		
 	death.emit(points,self.position)
 	dead = true
 	sprite.material = ENEMY_DIE.duplicate()

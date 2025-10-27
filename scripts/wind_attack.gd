@@ -10,7 +10,7 @@ func _ready() -> void:
 
 
 func _on_sprite_animation_finished() -> void:
-	for i in get_overlapping_areas():
+	for i in get_overlapping_bodies():
 		if i.is_in_group("enemy"):
 			i.hit(damage)
 

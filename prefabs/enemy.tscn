@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://xik0kqxbwkf5"]
+[gd_scene load_steps=12 format=3 uid="uid://xik0kqxbwkf5"]
 
 [ext_resource type="Script" uid="uid://dkwipiknlouhf" path="res://scripts/enemy.gd" id="1_yfjof"]
-[ext_resource type="Resource" uid="uid://b5vs14opf250m" path="res://Enemy/ranged.tres" id="2_a7d0n"]
+[ext_resource type="Resource" uid="uid://cdogctudku1eg" path="res://effects/skelebone.tres" id="2_a7d0n"]
 [ext_resource type="Texture2D" uid="uid://ckb6uyw2nhcu2" path="res://assets/spider-Sheet.png" id="2_yfjof"]
 [ext_resource type="Material" uid="uid://wb0oo4qlcsuu" path="res://effects/enemy_die.tres" id="3_a7d0n"]
 
@@ -43,13 +43,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="enemy" type="Area2D" groups=["enemy"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_a7d0n"]
+radius = 15.0
+
+[node name="enemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_yfjof")
 enemy_type = ExtResource("2_a7d0n")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 10)
 shape = SubResource("CircleShape2D_yfjof")
 
 [node name="attack_timer" type="Timer" parent="."]
@@ -59,5 +61,10 @@ material = ExtResource("3_a7d0n")
 sprite_frames = SubResource("SpriteFrames_2nw32")
 animation = &"walk"
 autoplay = "walk"
+
+[node name="detect_box" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detect_box"]
+shape = SubResource("CircleShape2D_a7d0n")
 
 [connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]

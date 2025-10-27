@@ -30,34 +30,43 @@ offset_top = 14.0
 offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 alignment = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 0
 theme = SubResource("Theme_5kuq4")
 
 [node name="split" type="HBoxContainer" parent="Control/VBoxContainer/MarginContainer"]
 layout_mode = 2
+mouse_filter = 0
 theme_override_constants/separation = 949
 alignment = 1
 
 [node name="left" type="VBoxContainer" parent="Control/VBoxContainer/MarginContainer/split"]
 layout_mode = 2
+mouse_filter = 0
 theme_override_constants/separation = 9
 
 [node name="Element Slot1" parent="Control/VBoxContainer/MarginContainer/split/left" instance=ExtResource("2_0tjp8")]
+process_mode = 3
 layout_mode = 2
 
 [node name="Element Slot2" parent="Control/VBoxContainer/MarginContainer/split/left" instance=ExtResource("2_0tjp8")]
+process_mode = 3
 layout_mode = 2
 
 [node name="right" type="VBoxContainer" parent="Control/VBoxContainer/MarginContainer/split"]
 layout_mode = 2
+mouse_filter = 0
 theme_override_constants/separation = 9
 alignment = 2
 
 [node name="Element Slot3" parent="Control/VBoxContainer/MarginContainer/split/right" instance=ExtResource("2_0tjp8")]
+process_mode = 3
 layout_mode = 2
 
 [node name="Element Slot4" parent="Control/VBoxContainer/MarginContainer/split/right" instance=ExtResource("2_0tjp8")]
+process_mode = 3
 layout_mode = 2
