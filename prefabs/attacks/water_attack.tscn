@@ -1,21 +1,67 @@
-[gd_scene load_steps=4 format=3 uid="uid://banpbbtj2yym7"]
+[gd_scene load_steps=11 format=3 uid="uid://banpbbtj2yym7"]
 
 [ext_resource type="Script" uid="uid://drlds8yx8bhmj" path="res://scripts/water_attack.gd" id="1_8orol"]
-[ext_resource type="Texture2D" uid="uid://bg1mnu8asomso" path="res://assets/placeholder_assets/water.png" id="2_dwkvi"]
+[ext_resource type="Texture2D" uid="uid://lcr04gdc10tr" path="res://assets/water-Sheet.png" id="2_8orol"]
+[ext_resource type="Resource" uid="uid://bm0nfhtxr8et8" path="res://resources/elements/water_element.tres" id="2_dwkvi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6j1uc"]
 size = Vector2(12, 13)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwkvi"]
+atlas = ExtResource("2_8orol")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dh1n5"]
+atlas = ExtResource("2_8orol")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0a1vd"]
+atlas = ExtResource("2_8orol")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkceg"]
+atlas = ExtResource("2_8orol")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5cgw"]
+atlas = ExtResource("2_8orol")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cd76k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwkvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dh1n5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0a1vd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkceg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5cgw")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="attack" type="Area2D"]
 script = ExtResource("1_8orol")
+element = ExtResource("2_dwkvi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6j1uc")
 
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="Icon" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_dwkvi")
-flip_h = true
+sprite_frames = SubResource("SpriteFrames_cd76k")
+autoplay = "default"
+speed_scale = 1.5
 
 [node name="die_time" type="Timer" parent="."]
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0wk1e0jhquh3"]
+[gd_scene load_steps=11 format=3 uid="uid://d0wk1e0jhquh3"]
 
 [ext_resource type="Script" uid="uid://bv6wqgunu7n8q" path="res://scripts/earth_attack.gd" id="1_jyjc0"]
 [ext_resource type="Texture2D" uid="uid://dx0v55a4q6m4o" path="res://assets/earth-Sheet.png" id="2_7eu23"]
+[ext_resource type="Resource" uid="uid://cikihy5ag5kj7" path="res://resources/elements/earth_element.tres" id="2_projr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyjc0"]
 size = Vector2(12.5, 15)
@@ -51,6 +52,7 @@ animations = [{
 
 [node name="earth_attack" type="Area2D"]
 script = ExtResource("1_jyjc0")
+element = ExtResource("2_projr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jyjc0")

@@ -3,12 +3,12 @@ var damage : int
 var speed = 200
 var direction = Vector2.ZERO
 var level : int
+@export var element : Element
 
 func _ready() -> void:
 	$die_time.start(2)
-	damage = 50 + (level - 1) * 10
-	
-	
+	damage = element.damage * level
+		
 func _physics_process(delta: float) -> void:
 	self.position += direction * speed * delta
 	

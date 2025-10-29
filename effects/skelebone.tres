@@ -6,12 +6,11 @@
 [resource]
 script = ExtResource("2_7rkby")
 enemy_name = "skelebone"
-enemy_health = 100.0
-enemy_speed = 10.0
+enemy_health = 50.0
+enemy_speed = 5.0
 ememy_damage = 20.0
 enemy_attack_cooldown = 1.0
-drops_chest = true
-enemy_spawn_cost = 0.1
+enemy_spawn_cost = 10.0
 enemy_anims = ExtResource("1_5xduu")
 enemy_walk_anim = "skelebone"
 metadata/_custom_type_script = "uid://c4id4tcqx5boy"

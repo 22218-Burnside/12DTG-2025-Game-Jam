@@ -38,7 +38,10 @@ func setup():
 	update_stats()
 	
 	var starting_elements = [WATER_ELEMENT,FIRE_ELEMENT,WIND_ELEMENT,EARTH_ELEMENT]
-	change_slot(1, WIND_ELEMENT)
+	change_slot(1, WATER_ELEMENT)
+	change_slot(2, FIRE_ELEMENT)
+	change_slot(3, WIND_ELEMENT)
+	change_slot(4, EARTH_ELEMENT)
 
 
 func _physics_process(_delta: float) -> void:	

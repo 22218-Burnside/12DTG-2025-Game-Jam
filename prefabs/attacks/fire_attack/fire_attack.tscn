@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://52h848nfricr"]
+[gd_scene load_steps=3 format=3 uid="uid://52h848nfricr"]
 
 [ext_resource type="Script" uid="uid://du0mcwwmg6f2i" path="res://prefabs/attacks/fire_attack/fire_attack.gd" id="1_43tdg"]
+[ext_resource type="Resource" uid="uid://dirvbjxkn2pam" path="res://resources/elements/fire_element.tres" id="2_x6ksp"]
 
 [node name="fire_attack" type="Node2D"]
 script = ExtResource("1_43tdg")
+element = ExtResource("2_x6ksp")
 
 [node name="die_time" type="Timer" parent="."]
 

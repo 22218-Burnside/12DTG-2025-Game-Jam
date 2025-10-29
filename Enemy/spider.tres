@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_q52bf")
 enemy_name = "Spider"
-enemy_health = 200.0
+enemy_health = 5.0
 enemy_speed = 15.0
 ememy_damage = 1.0
 enemy_anims = ExtResource("1_5gb58")
